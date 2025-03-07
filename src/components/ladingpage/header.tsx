@@ -1,33 +1,54 @@
-import { Card } from "@/components/ui/card"
+import Image from "next/image";
+import { Card } from "@/components/ui/card";
+import SearchBar from "@/components/ladingpage/searchBar";
 
 export default function Header() {
   return (
-    <Card className="w-full bg-gradient-to-r from-gray-100 to-white py-4 shadow-md">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6">
-        {/* Logo + Texto */}
-        <div className="flex items-center gap-4">
-          <div className="w-16 h-16 bg-green-600 rounded-md"></div> {/* Logo Placeholder */}
-          <div>
-            <h1 className="text-2xl font-bold text-green-700">ACAVISA</h1>
-            <p className="text-sm text-gray-600">SOMOS TU SOCIO DE NEGOCIOS</p>
+    <Card className="w-full" style={{ backgroundImage: "url('/backgrounds/background-header.png')" }}>
+      <div className="flex items-center justify-around px-6 mt-3">
+        <section className="flex items-center">
+          <Image
+            src="/logo-acavisa1.png"
+            alt="ACAVISA"
+            width={250}
+            height={120}
+            className="object-contain"
+          />
+        </section>
+
+      
+        <section className="flex flex-col mr-8">
+        <div className="flex items-center text-sm text-gray-700 space-x-4">
+          <div className="flex items-center space-x-1 text-green-700">
+            <Image
+              src="/countries/sv.png"
+              alt="sv"
+              width={20}
+              height={20}
+              className="object-contain"
+            />
+            <span>EL SALVADOR</span>
+          </div>
+          <span className="text-green-700">|</span>
+          <div className="flex items-center space-x-1 text-green-700">
+            <span>📞</span>
+            <span>
+              <strong>Call Center:</strong> 2231-4200
+            </span>
+          </div>
+          <span className="text-green-700">|</span>
+          <div className="flex items-center space-x-1 text-green-700">
+            <span>💬</span>
+            <span>
+              <strong>WhatsApp:</strong> 6025-1411
+            </span>
           </div>
         </div>
 
-        {/* Información de contacto */}
-        <div className="flex items-center gap-6 text-sm text-gray-700">
-          <div className="flex items-center gap-2">
-            <span className="bg-blue-500 text-white px-2 py-1 rounded-md">🇸🇻</span>
-            <span>EL SALVADOR</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>📞</span>
-            <span><strong>Call Center:</strong> 2231-4200</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>💬</span>
-            <span><strong>WhatsApp:</strong> 6025-1411</span>
-          </div>
+        <div className="flex items-center">
+          <SearchBar />
         </div>
+        </section>
       </div>
     </Card>
   );

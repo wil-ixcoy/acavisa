@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function NavBar() {
   return (
@@ -10,15 +11,23 @@ export default function NavBar() {
         </Button>
 
         {/* Categorías */}
-        <ul className="flex gap-6 ml-6 text-sm font-medium">
-          <li className="border-r pr-4">Lubricantes</li>
-          <li className="border-r pr-4">Baterías</li>
-          <li className="border-r pr-4">Grasas</li>
-          <li className="border-r pr-4">Productos de detallado</li>
-          <li className="border-r pr-4">Sistemas de almacenamiento</li>
-          <li className="border-r pr-4">Ruedas y rodamientos</li>
-          <li className="border-r pr-4">Aceros</li>
-          <li>Centros de servicio automotriz</li>
+        <ul className="flex gap-6 ml-6 text-sm font-medium items-center">
+          {[
+            "Lubricantes",
+            "Baterías",
+            "Grasas",
+            "Productos de detallado",
+            "Sistemas de almacenamiento",
+            "Ruedas y rodamientos",
+            "Aceros",
+            "Centros de servicio automotriz",
+          ].map((category, index, arr) => (
+            <li key={category} className={`flex items-center ${index !== arr.length - 1 ? "border-r pr-4" : ""}`}>
+              <Link href="#" className="hover:underline">
+                {category}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </nav>
