@@ -48,8 +48,8 @@ export default function PromotionsSection() {
               <span className="text-3xl mr-4">{promo.icon}</span>
 
               <div className="flex-1">
-                <h3 className="font-bold text-lg">{promo.title}</h3>
-                <p className="text-sm">{promo.description}</p>
+                <h3 className="font-bold text-3xl">{promo.title}</h3>
+                <p className="text-lg">{promo.description}</p>
               </div>
 
               <div className="w-7 h-32 flex items-center justify-center bg-green-700">
