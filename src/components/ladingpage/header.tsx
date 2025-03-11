@@ -1,19 +1,21 @@
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import SearchBar from "@/components/ladingpage/searchBar";
+import Link from "next/link";
 
 export default function Header() {
   return (
     <Card className="w-full" style={{ backgroundImage: "url('/backgrounds/background-header.png')" }}>
       <div className="flex items-center justify-around px-6 mt-3">
         <section className="flex items-center">
-          <Image
+         <Link href="/home">
+         <Image
             src="/logo-acavisa1.png"
             alt="ACAVISA"
             width={250}
             height={120}
             className="object-contain"
-          />
+          /></Link>
         </section>
 
       
