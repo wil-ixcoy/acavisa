@@ -9,10 +9,10 @@ interface SidebarMenuProps {
 export default function SidebarMenu({ isOpen, onClose }: SidebarMenuProps) {
   const menuItems = [
     { label: "HISTORIA", path: "/history" },
-    { label: "ÚNETE AL EQUIPO", path: "/join-the-team" },
-    { label: "NOTICIAS Y EVENTOS", path: "/news-events" },
+    { label: "ÚNETE AL EQUIPO", path: "/join-us" },
+    { label: "NOTICIAS Y EVENTOS", path: "/news-and-events" },
     { label: "BLOG", path: "/blog" },
-    { label: "CONTÁCTANOS", path: "/contact" },
+    { label: "CONTÁCTANOS", path: "/contact-us" },
     { label: "PREGUNTAS FRECUENTES", path: "/faq" },
   ];
 
