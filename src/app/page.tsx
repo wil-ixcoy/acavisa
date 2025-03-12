@@ -8,7 +8,7 @@ export default function Home() {
         className="w-full h-[108px] bg-cover bg-center flex justify-center shadow-lg"
         style={{ backgroundImage: "url('/background.png')" }}>
         <Image
-          src="/logo-acavisa1.png"
+          src="/logos/horizontal-acavisa-full-color.png"
           alt="ACAVISA"
           width={200}
           height={80}

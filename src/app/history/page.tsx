@@ -18,7 +18,7 @@ export default function History() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 items-start">
           <div className="flex justify-start">
             <Image
-              src="/logos/logo-acavisa1.png" 
+              src="/logos/horizontal-acavisa-full-color.png" 
               alt="Historia"
               width={400}
               height={300}
