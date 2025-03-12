@@ -18,7 +18,7 @@ export default function History() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 items-start">
           <div className="flex justify-start">
             <Image
-              src="/logos/logo-acavisa1.png"
+              src="/logos/logo-acavisa1.png" 
               alt="Historia"
               width={400}
               height={300}
@@ -26,8 +26,8 @@ export default function History() {
             />
           </div>
           <div className="text-gray-700">
-            <h2 className="font-bold text-black text-2xl">Líderes en el mercado</h2>
-            <p className="mt-4">
+            <h2 className="font-bold text-black text-md md:text-2xl">Líderes en el mercado</h2>
+            <p className="mt-4 text-xs md:text-lg">
               Contamos con 75 años de experiencia, siendo líderes en el mercado
               de la industria. Somos reconocidos por nuestros productos de
               calidad, servicio eficiente y mejora continua. Somos tu socio de
@@ -35,13 +35,13 @@ export default function History() {
               almacenamiento y el primero en distribuir la marca Dexion en El
               Salvador.
             </p>
-            <p className="mt-4">
+            <p className="mt-4 text-xs md:text-lg">
               También reconocidos por nuestros aceros especiales de la mejor
               calidad, principales proveedores de rodos industriales de la más
               alta resistencia y pioneros en la distribución de aceites
               hidráulicos.
             </p>
-            <p className="mt-4">
+            <p className="mt-4 text-xs md:text-lg">
               Cada producto tiene la garantía de nuestra experiencia.
             </p>
           </div>
