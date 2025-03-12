@@ -2,13 +2,13 @@ import Image from "next/image";
 
 export default function Ads() {
   return (
-    <div>
-      <section className="w-full h-90 relative mt-4 mb-6">
+    <div className="w-full my-4">
+      <section className="w-full h-60 md:h-80 relative">
         <Image
           src="/examples/ad.png"
-          alt="ad"
+          alt="Publicidad"
           layout="fill"
-          objectFit="cover"
+          className="object-cover rounded-lg shadow-md"
         />
       </section>
     </div>
