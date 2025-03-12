@@ -5,7 +5,7 @@ import Footer from "@/components/ladingpage/footer";
 import Title from "@/components/ladingpage/title";
 
 interface ArticleProps {
-  params: Promise<{ id: string }>};
+  params: Promise<{ id: string }>;
 }
 
 export default function Article({ params }: ArticleProps) {
