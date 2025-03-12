@@ -9,7 +9,6 @@ export default function Header() {
       
       <div className="flex flex-col lg:flex-row items-center justify-between px-4 lg:px-6 mt-3">
         
-        {/* 🔹 Logo */}
         <section className="flex items-center">
           <Link href="/home">
             <Image
@@ -22,7 +21,6 @@ export default function Header() {
           </Link>
         </section>
 
-        {/* 🔹 Información de contacto */}
         <section className="flex flex-col items-center lg:items-end mt-3 lg:mt-0 lg:mr-8 text-sm text-gray-700">
           <div className="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-4">
             
@@ -53,7 +51,6 @@ export default function Header() {
 
           </div>
 
-          {/* 🔹 Barra de búsqueda (Se coloca en una línea separada en móviles) */}
           <div className="w-full mt-2 lg:mt-3">
             <SearchBar />
           </div>
