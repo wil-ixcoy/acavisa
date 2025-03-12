@@ -4,24 +4,27 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import SidebarMenu from "./sidebarMenu";
-
+import { Menu } from "lucide-react"; 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
 
   return (
     <nav className="w-full bg-green-700 text-white py-3 relative z-30">
-      <div className="max-w-7xl mx-auto flex items-center">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4">
+        
         <Button
           variant="outline"
-          className="bg-green-800 text-white border-none flex gap-2"
+          className="bg-green-800 text-white border-none flex items-center gap-2 px-3 py-2 rounded-lg"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          ☰ MENÚ
+          <Menu className="w-5 h-5" />
+          <span className="text-sm">MENÚ</span>
         </Button>
 
         <SidebarMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
-        <ul className="flex gap-6 ml-6 text-sm font-medium items-center">
+        <ul className="hidden md:flex gap-6 ml-6 text-sm font-medium items-center">
           {[
             "Lubricantes",
             "Baterías",
@@ -44,7 +47,38 @@ export default function NavBar() {
             </li>
           ))}
         </ul>
+
+        <Button
+          variant="outline"
+          className="bg-green-800 text-white border-none flex items-center gap-2 px-3 py-2 rounded-lg md:hidden"
+          onClick={() => setCategoriesOpen(!categoriesOpen)}
+        >
+          <span className="text-sm">Categorías</span>
+        </Button>
       </div>
+
+      {categoriesOpen && (
+        <div className="md:hidden bg-green-900 text-white p-4 absolute w-full z-20">
+          <ul className="flex flex-col gap-3">
+            {[
+              "Lubricantes",
+              "Baterías",
+              "Grasas",
+              "Productos de detallado",
+              "Sistemas de almacenamiento",
+              "Ruedas y rodamientos",
+              "Aceros",
+              "Centros de servicio automotriz",
+            ].map((category) => (
+              <li key={category}>
+                <Link href="#" className="hover:underline">
+                  {category}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </nav>
   );
 }

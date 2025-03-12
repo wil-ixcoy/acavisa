@@ -4,9 +4,9 @@ import { Phone, Mail, MapPin } from "lucide-react";
 export default function Footer() {
   return (
     <footer className="bg-green-800 text-white p-6 mt-10">
-      <div className="w-full flex flex-col md:flex-row items-center justify-center text-center md:text-left gap-36">
+      <div className="w-full flex flex-col md:flex-row items-center justify-center text-center md:text-left gap-10 md:gap-36">
         
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center md:items-start">
           <Image
             src="/logos/LOGOS ACAVISA_ACAVISA VERTICAL BLANCO.png"
             alt="ACAVISA"
@@ -17,7 +17,7 @@ export default function Footer() {
           <span className="text-sm">SOMOS TU SOCIO DE NEGOCIOS</span>
         </div>
 
-        <div className="flex flex-col items-start space-y-2">
+        <div className="flex flex-col items-center md:items-start space-y-4 md:space-y-2">
           <span className="font-semibold">¿Necesitas ayuda?</span>
           <div className="flex items-center space-x-2">
             <Phone size={20} />
@@ -37,7 +37,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-start space-y-2">
+        <div className="flex flex-col items-center md:items-start space-y-4 md:space-y-2">
           <span className="font-semibold">Nuestras redes</span>
           <div className="flex items-center space-x-2">
             <Phone size={20} />

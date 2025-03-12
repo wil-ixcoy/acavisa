@@ -1,4 +1,39 @@
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import Image from "next/image";
+
+const newsItems = [
+  {
+    title: "Noticia 1",
+    image:
+      "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "Noticia 2",
+    image:
+      "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "Noticia 3",
+    image:
+      "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "Noticia 4",
+    image:
+      "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "Noticia 5",
+    image:
+      "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+];
 
 export default function News() {
   return (
@@ -8,19 +43,27 @@ export default function News() {
           NOTICIAS Y EVENTOS
         </div>
       </div>
+      <div className="w-full h-auto p-5">
+        <Carousel className="w-full max-w-4xl mx-auto">
+          <CarouselContent>
+            {newsItems.map((news, index) => (
+              <CarouselItem key={index} className="basis-full md:basis-1/3">
+                <div className="relative w-full h-80">
+                  <Image
+                    src={news.image}
+                    alt={news.title}
+                    width={400}
+                    height={600}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-7 w-full h-auto p-5">
-        <div className="bg-gray-300 flex items-center justify-center w-full h-[340px]">
-          <span className="text-gray-700 font-semibold">Banner 1</span>
-        </div>
-
-        <div className="bg-gray-300 flex items-center justify-center w-full h-[340px]">
-          <span className="text-gray-700 font-semibold">Banner 2</span>
-        </div>
-
-        <div className="bg-gray-300 flex items-center justify-center w-full h-[340px]">
-          <span className="text-gray-700 font-semibold">Banner 3</span>
-        </div>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
       </div>
     </section>
   );

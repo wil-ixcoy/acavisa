@@ -2,13 +2,14 @@ import Image from "next/image";
 
 export default function HelpComponent() {
   return (
-    <div className="bg-green-800 p-4 flex items-center justify-center space-x-4">
-      <section className="bg-green-600 p-4 rounded-3xl flex items-center justify-center space-x-4 w-full">
-        <span className="text-white font-semibold text-2xl w-2/4 pl-10">
+    <div className="bg-green-800 p-4 flex items-center justify-center">
+      <section className="bg-green-600 p-4 rounded-3xl flex flex-col lg:flex-row items-center justify-center w-full space-y-4 lg:space-y-0 lg:space-x-4">
+        <span className="text-white font-semibold text-2xl text-center lg:text-left lg:w-2/4 px-4">
           ¡Estamos para ayudarte!
         </span>
-        <section className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
+
+        <section className="flex flex-wrap lg:flex-nowrap justify-center items-center gap-4">
+          <div className="flex items-center space-x-2 lg:w-auto">
             <Image
               src="/countries/sv.png"
               alt="Chat en Línea"
@@ -16,10 +17,12 @@ export default function HelpComponent() {
               height={24}
               className="object-contain"
             />
-            <span className="text-white text-xs">Chat en Línea</span>
+            <span className="text-white text-sm font-bold">Chat en Línea</span>
           </div>
-          <span className="text-white text-4xl">|</span>
-          <div className="flex items-center space-x-2">
+
+          <span className="hidden lg:block text-white text-4xl">|</span>
+
+          <div className="flex items-center space-x-2 lg:w-auto">
             <Image
               src="/countries/sv.png"
               alt="Call Center"
@@ -27,10 +30,12 @@ export default function HelpComponent() {
               height={24}
               className="object-contain"
             />
-            <span className="text-white text-xs">Call Center: 2231-4200</span>
+            <p className="text-white text-sm"><span className="font-bold">Call Center:</span> 2231-4200</p>
           </div>
-          <span className="text-white text-4xl">|</span>
-          <div className="flex items-center space-x-2">
+
+          <span className="hidden lg:block text-white text-4xl">|</span>
+
+          <div className="flex items-center space-x-2 lg:w-auto">
             <Image
               src="/countries/sv.png"
               alt="WhatsApp"
@@ -38,20 +43,20 @@ export default function HelpComponent() {
               height={24}
               className="object-contain"
             />
-            <span className="text-white text-xs">WhatsApp: 6025-1411</span>
-          </div>
-          <span className="text-white text-4xl">|</span>
-          <div className="flex items-center space-x-2">
+            <p className="text-white text-sm"><span className="font-bold">WhatsApp:</span> 6025-1411</p>
+            </div>
+
+          <span className="hidden lg:block text-white text-4xl">|</span>
+
+          <div className="flex items-center space-x-2 lg:w-auto">
             <Image
               src="/countries/sv.png"
-              alt="Muestre Centro de Negocios"
+              alt="Centro de Negocios"
               width={24}
               height={24}
               className="object-contain"
             />
-            <span className="text-white text-xs">
-              Muestre Centro de Negocios
-            </span>
+            <span className="text-white text-sm font-bold">Centro de Negocios</span>
           </div>
         </section>
       </section>
