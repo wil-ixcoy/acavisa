@@ -19,7 +19,7 @@ interface TitleProps {
   
     return (
       <div className={`flex ${alignmentClass} mt-8`}>
-        <div className={`bg-green-800 ${sizeClasses}`}>
+        <div className={`bg-primary ${sizeClasses}`}>
           <h1 className="font-bold text-white text-center">{children}</h1>
         </div>
       </div>

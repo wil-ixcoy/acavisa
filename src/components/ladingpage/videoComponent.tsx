@@ -12,13 +12,13 @@ export default function VideoComponent() {
       </section>
 
       <section className="text-white flex flex-col w-full">
-        <section className="bg-green-800 w-full h-16 flex justify-center items-center p-2">
+        <section className="bg-primary w-full h-16 flex justify-center items-center p-2">
           <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-center md:text-left">
             ¿QUIÉNES SOMOS?
           </h1>
         </section>
 
-        <section className="bg-green-700 w-full h-14 flex justify-center items-center p-2">
+        <section className="bg-secondary w-full h-14 flex justify-center items-center p-2">
           <a
             href="#"
             className="text-base md:text-lg font-semibold hover:underline">

@@ -39,7 +39,7 @@ export default function News() {
   return (
     <section className="p-4 mb-6 mt-10">
       <div className="flex items-center justify-between mb-4">
-        <div className="bg-green-600 text-white px-4 py-2">
+        <div className="bg-secondary text-white px-4 py-2">
           NOTICIAS Y EVENTOS
         </div>
       </div>

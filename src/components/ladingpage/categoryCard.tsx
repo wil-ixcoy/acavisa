@@ -42,7 +42,7 @@ export default function CategoryCarousel() {
                   height={200}
                   className="w-full h-48 object-cover rounded-lg"
                 />
-                <div className="absolute inset-0 bg-green-700 bg-opacity-60 mix-blend-multiply rounded-lg"></div>
+                <div className="absolute inset-0 bg-secondary bg-opacity-60 mix-blend-multiply rounded-lg"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <p className="text-white text-lg font-bold uppercase text-center drop-shadow-lg px-4">
                     {category.title}

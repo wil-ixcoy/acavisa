@@ -21,10 +21,10 @@ export default function Header() {
           </Link>
         </section>
 
-        <section className="flex flex-col items-center lg:items-end mt-3 lg:mt-0 lg:mr-8 text-sm text-gray-700">
+        <section className="flex flex-col items-center lg:items-end mt-3 lg:mt-0 lg:mr-8 text-sm text-deep-gray">
           <div className="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-4">
             
-            <div className="flex items-center space-x-1 text-green-700">
+            <div className="flex items-center space-x-1 text-secondary">
               <Image
                 src="/countries/sv.png"
                 alt="sv"
@@ -35,16 +35,16 @@ export default function Header() {
               <span>EL SALVADOR</span>
             </div>
 
-            <span className="hidden lg:block text-green-700">|</span>
+            <span className="hidden lg:block text-secondary">|</span>
 
-            <div className="flex items-center space-x-1 text-green-700">
+            <div className="flex items-center space-x-1 text-secondary">
               <span>📞</span>
               <span><strong>Call Center:</strong> 2231-4200</span>
             </div>
 
-            <span className="hidden lg:block text-green-700">|</span>
+            <span className="hidden lg:block text-secondary">|</span>
 
-            <div className="flex items-center space-x-1 text-green-700">
+            <div className="flex items-center space-x-1 text-secondary">
               <span>💬</span>
               <span><strong>WhatsApp:</strong> 6025-1411</span>
             </div>

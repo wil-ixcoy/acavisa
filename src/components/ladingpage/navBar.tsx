@@ -10,12 +10,12 @@ export default function NavBar() {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
 
   return (
-    <nav className="w-full bg-green-700 text-white py-3 relative z-30">
+    <nav className="w-full bg-secondary text-white py-3 relative z-30">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4">
         
         <Button
           variant="outline"
-          className="bg-green-800 text-white border-none flex items-center gap-2 px-3 py-2 rounded-lg"
+          className="bg-primary text-white border-none flex items-center gap-2 px-3 py-2 rounded-lg"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           <Menu className="w-5 h-5" />
@@ -50,7 +50,7 @@ export default function NavBar() {
 
         <Button
           variant="outline"
-          className="bg-green-800 text-white border-none flex items-center gap-2 px-3 py-2 rounded-lg md:hidden"
+          className="bg-primary text-white border-none flex items-center gap-2 px-3 py-2 rounded-lg md:hidden"
           onClick={() => setCategoriesOpen(!categoriesOpen)}
         >
           <span className="text-sm">Categorías</span>
