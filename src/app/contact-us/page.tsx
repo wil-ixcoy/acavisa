@@ -13,17 +13,18 @@ export default function ContactUs() {
         <Header />
         <NavBar />
       </header>
+
       <main className="max-w-6xl mx-auto py-10 px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-18 mt-6 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:mt-6 items-start">
           <section className="p-6">
-            <h2 className="font-bold text-2xl mb-4">Contáctanos ahora</h2>
-            <p className="mb-4">
+            <h2 className="font-bold text-lg md:text-2xl mb-4">Contáctanos ahora</h2>
+            <p className="mb-4 text-sm md:text-lg">
               Contamos con 75 años de experiencia, siendo líderes en el mercado
               de la industria. Somos reconocidos por nuestros productos de
               calidad, servicio eficiente y mejora continua.
             </p>
-            <p className="font-bold mb-4">¡Somos tu socio de negocios!</p>
-            <div className="flex items-center mb-2">
+            <p className="font-bold mb-4 text-sm md:text-lg">¡Somos tu socio de negocios!</p>
+            <div className="flex items-center mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 mr-2 text-green-800"
@@ -44,11 +45,11 @@ export default function ContactUs() {
                 />
               </svg>
               <section className="flex flex-col">
-                <h3 className="text-md font-bold">Vísitanos</h3>
-                <p>25 W. Su N 783, San Salvador</p>
+                <h3 className="text-sm md:text-lg font-bold">Vísitanos</h3>
+                <p className="text-xs md:text-lg">25 W. Su N 783, San Salvador</p>
               </section>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 mr-2 text-green-800"
@@ -63,22 +64,24 @@ export default function ContactUs() {
                 />
               </svg>
               <section className="flex flex-col">
-                <h3 className="text-md font-bold">Correo electronico</h3>
-              <p>acavisa.info@acavisa.com</p>
+                <h3 className="text-sm md:text-lg font-bold">Correo electronico</h3>
+                <p className="text-xs md:text-lg">acavisa.info@acavisa.com</p>
               </section>
             </div>
           </section>
+
           <section className="px-3">
             <Title align="left" size="sm">
               <p>Escríbenos</p>
             </Title>
+
             <div className="mt-4">
               <label
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700">
                 Tu nombre
               </label>
-              <Input type="text" name="name" id="name" />
+              <Input type="text" name="name" id="name" className="w-full" />
             </div>
             <div className="mt-4">
               <label
@@ -86,7 +89,7 @@ export default function ContactUs() {
                 className="block text-sm font-medium text-gray-700">
                 Tu E-Mail
               </label>
-              <Input type="email" name="email" id="email" />
+              <Input type="email" name="email" id="email" className="w-full" />
             </div>
             <div className="mt-4">
               <label
@@ -94,14 +97,15 @@ export default function ContactUs() {
                 className="block text-sm font-medium text-gray-700">
                 Mensaje
               </label>
-              <Textarea name="message" id="message" rows={4} />
+              <Textarea name="message" id="message" rows={4} className="w-full" />
             </div>
-            <Button className="bg-green-800 rounded-none w-1/3 mt-4">
-              Cotizar
+            <Button className="bg-green-800 rounded-none w-full sm:w-1/3 mt-4 hover:bg-green-700">
+              Enviar
             </Button>
           </section>
         </div>
       </main>
+
       <Footer />
     </div>
   );
