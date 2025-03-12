@@ -8,7 +8,7 @@ interface ArticleProps {
   params: Promise<{ id: string }>;
 }
 
-export default function Article({ params }: ArticleProps) {
+export default async function Article({ params }: ArticleProps) {
 
   const { id } = await params;
   
