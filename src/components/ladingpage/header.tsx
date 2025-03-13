@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import SearchBar from "@/components/ladingpage/searchBar";
 import Link from "next/link";
 
+// Header component
 export default function Header() {
   return (
     <Card className="w-full bg-cover bg-center" style={{ backgroundImage: "url('/backgrounds/background-header.png')" }}>
