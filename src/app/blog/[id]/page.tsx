@@ -5,12 +5,13 @@ import Footer from "@/components/ladingpage/footer";
 import Title from "@/components/ladingpage/title";
 
 interface ArticleProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 }
 
-export default function Article({ params }: ArticleProps) {
+export default async function Article({ params }: ArticleProps) {
+
+  const { id } = await params;
+  
   return (
     <div>
       <header>
@@ -20,7 +21,7 @@ export default function Article({ params }: ArticleProps) {
 
       <main className="container mx-auto p-4">
         <Title>
-          <h1>{params.id}</h1>
+          <h1>{id}</h1>
         </Title>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center mt-8">
           <div className="relative w-full h-64">
