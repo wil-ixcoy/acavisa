@@ -17,7 +17,7 @@ const promotions = [
   {
     title: "Calidad y Garantía",
     description: "Conoce las ventajas de usar Tecnovolt",
-    bgColor: "bg-green-800",
+    bgColor: "bg-primary",
     icon: "✅",
   },
 ];
@@ -25,7 +25,7 @@ const promotions = [
 export default function PromotionsSection() {
   return (
     <div className="w-full p-4">
-      <h2 className="bg-green-700 text-white px-4 py-2 text-lg font-bold inline-block uppercase">
+      <h2 className="bg-secondary text-white px-4 py-2 text-lg font-bold inline-block uppercase">
         PROMOCIONES
       </h2>
 
@@ -52,7 +52,7 @@ export default function PromotionsSection() {
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl">{promo.description}</p>
               </div>
 
-              <div className="w-10 h-16 md:h-20 lg:h-24 flex items-center justify-center bg-green-700">
+              <div className="w-10 h-16 md:h-20 lg:h-24 flex items-center justify-center bg-secondary">
                 <ChevronRight className="w-6 h-6 text-white" />
               </div>
             </div>

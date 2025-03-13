@@ -30,11 +30,11 @@ export default function SidebarMenu({ isOpen, onClose }: SidebarMenuProps) {
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="bg-green-700 text-white p-3 flex items-center space-x-2">
+        <div className="bg-secondary text-white p-3 flex items-center space-x-2">
           <Home size={20} />
           <span className="font-semibold">MENU</span>
         </div>
-        <div className="bg-green-600 text-white p-3 flex items-center space-x-2">
+        <div className="bg-secondary text-white p-3 flex items-center space-x-2">
           <List size={20} />
           <span className="font-semibold">CATEGORIES</span>
         </div>
@@ -44,7 +44,7 @@ export default function SidebarMenu({ isOpen, onClose }: SidebarMenuProps) {
             <Link
               key={path}
               href={path}
-              className="w-full flex items-center justify-start text-green-700 font-semibold p-3 border-t border-gray-200 hover:bg-gray-100 transition"
+              className="w-full flex items-center justify-start text-secondary font-semibold p-3 border-t border-gray-200 hover:bg-gray-100 transition"
               onClick={onClose}
             >
               <ChevronDown size={18} className="mr-4" />

@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function HelpComponent() {
   return (
-    <div className="bg-green-800 p-4 flex items-center justify-center">
-      <section className="bg-green-600 p-4 rounded-3xl flex flex-col lg:flex-row items-center justify-center w-full space-y-4 lg:space-y-0 lg:space-x-4">
+    <div className="bg-primary p-4 flex items-center justify-center">
+      <section className="bg-secondary p-4 rounded-3xl flex flex-col lg:flex-row items-center justify-center w-full space-y-4 lg:space-y-0 lg:space-x-4">
         <span className="text-white font-semibold text-2xl text-center lg:text-left lg:w-2/4 px-4">
           ¡Estamos para ayudarte!
         </span>

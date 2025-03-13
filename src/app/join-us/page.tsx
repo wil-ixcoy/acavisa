@@ -36,7 +36,7 @@ export default function JoinUs() {
       <main className="max-w-4xl mx-auto py-10 px-6">
         <div className="grid grid-cols-1 gap-6 md:mt-6 items-start">
           <section className="p-6 bg-white rounded-lg shadow-md">
-            <h2 className="text-xl md:text-2xl font-bold text-center bg-green-800 text-white p-3 mb-6 md:w-1/4 md:h-1/4">
+            <h2 className="text-xl md:text-2xl font-bold text-center bg-primary text-white p-3 mb-6 md:w-1/4 md:h-1/4">
               Reclutamiento
             </h2>
 
@@ -87,7 +87,7 @@ export default function JoinUs() {
                   onChange={handleFileChange}
                   ref={fileInputRef}
                 />
-                <span className="text-gray-500 text-sm md:text-base">
+                <span className="text-acavisa-gray text-sm md:text-base">
                   {selectedFile ? selectedFile.name : "Selecciona tu CV"}
                 </span>
               </div>
@@ -107,7 +107,7 @@ export default function JoinUs() {
               />
             </div>
 
-            <Button className="bg-green-800 md:w-1/4 rounded-none mt-6 hover:bg-green-700 text-sm md:text-base">
+            <Button className="bg-primary md:w-1/4 rounded-none mt-6 hover:bg-secondary text-sm md:text-base">
               Enviar
             </Button>
           </section>

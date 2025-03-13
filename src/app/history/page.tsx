@@ -18,14 +18,14 @@ export default function History() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 items-start">
           <div className="flex justify-start">
             <Image
-              src="/logos/logo-acavisa1.png" 
+              src="/logos/horizontal-acavisa-full-color.png" 
               alt="Historia"
               width={400}
               height={300}
               className="rounded-lg shadow-md"
             />
           </div>
-          <div className="text-gray-700">
+          <div className="text-deep-gray">
             <h2 className="font-bold text-black text-md md:text-2xl">Líderes en el mercado</h2>
             <p className="mt-4 text-xs md:text-lg">
               Contamos con 75 años de experiencia, siendo líderes en el mercado

@@ -8,7 +8,7 @@ export default function Home() {
         className="w-full h-[108px] bg-cover bg-center flex justify-center shadow-lg"
         style={{ backgroundImage: "url('/background.png')" }}>
         <Image
-          src="/logo-acavisa1.png"
+          src="/logos/horizontal-acavisa-full-color.png"
           alt="ACAVISA"
           width={200}
           height={80}
@@ -19,16 +19,15 @@ export default function Home() {
       <main className="flex flex-col justify-center items-center">
         <div className="mt-10 w-80 text-center">
           <h2>
-            <span className="text-3xl font-bold text-green-700">
+            <span className="text-3xl font-bold text-secondary">
               SELECCIONAR
             </span>{" "}
             <span className="text-3xl font-bold text-black-700">PAÍS</span>
           </h2>
 
-          <hr className="w-[100%] my-4 border-green-700 mx-auto border-1" /> {/* Cambio aquí */}
-
+          <hr className="w-[100%] my-4 border-green-700 mx-auto border-1" /> 
           <div className="flex flex-col gap-4 mt-4 items-center justify-center">
-            <Button className="bg-green-700 text-white flex justify-between w-full h-12 py-2 px-4 rounded-lg hover:cursor-pointer">
+            <Button className="bg-secondary text-white flex justify-between w-full h-12 py-2 px-4 rounded-lg hover:cursor-pointer">
               <Image
                 src="/countries/sv.png"
                 alt="sv"
@@ -40,7 +39,7 @@ export default function Home() {
               <span>➡</span>
             </Button>
 
-            <Button className="bg-green-700 text-white flex justify-between w-full h-12 py-2 px-4 rounded-lg hover:cursor-pointer">
+            <Button className="bg-secondary text-white flex justify-between w-full h-12 py-2 px-4 rounded-lg hover:cursor-pointer">
               <Image
                 src="/countries/hn.png"
                 alt="hn"
@@ -52,7 +51,7 @@ export default function Home() {
               <span>➡</span>
             </Button>
 
-            <Button className="bg-green-700 text-white flex justify-between w-full h-12 py-2 px-4 rounded-lg hover:cursor-pointer">
+            <Button className="bg-secondary text-white flex justify-between w-full h-12 py-2 px-4 rounded-lg hover:cursor-pointer">
               <Image
                 src="/countries/ni.png"
                 alt="ni"

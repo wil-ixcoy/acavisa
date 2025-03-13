@@ -24,7 +24,7 @@ export default function BlogCard({
         className="w-full h-56 object-cover"
       />
       <div>
-        <div className="font-bold text-sm md:text-xl mb-2 bg-green-800 text-white flex items-center justify-center py-2">
+        <div className="font-bold text-sm md:text-xl mb-2 bg-primary text-white flex items-center justify-center py-2">
           <p className="text-center">{title}</p>
         </div>
         <p className="text-xs md:text-lg px-4 overflow-hidden text-ellipsis whitespace-normal line-clamp-3">

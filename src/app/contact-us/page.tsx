@@ -16,7 +16,7 @@ export default function ContactUs() {
 
       <main className="max-w-6xl mx-auto py-10 px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:mt-6 items-start">
-          <section className="p-6">
+          <section className="p-6 text-verdeLimon">
             <h2 className="font-bold text-lg md:text-2xl mb-4">Contáctanos ahora</h2>
             <p className="mb-4 text-sm md:text-lg">
               Contamos con 75 años de experiencia, siendo líderes en el mercado
@@ -27,7 +27,7 @@ export default function ContactUs() {
             <div className="flex items-center mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mr-2 text-green-800"
+                className="h-6 w-6 mr-2 text-primary"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -52,7 +52,7 @@ export default function ContactUs() {
             <div className="flex items-center mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mr-2 text-green-800"
+                className="h-6 w-6 mr-2 text-primary"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -78,7 +78,7 @@ export default function ContactUs() {
             <div className="mt-4">
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700">
+                className="block text-sm font-medium text-deepGray">
                 Tu nombre
               </label>
               <Input type="text" name="name" id="name" className="w-full" />
@@ -86,7 +86,7 @@ export default function ContactUs() {
             <div className="mt-4">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700">
+                className="block text-sm font-medium text-deepGray">
                 Tu E-Mail
               </label>
               <Input type="email" name="email" id="email" className="w-full" />
@@ -94,12 +94,12 @@ export default function ContactUs() {
             <div className="mt-4">
               <label
                 htmlFor="message"
-                className="block text-sm font-medium text-gray-700">
+                className="block text-sm font-medium text-deepGray">
                 Mensaje
               </label>
               <Textarea name="message" id="message" rows={4} className="w-full" />
             </div>
-            <Button className="bg-green-800 rounded-none w-full sm:w-1/3 mt-4 hover:bg-green-700">
+            <Button className="bg-primary rounded-none w-full sm:w-1/3 mt-4 hover:bg-secondary">
               Enviar
             </Button>
           </section>

@@ -56,11 +56,11 @@ export default function Faq() {
           <Accordion type="single" collapsible className="my-8">
             {faqData.map((item, index) => (
               <AccordionItem value={`item-${index}`} key={index}>
-                <AccordionTrigger className="text-green-800 font-bold cursor-pointer transition-all duration-300 hover:text-green-700 p-3 rounded-lg">
+                <AccordionTrigger className="text-primary font-bold cursor-pointer transition-all duration-300 hover:text-secondary p-3 rounded-lg">
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="transition-all duration-300 ease-in-out">
-                  <p className="text-green-700">{item.answer}</p>
+                  <p className="text-secondary">{item.answer}</p>
                 </AccordionContent>
               </AccordionItem>
             ))}

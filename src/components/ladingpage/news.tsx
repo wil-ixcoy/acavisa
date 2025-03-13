@@ -39,12 +39,12 @@ export default function News() {
   return (
     <section className="p-4 mb-6 mt-10">
       <div className="flex items-center justify-between mb-4">
-        <div className="bg-green-600 text-white px-4 py-2">
+        <div className="bg-secondary text-white px-4 py-2">
           NOTICIAS Y EVENTOS
         </div>
       </div>
       <div className="w-full h-auto p-5">
-        <Carousel className="w-full max-w-4xl mx-auto">
+        <Carousel className="w-3/4 md:w-full max-w-4xl mx-auto">
           <CarouselContent>
             {newsItems.map((news, index) => (
               <CarouselItem key={index} className="basis-full md:basis-1/3">
