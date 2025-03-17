@@ -1,16 +1,25 @@
-"use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client';
 
-import Header from "@/components/ladingpage/header";
-import NavBar from "@/components/ladingpage/navBar";
-import Footer from "@/components/ladingpage/footer";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useRef, useState } from "react";
+import Header from '@/components/ladingpage/header';
+import NavBar from '@/components/ladingpage/navBar';
+import Footer from '@/components/ladingpage/footer';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { useRef, useState } from 'react';
 
 export default function JoinUs() {
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [profession, setProfession] = useState('');
+  const [desiredPosition, setDesiredPosition] = useState('');
+  const [message, setMessage] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -23,6 +32,49 @@ export default function JoinUs() {
   const handleFileClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setSuccessMessage(null);
+    setErrorMessage(null);
+
+    const formData = new FormData();
+    formData.append('fullName', fullName);
+    formData.append('email', email);
+    formData.append('profession', profession);
+    formData.append('desiredPosition', desiredPosition);
+    formData.append('message', message);
+    if (selectedFile) {
+      formData.append('cv', selectedFile);
+    }
+
+    try {
+      const response = await fetch('/api/join-us', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        setSuccessMessage('Solicitud enviada con éxito.');
+        setFullName('');
+        setEmail('');
+        setProfession('');
+        setDesiredPosition('');
+        setMessage('');
+        setSelectedFile(null);
+      } else {
+        const errorData = await response.json();
+        setErrorMessage(errorData.error || 'Error al enviar la solicitud. Inténtalo de nuevo.');
+        console.error('Error al enviar a la API:', errorData);
+      }
+    } catch (err: any) {
+      setErrorMessage('Ocurrió un error inesperado.');
+      console.error('Error:', err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -40,76 +92,98 @@ export default function JoinUs() {
               Reclutamiento
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <Input
-                  className="rounded-none text-sm md:text-base"
-                  type="text"
-                  id="name"
-                  placeholder="Tu nombre"
-                />
+            <form onSubmit={handleSubmit}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <Input
+                    className="rounded-none text-sm md:text-base"
+                    type="text"
+                    id="name"
+                    placeholder="Tu nombre"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div>
+                  <Input
+                    className="rounded-none text-sm md:text-base"
+                    type="email"
+                    id="email"
+                    placeholder="Tu E-Mail"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div>
+                  <Input
+                    className="rounded-none text-sm md:text-base"
+                    type="text"
+                    id="profession"
+                    placeholder="Profesión"
+                    value={profession}
+                    onChange={(e) => setProfession(e.target.value)}
+                    required
+                  />
+                </div>
+                <div>
+                  <Input
+                    className="rounded-none text-sm md:text-base"
+                    type="text"
+                    id="position"
+                    placeholder="Cargo a aplicar"
+                    value={desiredPosition}
+                    onChange={(e) => setDesiredPosition(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
-              <div>
-                <Input
-                  className="rounded-none text-sm md:text-base"
-                  type="email"
-                  id="email"
-                  placeholder="Tu E-Mail"
-                />
-              </div>
-              <div>
-                <Input
-                  className="rounded-none text-sm md:text-base"
-                  type="text"
-                  id="profession"
-                  placeholder="Profesión"
-                />
-              </div>
-              <div>
-                <Input
-                  className="rounded-none text-sm md:text-base"
-                  type="text"
-                  id="position"
-                  placeholder="Cargo a aplicar"
-                />
-              </div>
-            </div>
 
-            <div className="mt-4">
-              <div
-                className="relative border rounded-none py-2 px-4 cursor-pointer bg-white hover:bg-gray-50"
-                onClick={handleFileClick}
+              <div className="mt-4">
+                <div
+                  className="relative border rounded-none py-2 px-4 cursor-pointer bg-white hover:bg-gray-50"
+                  onClick={handleFileClick}
+                >
+                  <input
+                    type="file"
+                    id="cv"
+                    className="absolute inset-0 opacity-0 w-full h-full"
+                    onChange={handleFileChange}
+                    ref={fileInputRef}
+                  />
+                  <span className="text-acavisa-gray text-sm md:text-base">
+                    {selectedFile ? selectedFile.name : 'Selecciona tu CV'}
+                  </span>
+                </div>
+                {selectedFile && <p className="mt-2 text-sm">Archivo seleccionado: {selectedFile.name}</p>}
+              </div>
+
+              <div className="mt-4">
+                <Textarea
+                  id="message"
+                  rows={6}
+                  placeholder="Mensaje"
+                  className="rounded-none text-sm md:text-base"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
+                />
+              </div>
+
+              <Button
+                type="submit"
+                className={`bg-primary md:w-1/4 rounded-none mt-6 hover:bg-secondary text-sm md:text-base ${
+                  isLoading ? 'opacity-70 cursor-wait' : ''
+                }`}
+                disabled={isLoading}
               >
-                <input
-                  type="file"
-                  id="cv"
-                  className="absolute inset-0 opacity-0 w-full h-full"
-                  onChange={handleFileChange}
-                  ref={fileInputRef}
-                />
-                <span className="text-acavisa-gray text-sm md:text-base">
-                  {selectedFile ? selectedFile.name : "Selecciona tu CV"}
-                </span>
-              </div>
-              {selectedFile && (
-                <p className="mt-2 text-sm">
-                  Archivo seleccionado: {selectedFile.name}
-                </p>
-              )}
-            </div>
+                {isLoading ? 'Enviando...' : 'Enviar'}
+              </Button>
+            </form>
 
-            <div className="mt-4">
-              <Textarea
-                id="message"
-                rows={6}
-                placeholder="Mensaje"
-                className="rounded-none text-sm md:text-base"
-              />
-            </div>
-
-            <Button className="bg-primary md:w-1/4 rounded-none mt-6 hover:bg-secondary text-sm md:text-base">
-              Enviar
-            </Button>
+            {successMessage && <div className="mt-4 text-green-500">{successMessage}</div>}
+            {errorMessage && <div className="mt-4 text-red-500">{errorMessage}</div>}
           </section>
         </div>
       </main>
