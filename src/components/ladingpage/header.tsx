@@ -25,7 +25,7 @@ export default function Header() {
           <div className="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-4">
             <div className="flex items-center space-x-1 text-primary">
               <Image
-                src="/countries/sv.png"
+                src="/icons/el-salvador.png"
                 alt="sv"
                 width={22}
                 height={20}
@@ -38,7 +38,7 @@ export default function Header() {
 
             <div className="flex items-center space-x-1 text-primary">
               <Image
-                src="/icons/green-phone.png"
+                src="/icons/llamada-telefonica-full-collor.png"
                 alt="call"
                 width={22}
                 height={60}
@@ -53,7 +53,7 @@ export default function Header() {
 
             <div className="flex items-center space-x-1 text-primary">
             <Image
-                src="/icons/green-whatsapp.png"
+                src="/icons/whatsapp.png"
                 alt="whatsApp"
                 width={22}
                 height={60}

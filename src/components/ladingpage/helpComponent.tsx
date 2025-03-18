@@ -8,55 +8,77 @@ export default function HelpComponent() {
           ¡Estamos para ayudarte!
         </span>
 
-        <section className="flex flex-wrap lg:flex-nowrap justify-center items-center gap-4">
+        <section className="flex flex-wrap lg:flex-nowrap justify-start  md:justify-center md:items-center gap-4">
           <div className="flex items-center space-x-2 lg:w-auto">
-            <Image
-              src="/countries/sv.png"
-              alt="Chat en Línea"
-              width={24}
-              height={24}
-              className="object-contain"
-            />
+            <div
+              className=" p-2 md:p-3 xl:p-3.5 w-9 h-10 md:w-10 md:h-12 lg:w-16 lg:h-12 xl:w-13 xl:h-14 bg-cover bg-center mr-6 relative"
+              style={{ backgroundImage: "url('/icons/rombo.svg')" }}>
+              <Image
+                src="/icons/charla-2.png"
+                alt="Chat en Línea"
+                width={38}
+                height={38}
+                className="object-contain absolute  w-8.5  md:w-10 xl:w-11"
+              />
+            </div>
             <span className="text-white text-sm font-bold">Chat en Línea</span>
           </div>
 
           <span className="hidden lg:block text-white text-4xl">|</span>
 
           <div className="flex items-center space-x-2 lg:w-auto">
-            <Image
-              src="/countries/sv.png"
-              alt="Call Center"
-              width={24}
-              height={24}
-              className="object-contain"
-            />
-            <p className="text-white text-sm"><span className="font-bold">Call Center:</span> 2231-4200</p>
+            <div
+              className=" p-2 md:p-3 xl:p-3.5 w-9 h-10 md:w-10 md:h-12 lg:w-16 lg:h-12 xl:w-13 xl:h-14 bg-cover bg-center mr-6 relative"
+              style={{ backgroundImage: "url('/icons/rombo.svg')" }}>
+              <Image
+                src="/icons/llamada-telefonica-2.png"
+                alt="Chat en Línea"
+                width={38}
+                height={38}
+                className="object-contain absolute  w-7.5  md:w-8.5 xl:w-9.5"
+              />
+            </div>
+            <p className="text-white text-sm">
+              <span className="font-bold">Call Center:</span> 2231-4200
+            </p>
           </div>
 
           <span className="hidden lg:block text-white text-4xl">|</span>
 
           <div className="flex items-center space-x-2 lg:w-auto">
-            <Image
-              src="/countries/sv.png"
-              alt="WhatsApp"
-              width={24}
-              height={24}
-              className="object-contain"
-            />
-            <p className="text-white text-sm"><span className="font-bold">WhatsApp:</span> 6025-1411</p>
+            <div
+              className=" p-2 md:p-3 xl:p-3.5 w-9 h-10 md:w-10 md:h-12 lg:w-16 lg:h-12 xl:w-13 xl:h-14 bg-cover bg-center mr-6 relative"
+              style={{ backgroundImage: "url('/icons/rombo.svg')" }}>
+              <Image
+                src="/icons/whatsapp-2.png"
+                alt="Chat en Línea"
+                width={38}
+                height={38}
+                className="object-contain absolute w-7.5  md:w-8.5 xl:w-9.5"
+              />
             </div>
+            <p className="text-white text-sm">
+              <span className="font-bold">WhatsApp:</span> 6025-1411
+            </p>
+          </div>
 
           <span className="hidden lg:block text-white text-4xl">|</span>
 
           <div className="flex items-center space-x-2 lg:w-auto">
-            <Image
-              src="/countries/sv.png"
-              alt="Centro de Negocios"
-              width={24}
-              height={24}
-              className="object-contain"
-            />
-            <span className="text-white text-sm font-bold">Centro de Negocios</span>
+          <div
+              className=" p-2 md:p-3 xl:p-2.5 w-9 h-10 md:w-10 md:h-12 lg:w-16 lg:h-12 xl:w-13 xl:h-14 bg-cover bg-center mr-6 relative"
+              style={{ backgroundImage: "url('/icons/rombo.svg')" }}>
+              <Image
+                src="/icons/ubicacion-2.png"
+                alt="Chat en Línea"
+                width={38}
+                height={38}
+                className="object-contain absolute  w-8.5  md:w-10 xl:w-11"
+              />
+            </div>
+            <span className="text-white text-sm font-bold">
+              Centro de Negocios
+            </span>
           </div>
         </section>
       </section>
