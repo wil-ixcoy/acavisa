@@ -7,10 +7,12 @@ export async function POST(request: Request) {
   const supabase = await createClient();
 
   console.log(fullName);
+  console.log(email);
+  console.log(message);
   try {
     const { error } = await supabase
-      .from("profiles")
-      .insert([{ fullName, email, message }]);
+      .from("customer_messages")
+      .insert([{ full_name: fullName, email, message }]);
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
@@ -18,6 +20,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (err: any) {
+    console.log(err)
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }

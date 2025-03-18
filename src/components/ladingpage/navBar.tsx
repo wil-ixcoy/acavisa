@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import SidebarMenu from "./sidebarMenu";
@@ -8,6 +9,30 @@ import { Menu } from "lucide-react";
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
+
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("/api/categories", {
+          method: "GET",
+        });
+
+        if (!response.ok) {
+          throw new Error("Error fetching categories");
+        }
+
+        const data = await response.json();
+        console.log(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+
 
   return (
     <nav className="w-full bg-primary text-white py-3 relative z-30">

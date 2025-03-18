@@ -29,11 +29,7 @@ export default function JoinUs() {
     }
   };
 
-  const handleFileClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
+ 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,6 +44,7 @@ export default function JoinUs() {
     formData.append('desiredPosition', desiredPosition);
     formData.append('message', message);
     if (selectedFile) {
+      console.log(selectedFile)
       formData.append('cv', selectedFile);
     }
 
@@ -68,7 +65,6 @@ export default function JoinUs() {
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.error || 'Error al enviar la solicitud. Inténtalo de nuevo.');
-        console.error('Error al enviar a la API:', errorData);
       }
     } catch (err: any) {
       setErrorMessage('Ocurrió un error inesperado.');
@@ -141,23 +137,15 @@ export default function JoinUs() {
               </div>
 
               <div className="mt-4">
-                <div
-                  className="relative border rounded-none py-2 px-4 cursor-pointer bg-white hover:bg-gray-50"
-                  onClick={handleFileClick}
-                >
-                  <input
-                    type="file"
-                    id="cv"
-                    className="absolute inset-0 opacity-0 w-full h-full"
-                    onChange={handleFileChange}
-                    ref={fileInputRef}
-                  />
-                  <span className="text-acavisa-gray text-sm md:text-base">
-                    {selectedFile ? selectedFile.name : 'Selecciona tu CV'}
-                  </span>
-                </div>
-                {selectedFile && <p className="mt-2 text-sm">Archivo seleccionado: {selectedFile.name}</p>}
-              </div>
+              <input
+                type="file"
+                id="cv"
+                className="w-full border rounded-none py-2 px-4 cursor-pointer bg-white hover:bg-gray-50"
+                onChange={handleFileChange}
+                ref={fileInputRef}
+              />
+             
+            </div>
 
               <div className="mt-4">
                 <Textarea
