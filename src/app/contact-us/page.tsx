@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-
+import Image from "next/image";
 export default function ContactUs() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -75,25 +75,13 @@ export default function ContactUs() {
               ¡Somos tu socio de negocios!
             </p>
             <div className="flex items-center mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mr-2 text-primary"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
+            <Image
+                        src="/icons/pin.svg"
+                        alt="pin"
+                        width={25}
+                        height={60}
+                        className="object-contain mr-4"
+                      />
               <section className="flex flex-col">
                 <h3 className="text-sm md:text-lg font-bold">Vísitanos</h3>
                 <p className="text-xs md:text-lg">
@@ -102,19 +90,13 @@ export default function ContactUs() {
               </section>
             </div>
             <div className="flex items-center mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mr-2 text-primary"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 002 2v10a2 2 0 002 2z"
-                />
-              </svg>
+               <Image
+                        src="/icons/email.svg"
+                        alt="email"
+                        width={25}
+                        height={60}
+                        className="object-contain mr-4"
+                      />
               <section className="flex flex-col">
                 <h3 className="text-sm md:text-lg font-bold">
                   Correo electronico

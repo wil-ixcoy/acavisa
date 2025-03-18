@@ -1,5 +1,5 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
 
 export default function SearchBar() {
   return (
@@ -11,7 +11,13 @@ export default function SearchBar() {
           className="flex-1 text-black-proces outline-none bg-transparent px-2 border-none focus:ring-0 placeholder-gray-500"
         />
         <Button variant="ghost" size="icon" className="p-1 sm:p-2">
-          <Search className="w-6 h-6 sm:w-7 sm:h-7 text-deep-gray hover:text-black transition-colors" />
+          <Image
+            src="/icons/search.png"
+            alt="call"
+            width={20}
+            height={60}
+            className="object-contain w-6 h-6 sm:w-7 sm:h-7 text-deep-gray hover:text-black transition-colors"
+          />
         </Button>
       </div>
     </div>

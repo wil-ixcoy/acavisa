@@ -10,8 +10,8 @@ export default function NavBar() {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
 
   return (
-    <nav className="w-full bg-secondary text-white py-3 relative z-30">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4">
+    <nav className="w-full bg-primary text-white py-3 relative z-30">
+      <div className=" mx-auto flex items-center justify-between px-4">
         
         <Button
           variant="outline"
