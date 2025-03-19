@@ -85,7 +85,7 @@ export default function JoinUs() {
 
       <main className="max-w-4xl mx-auto py-10 px-6">
         <div className="grid grid-cols-1 gap-6 md:mt-6 items-start">
-          <section className="p-6 bg-white rounded-lg shadow-md">
+          <section className="p-6">
             <h2 className="text-xl md:text-2xl font-bold text-center bg-primary text-white p-3 mb-6 md:w-1/4 md:h-1/4">
               Reclutamiento
             </h2>
@@ -94,7 +94,7 @@ export default function JoinUs() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Input
-                    className="rounded-none text-sm md:text-base"
+                    className="rounded-none text-sm md:text-base bg-white"
                     type="text"
                     id="name"
                     placeholder="Tu nombre"
@@ -105,7 +105,7 @@ export default function JoinUs() {
                 </div>
                 <div>
                   <Input
-                    className="rounded-none text-sm md:text-base"
+                    className="rounded-none text-sm md:text-base bg-white"
                     type="email"
                     id="email"
                     placeholder="Tu E-Mail"
@@ -116,7 +116,7 @@ export default function JoinUs() {
                 </div>
                 <div>
                   <Input
-                    className="rounded-none text-sm md:text-base"
+                    className="rounded-none text-sm md:text-base bg-white"
                     type="text"
                     id="profession"
                     placeholder="Profesión"
@@ -127,7 +127,7 @@ export default function JoinUs() {
                 </div>
                 <div>
                   <Input
-                    className="rounded-none text-sm md:text-base"
+                    className="rounded-none text-sm md:text-base bg-white"
                     type="text"
                     id="position"
                     placeholder="Cargo a aplicar"
@@ -153,7 +153,7 @@ export default function JoinUs() {
                   id="message"
                   rows={6}
                   placeholder="Mensaje"
-                  className="rounded-none text-sm md:text-base"
+                  className="rounded-none text-sm md:text-base bg-white"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   required

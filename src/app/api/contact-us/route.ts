@@ -6,9 +6,6 @@ export async function POST(request: Request) {
   const { fullName, email, message } = await request.json();
   const supabase = await createClient();
 
-  console.log(fullName);
-  console.log(email);
-  console.log(message);
   try {
     const { error } = await supabase
       .from("contact_requests")

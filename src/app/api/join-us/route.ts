@@ -14,16 +14,6 @@ export async function POST(request: Request) {
 
   const supabase = await createClient();
 
-  console.log("Inicio de la solicitud POST a /api/join-us");
-  console.log("Datos del formulario recibidos:", {
-    fullName,
-    email,
-    profession,
-    desiredPosition,
-    message,
-    cvFile: cvFile ? cvFile.name : null,
-  });
-
   try {
     let cvUrl = null;
     if (cvFile) {
