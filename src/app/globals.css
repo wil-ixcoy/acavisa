@@ -18,9 +18,6 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
@@ -81,6 +78,7 @@
 
   --primary: #005f2a;
   --secondary: #00a53d;
+
   --verde-acavisa: #005d27;
   --verde-secundario: #348928;
   --verde-hea: #00ab0a;
@@ -203,6 +201,14 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-verde-acavisa: var(--verde-acavisa);
+  --color-verde-secundario: var(--verde-secundario);
+  --color-verde-hea: var(--verde-hea);
+  --color-verde-pit: var(--verde-pit);
+  --color-verde-limon: var(--verde-limon);
+  --color-deep-gray: var(--deep-gray);
+  --color-acavisa-gray: var(--acavisa-gray);
+  --color-black-process: var(--black-process);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -222,12 +228,11 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background;
   }
 }
