@@ -13,7 +13,8 @@ export default async function Article({ params }: ArticleProps) {
   const { id } = await params;
   
   return (
-    <div>
+    <div   className="w-full h-full bg-cover bg-center bg-no-repeat"
+    style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
       <header>
         <Header />
         <NavBar />

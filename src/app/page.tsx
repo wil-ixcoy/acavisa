@@ -6,7 +6,7 @@ export default function Home() {
     <div className="h-screen bg-gray-100">
       <div
         className="w-full h-[108px] bg-cover bg-center flex justify-center shadow-lg"
-        style={{ backgroundImage: "url('/background.png')" }}>
+        style={{ backgroundImage: "url('backgrounds/background-header.png')" }}>
         <Image
           src="/logos/horizontal-acavisa-full-color.png"
           alt="ACAVISA"

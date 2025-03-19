@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     }
 
     const { error: insertError } = await supabase
-      .from("job_applications")
+      .from("job_applicants")
       .insert([
         {
           full_name: fullName,

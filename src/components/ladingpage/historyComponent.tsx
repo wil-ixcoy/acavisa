@@ -13,7 +13,7 @@ export default function HistoryComponent({ image, title, text, side }: HistoryPr
       <div className="w-3/4 flex justify-center">
         <Image src={image} alt={title} width={260} height={350} className="" />
       </div>
-      <div className="w-1/2 bg-white p-6 ">
+      <div className="w-1/2  p-6 ">
         <h2 className="bg-primary text-white px-4 py-2 inline-block font-bold text-lg">{title}</h2>
         <p className="text-gray-700 mt-2">{text}</p>
       </div>

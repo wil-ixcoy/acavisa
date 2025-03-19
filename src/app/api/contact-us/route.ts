@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   console.log(message);
   try {
     const { error } = await supabase
-      .from("customer_messages")
+      .from("contact_requests")
       .insert([{ full_name: fullName, email, message }]);
 
     if (error) {

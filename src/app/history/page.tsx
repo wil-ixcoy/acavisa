@@ -46,7 +46,9 @@ const historyData = [
 
 export default function History() {
   return (
-    <div>
+    <div
+      className="w-full h-full bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
       <Header />
       <NavBar />
       <Title>

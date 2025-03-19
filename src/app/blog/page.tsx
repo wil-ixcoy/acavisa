@@ -27,7 +27,8 @@ export default function Blog() {
   ]; 
 
   return (
-    <div>
+    <div   className="w-full h-full bg-cover bg-center bg-no-repeat"
+    style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
       <header>
         <Header />
         <NavBar />

@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
+"use client";
 
-import Header from '@/components/ladingpage/header';
-import NavBar from '@/components/ladingpage/navBar';
-import Footer from '@/components/ladingpage/footer';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { useRef, useState } from 'react';
+import Header from "@/components/ladingpage/header";
+import NavBar from "@/components/ladingpage/navBar";
+import Footer from "@/components/ladingpage/footer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useRef, useState } from "react";
 
 export default function JoinUs() {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [profession, setProfession] = useState('');
-  const [desiredPosition, setDesiredPosition] = useState('');
-  const [message, setMessage] = useState('');
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [profession, setProfession] = useState("");
+  const [desiredPosition, setDesiredPosition] = useState("");
+  const [message, setMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,8 +29,6 @@ export default function JoinUs() {
     }
   };
 
- 
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -38,44 +36,48 @@ export default function JoinUs() {
     setErrorMessage(null);
 
     const formData = new FormData();
-    formData.append('fullName', fullName);
-    formData.append('email', email);
-    formData.append('profession', profession);
-    formData.append('desiredPosition', desiredPosition);
-    formData.append('message', message);
+    formData.append("fullName", fullName);
+    formData.append("email", email);
+    formData.append("profession", profession);
+    formData.append("desiredPosition", desiredPosition);
+    formData.append("message", message);
     if (selectedFile) {
-      console.log(selectedFile)
-      formData.append('cv', selectedFile);
+      console.log(selectedFile);
+      formData.append("cv", selectedFile);
     }
 
     try {
-      const response = await fetch('/api/join-us', {
-        method: 'POST',
+      const response = await fetch("/api/join-us", {
+        method: "POST",
         body: formData,
       });
 
       if (response.ok) {
-        setSuccessMessage('Solicitud enviada con éxito.');
-        setFullName('');
-        setEmail('');
-        setProfession('');
-        setDesiredPosition('');
-        setMessage('');
+        setSuccessMessage("Solicitud enviada con éxito.");
+        setFullName("");
+        setEmail("");
+        setProfession("");
+        setDesiredPosition("");
+        setMessage("");
         setSelectedFile(null);
       } else {
         const errorData = await response.json();
-        setErrorMessage(errorData.error || 'Error al enviar la solicitud. Inténtalo de nuevo.');
+        setErrorMessage(
+          errorData.error || "Error al enviar la solicitud. Inténtalo de nuevo."
+        );
       }
     } catch (err: any) {
-      setErrorMessage('Ocurrió un error inesperado.');
-      console.error('Error:', err);
+      setErrorMessage("Ocurrió un error inesperado.");
+      console.error("Error:", err);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div>
+    <div
+      className="w-full h-full bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
       <header>
         <Header />
         <NavBar />
@@ -137,15 +139,14 @@ export default function JoinUs() {
               </div>
 
               <div className="mt-4">
-              <input
-                type="file"
-                id="cv"
-                className="w-full border rounded-none py-2 px-4 cursor-pointer bg-white hover:bg-gray-50"
-                onChange={handleFileChange}
-                ref={fileInputRef}
-              />
-             
-            </div>
+                <input
+                  type="file"
+                  id="cv"
+                  className="w-full border rounded-none py-2 px-4 cursor-pointer bg-white hover:bg-gray-50"
+                  onChange={handleFileChange}
+                  ref={fileInputRef}
+                />
+              </div>
 
               <div className="mt-4">
                 <Textarea
@@ -162,16 +163,19 @@ export default function JoinUs() {
               <Button
                 type="submit"
                 className={`bg-primary md:w-1/4 rounded-none mt-6 hover:bg-secondary text-sm md:text-base ${
-                  isLoading ? 'opacity-70 cursor-wait' : ''
+                  isLoading ? "opacity-70 cursor-wait" : ""
                 }`}
-                disabled={isLoading}
-              >
-                {isLoading ? 'Enviando...' : 'Enviar'}
+                disabled={isLoading}>
+                {isLoading ? "Enviando..." : "Enviar"}
               </Button>
             </form>
 
-            {successMessage && <div className="mt-4 text-green-500">{successMessage}</div>}
-            {errorMessage && <div className="mt-4 text-red-500">{errorMessage}</div>}
+            {successMessage && (
+              <div className="mt-4 text-green-500">{successMessage}</div>
+            )}
+            {errorMessage && (
+              <div className="mt-4 text-red-500">{errorMessage}</div>
+            )}
           </section>
         </div>
       </main>

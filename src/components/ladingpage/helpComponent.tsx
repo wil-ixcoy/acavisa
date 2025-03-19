@@ -32,7 +32,7 @@ export default function HelpComponent() {
               style={{ backgroundImage: "url('/icons/rombo.svg')" }}>
               <Image
                 src="/icons/llamada-telefonica-2.png"
-                alt="Chat en Línea"
+                alt="llamda"
                 width={38}
                 height={38}
                 className="object-contain absolute  w-7.5  md:w-8.5 xl:w-9.5"
@@ -51,7 +51,7 @@ export default function HelpComponent() {
               style={{ backgroundImage: "url('/icons/rombo.svg')" }}>
               <Image
                 src="/icons/whatsapp-2.png"
-                alt="Chat en Línea"
+                alt="whatsApp"
                 width={38}
                 height={38}
                 className="object-contain absolute w-7.5  md:w-8.5 xl:w-9.5"
@@ -70,7 +70,7 @@ export default function HelpComponent() {
               style={{ backgroundImage: "url('/icons/rombo.svg')" }}>
               <Image
                 src="/icons/ubicacion-2.png"
-                alt="Chat en Línea"
+                alt="ubicacion"
                 width={38}
                 height={38}
                 className="object-contain absolute  w-8.5  md:w-10 xl:w-11"

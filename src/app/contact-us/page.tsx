@@ -54,7 +54,9 @@ export default function ContactUs() {
   };
 
   return (
-    <div>
+    <div
+      className="w-full h-full bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
       <header>
         <Header />
         <NavBar />
@@ -75,13 +77,13 @@ export default function ContactUs() {
               ¡Somos tu socio de negocios!
             </p>
             <div className="flex items-center mb-4">
-            <Image
-                        src="/icons/pin.svg"
-                        alt="pin"
-                        width={25}
-                        height={60}
-                        className="object-contain mr-4"
-                      />
+              <Image
+                src="/icons/ubicacion-4.png"
+                alt="pin"
+                width={25}
+                height={60}
+                className="object-contain mr-4"
+              />
               <section className="flex flex-col">
                 <h3 className="text-sm md:text-lg font-bold">Vísitanos</h3>
                 <p className="text-xs md:text-lg">
@@ -90,13 +92,13 @@ export default function ContactUs() {
               </section>
             </div>
             <div className="flex items-center mb-4">
-               <Image
-                        src="/icons/email.svg"
-                        alt="email"
-                        width={25}
-                        height={60}
-                        className="object-contain mr-4"
-                      />
+              <Image
+                src="/icons/correo-electronico-3.png"
+                alt="email"
+                width={25}
+                height={60}
+                className="object-contain mr-4"
+              />
               <section className="flex flex-col">
                 <h3 className="text-sm md:text-lg font-bold">
                   Correo electronico
@@ -122,7 +124,7 @@ export default function ContactUs() {
                   type="text"
                   name="name"
                   id="name"
-                  className="w-full"
+                  className="w-full bg-white rounded-none"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required
@@ -138,7 +140,7 @@ export default function ContactUs() {
                   type="email"
                   name="email"
                   id="email"
-                  className="w-full"
+                  className="w-full bg-white rounded-none"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -154,7 +156,7 @@ export default function ContactUs() {
                   name="message"
                   id="message"
                   rows={4}
-                  className="w-full"
+                  className="w-full bg-white rounded-none"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   required
