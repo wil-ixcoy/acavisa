@@ -60,32 +60,39 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col items-center md:items-start space-y-4 md:space-y-2 mr-2">
-          <span className="font-semibold">Nuestras redes</span>
-          <div className="flex items-center space-x-2">
-            <Image
-              src="/icons/logotipo-de-linkedin.png"
-              alt="linkedin"
-              width={18}
-              height={18}
-              className="object-contain"
-            />
-            <Image
-              src="/icons/logotipo-de-instagram.png"
-              alt="instagram"
-              width={18}
-              height={18}
-              className="object-contain"
-            />
-            <Image
-              src="/icons/facebook-2.png"
-              alt="facebook"
-              width={18}
-              height={18}
-              className="object-contain"
-            />
-            <span>acavisasv</span>
-          </div>
-        </div>
+  <span className="font-semibold">Nuestras redes</span>
+
+  <div className="flex flex-col lg:flex-row items-center md:space-x-2 gap-2">
+    <div className="flex items-center space-x-2">
+      <Image
+        src="/icons/logotipo-de-linkedin.png"
+        alt="linkedin"
+        width={18}
+        height={18}
+        className="object-contain"
+      />
+      <Image
+        src="/icons/logotipo-de-instagram.png"
+        alt="instagram"
+        width={18}
+        height={18}
+        className="object-contain"
+      />
+      <Image
+        src="/icons/facebook-2.png"
+        alt="facebook"
+        width={18}
+        height={18}
+        className="object-contain"
+      />
+    </div>
+
+    <span className=" lg:ml-3 text-center md:text-left">acavisasv</span>
+  </div>
+</div>
+
+
+        
       </div>
     </footer>
   );

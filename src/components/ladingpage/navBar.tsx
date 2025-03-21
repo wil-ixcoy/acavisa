@@ -1,15 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import SidebarMenu from "./sidebarMenu";
-import { Menu } from "lucide-react"; 
+import { Menu } from "lucide-react";
+
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
-
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -32,12 +31,9 @@ export default function NavBar() {
     fetchCategories();
   }, []);
 
-
-
   return (
     <nav className="w-full bg-primary text-white py-3 relative z-30">
-      <div className=" mx-auto flex items-center justify-between px-4">
-        
+      <div className="mx-auto flex items-center justify-between px-4">
         <Button
           variant="outline"
           className="bg-primary text-white border-none flex items-center gap-2 px-3 py-2 rounded-lg"
@@ -49,7 +45,7 @@ export default function NavBar() {
 
         <SidebarMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
-        <ul className="hidden md:flex gap-6 ml-6 text-sm font-medium items-center">
+        <ul className="hidden md:flex flex-wrap gap-6 ml-6 text-sm font-medium items-center">
           {[
             "Lubricantes",
             "Baterías",
@@ -59,14 +55,9 @@ export default function NavBar() {
             "Ruedas y rodamientos",
             "Aceros",
             "Centros de servicio automotriz",
-          ].map((category, index, arr) => (
-            <li
-              key={category}
-              className={`flex items-center ${
-                index !== arr.length - 1 ? "border-r pr-4" : ""
-              }`}
-            >
-              <Link href="#" className="hover:underline">
+          ].map((category) => (
+            <li key={category}>
+              <Link href="#" className="hover:underline whitespace-nowrap">
                 {category}
               </Link>
             </li>

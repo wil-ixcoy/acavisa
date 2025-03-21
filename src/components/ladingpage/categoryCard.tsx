@@ -30,7 +30,7 @@ export default function CategoryCarousel() {
       className="w-full my-10 py-10"
       style={{ backgroundImage: "url('/backgrounds/background-header.png')" }}>
       
-      <Carousel className="w-2/4 md:w-full max-w-4xl mx-auto">
+      <Carousel className="w-2/4 md:w-5/6 lg:w-full max-w-4xl mx-auto">
         <CarouselContent>
           {categories.map((category, index) => (
             <CarouselItem key={index} className="basis-full md:basis-1/2 lg:basis-1/3">
