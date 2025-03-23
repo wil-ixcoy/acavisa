@@ -44,7 +44,7 @@ export default function News() {
         </div>
       </div>
       <div className="w-full h-auto p-5">
-        <Carousel className="w-3/4 md:w-full max-w-4xl mx-auto">
+        <Carousel className="w-3/4 md:w-5/6 lg:w-full max-w-4xl mx-auto">
           <CarouselContent>
             {newsItems.map((news, index) => (
               <CarouselItem key={index} className="basis-full md:basis-1/3">

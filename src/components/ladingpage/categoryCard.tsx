@@ -1,62 +1,44 @@
+"use client";
+
 import Image from "next/image";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const categories = [
-  {
-    title: "GRASAS Y LUBRICANTES",
-    image: "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    title: "BATERÍAS",
-    image: "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    title: "PRODUCTOS DE DETALLADO",
-    image: "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    title: "SISTEMAS DE ALMACENAMIENTO",
-    image: "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    title: "RUEDAS Y RODOS",
-    image: "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-];
+const formatCategoryName = (slug: string) => {
+  return decodeURIComponent(slug).replace(/-/g, " ");
+};
 
-export default function CategoryCarousel() {
+export default function Category() {
+  const pathname = usePathname();
+  const image =
+    "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
+  const categorySlug = pathname.split("/").pop() || "";
+  const categoryName = formatCategoryName(categorySlug);
+
   return (
-    <div
-      className="w-full my-10 py-10"
-      style={{ backgroundImage: "url('/backgrounds/background-header.png')" }}>
-      
-      <Carousel className="w-2/4 md:w-full max-w-4xl mx-auto">
-        <CarouselContent>
-          {categories.map((category, index) => (
-            <CarouselItem key={index} className="basis-full md:basis-1/2 lg:basis-1/3">
-              <div className="relative w-full">
-                <Image
-                  src={category.image}
-                  alt={category.title}
-                  width={300}
-                  height={200}
-                  className="w-full h-48 object-cover rounded-lg"
-                />
-                <div className="absolute inset-0 bg-secondary bg-opacity-60 mix-blend-multiply rounded-lg"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <p className="text-white text-lg font-bold uppercase text-center drop-shadow-lg px-4">
-                    {category.title}
-                  </p>
-                </div>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-      
-    </div>
+    <section className="">
+      <div className="bg-primary w-full md:w-4/6 h-auto px-4 py-2 ">
+        <h2 className="text-xl md:text-3xl font-bold text-center text-white uppercase">
+          {categoryName}
+        </h2>
+      </div>
+      <div className="w-60 md:w-72 mt-6 flex flex-col justify-center">
+        <div className="w-60 md:w-72 rounded-t-lg overflow-hidden shadow-md bg-white">
+          <Image
+            src={image}
+            alt={categoryName}
+            width={300}
+            height={200}
+            className="w-full h-48 object-cover rounded-t-lg p-2"
+          />
+        </div>
+        <Link  href={`/categories/${categoryName}/products`} className="p-4 w-auto bg-white rounded-b-lg shadow-md mt-1">
+          <h3 className="text-primary text-lg md:text-xl text-center font-semibold uppercase">
+            {categoryName}
+          </h3>
+        </Link>
+      </div>
+    </section>
   );
 }

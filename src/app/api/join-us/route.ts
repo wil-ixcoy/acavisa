@@ -19,10 +19,10 @@ export async function POST(request: Request) {
     if (cvFile) {
       const fileExt = cvFile.name.split(".").pop();
       const fileName = `${uuidv4()}.${fileExt}`;
-      const filePath = `cvs/${fileName}`;
+      const filePath = `CVs/${fileName}`;
 
       const { error: uploadError } = await supabase.storage
-        .from("cv-bucket")
+        .from("media")
         .upload(filePath, cvFile, {
           cacheControl: "3600",
           upsert: false,
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
         );
       }
 
-      cvUrl = supabase.storage.from("cv-bucket").getPublicUrl(filePath)
+      cvUrl = supabase.storage.from("media").getPublicUrl(filePath)
         .data.publicUrl;
     }
 

@@ -25,7 +25,7 @@ export default function Home() {
             <span className="text-3xl font-bold text-black-700">PAÍS</span>
           </h2>
 
-          <hr className="w-[100%] my-4 border-green-700 mx-auto border-1" /> 
+          <hr className="w-[100%] my-4 border-green-700 mx-auto border-1" />
           <div className="flex flex-col gap-4 mt-4 items-center justify-center">
             <Button className="bg-secondary text-white flex justify-between w-full h-12 py-2 px-4 rounded-lg hover:cursor-pointer">
               <Image
@@ -35,8 +35,16 @@ export default function Home() {
                 height={30}
                 className="object-contain"
               />
-              <span className="flex items-center gap-2 text-lg">EL SALVADOR</span>
-              <span>➡</span>
+              <span className="flex items-center gap-2 text-lg">
+                EL SALVADOR
+              </span>
+              <Image
+                src="/icons/arrow-select-country.png"
+                alt="ACAVISA"
+                width={20}
+                height={20}
+                className="object-contain filter"
+              />
             </Button>
 
             <Button className="bg-secondary text-white flex justify-between w-full h-12 py-2 px-4 rounded-lg hover:cursor-pointer">
@@ -48,7 +56,13 @@ export default function Home() {
                 className="object-contain"
               />
               <span className="flex items-center gap-2 text-lg">HONDURAS</span>
-              <span>➡</span>
+              <Image
+                src="/icons/arrow-select-country.png"
+                alt="ACAVISA"
+                width={20}
+                height={20}
+                className="object-contain filter"
+              />{" "}
             </Button>
 
             <Button className="bg-secondary text-white flex justify-between w-full h-12 py-2 px-4 rounded-lg hover:cursor-pointer">
@@ -60,7 +74,13 @@ export default function Home() {
                 className="object-contain"
               />
               <span className="flex items-center gap-2 text-lg">NICARAGUA</span>
-              <span>➡</span>
+              <Image
+                src="/icons/arrow-select-country.png"
+                alt="ACAVISA"
+                width={20}
+                height={20}
+                className="object-contain filter"
+              />{" "}
             </Button>
           </div>
         </div>
