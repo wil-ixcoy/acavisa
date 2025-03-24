@@ -9,7 +9,7 @@ interface ProductProps {
   id: string;
 }
 
-export default function Product({ image, title, id }: ProductProps) {
+export default function Product({ image, title }: ProductProps) {
   return (
     <section className="">
       <div className="w-72 mt-6 flex flex-col justify-center">
