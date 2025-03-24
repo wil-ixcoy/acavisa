@@ -16,7 +16,12 @@ export async function GET(request: Request, { params }: { params: { categoryId: 
     }
 
     return NextResponse.json({ products }, { status: 200 });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err) {
+    // Aseguramos que 'err' sea de tipo Error, lo cual es más seguro
+    if (err instanceof Error) {
+      return NextResponse.json({ error: err.message }, { status: 500 });
+    }
+    // Si no es un error estándar, lanzamos un error genérico
+    return NextResponse.json({ error: 'Unknown error occurred' }, { status: 500 });
   }
 }
