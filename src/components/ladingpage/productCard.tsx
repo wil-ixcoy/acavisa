@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 //import Link from "next/link";
 
@@ -25,7 +23,7 @@ export default function Product({ image, title, id }: ProductProps) {
 
         <div className="p-4 w-auto bg-white rounded-b-lg shadow-md mt-1">
           <h3 className="text-primary text-lg md:text-xl text-center font-semibold uppercase hover:underline">
-            {title}
+            {title} {id}
           </h3>
 
           {/*

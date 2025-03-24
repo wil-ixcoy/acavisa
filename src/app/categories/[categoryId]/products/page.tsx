@@ -3,12 +3,12 @@ import NavBar from "@/components/ladingpage/navBar";
 import Footer from "@/components/ladingpage/footer";
 import Product from "@/components/ladingpage/productCard";
 
-export default function ProductsPage({
-  params,
-}: {
-  params: { categoryId: string };
-}) {
-  const { categoryId } = params;
+interface PageProps {
+  params: Promise<{ categoryId: string }>;
+}
+
+export default async function ProductsPage({ params }: PageProps) {
+  const { categoryId } = await params;
 
   const productsByCategory: Record<
     string,
@@ -25,7 +25,7 @@ export default function ProductsPage({
         id: "2",
         title: "Batería de motocicleta",
         image:
-          "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG0dby1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       },
     ],
     grasas: [
@@ -33,13 +33,13 @@ export default function ProductsPage({
         id: "3",
         title: "Aceite sintético 5W-30",
         image:
-          "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG0dby1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       },
       {
         id: "4",
         title: "Aceite mineral 10W-40",
         image:
-          "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG0dby1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       },
     ],
     herramientas: [
@@ -47,13 +47,13 @@ export default function ProductsPage({
         id: "5",
         title: "Kit de detallado automotriz",
         image:
-          "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG0dby1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       },
       {
         id: "6",
         title: "Llave de impacto neumática",
         image:
-          "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG0dby1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       },
     ],
   };
@@ -63,7 +63,8 @@ export default function ProductsPage({
   return (
     <div
       className="w-full h-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
+      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}
+    >
       <header>
         <Header />
         <NavBar />
@@ -73,7 +74,12 @@ export default function ProductsPage({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-6 mt-10">
           {products.length > 0 ? (
             products.map((product) => (
-              <Product key={product.id} id={product.id} title={product.title} image={product.image} />
+              <Product
+                key={product.id}
+                id={product.id}
+                title={product.title}
+                image={product.image}
+              />
             ))
           ) : (
             <p className="text-center col-span-3">

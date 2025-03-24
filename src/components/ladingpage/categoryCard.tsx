@@ -2,19 +2,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 
 const formatCategoryName = (slug: string) => {
   return decodeURIComponent(slug).replace(/-/g, " ");
 };
 
 export default function Category() {
-  const pathname = usePathname();
+  const params = useParams();
+  const categoryId = params.categoryId as string; 
+
   const image =
     "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
-  const categorySlug = pathname.split("/").pop() || "";
-  const categoryName = formatCategoryName(categorySlug);
+  const categoryName = formatCategoryName(categoryId);
 
   return (
     <section className="">
@@ -33,7 +34,10 @@ export default function Category() {
             className="w-full h-48 object-cover rounded-t-lg p-2"
           />
         </div>
-        <Link  href={`/categories/${categoryName}/products`} className="p-4 w-auto bg-white rounded-b-lg shadow-md mt-1">
+        <Link
+          href={`/categories/${categoryId}/products`}
+          className="p-4 w-auto bg-white rounded-b-lg shadow-md mt-1"
+        >
           <h3 className="text-primary text-lg md:text-xl text-center font-semibold uppercase">
             {categoryName}
           </h3>
