@@ -42,8 +42,16 @@ export default function JoinUs() {
     formData.append("desiredPosition", desiredPosition);
     formData.append("message", message);
     if (selectedFile) {
-      console.log(selectedFile);
       formData.append("cv", selectedFile);
+    }
+
+    const selectedCountryId = localStorage.getItem("selectedCountryId");
+    if (selectedCountryId) {
+      formData.append("country", selectedCountryId);
+    } else {
+      setErrorMessage("Por favor selecciona un país antes de enviar el formulario.");
+      setIsLoading(false);
+      return;
     }
 
     try {
@@ -60,6 +68,9 @@ export default function JoinUs() {
         setDesiredPosition("");
         setMessage("");
         setSelectedFile(null);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = ""; // Limpiamos el input de archivo
+        }
       } else {
         const errorData = await response.json();
         setErrorMessage(
@@ -77,7 +88,8 @@ export default function JoinUs() {
   return (
     <div
       className="w-full h-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
+      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}
+    >
       <header>
         <Header />
         <NavBar />
@@ -165,7 +177,8 @@ export default function JoinUs() {
                 className={`bg-primary md:w-1/4 rounded-none mt-6 hover:bg-secondary text-sm md:text-base ${
                   isLoading ? "opacity-70 cursor-wait" : ""
                 }`}
-                disabled={isLoading}>
+                disabled={isLoading}
+              >
                 {isLoading ? "Enviando..." : "Enviar"}
               </Button>
             </form>

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
-// Interfaz para un país
 interface Country {
   id: string;
   created_at: string;
@@ -13,7 +12,6 @@ interface Country {
   country_code: string;
 }
 
-// Interfaz para la respuesta de la API
 interface ApiResponse {
   categories: Country[];
 }
@@ -23,7 +21,6 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
     const fetchCountries = async () => {
       try {
         const response = await fetch("/api/countries");
@@ -33,18 +30,15 @@ export default function Home() {
         }
 
         const data: ApiResponse = await response.json();
-        console.log("Datos recibidos:", data); // Verifica la estructura de datos
 
-        // Accedemos a data.categories, que es el array que necesitamos
         if (Array.isArray(data.categories)) {
           setCountries(data.categories);
         } else {
-          console.error("La propiedad 'categories' no es un array:", data.categories);
           setCountries([]);
         }
         setLoading(false);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
-        console.error("Error en fetchCountries:", err);
         setCountries([]);
         setLoading(false);
       }
@@ -52,6 +46,11 @@ export default function Home() {
 
     fetchCountries();
   }, []);
+
+  const handleCountrySelect = (countryId: string) => {
+    localStorage.setItem("selectedCountryId", countryId);
+  
+  };
 
   return (
     <div className="h-screen bg-gray-100">
@@ -85,13 +84,16 @@ export default function Home() {
             ) : countries.length > 0 ? (
               countries.map(({ id, country_name, country_flag }) => (
                 <Link key={id} href="/home">
-                  <Button className="bg-secondary text-white flex justify-between w-60 h-12 py-2 px-4 rounded-lg transition-transform transform hover:scale-105 cursor-pointer">
-                  <Image
+                  <Button
+                    className="bg-secondary text-white flex justify-between w-60 h-12 py-2 px-4 rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
+                    onClick={() => handleCountrySelect(id)}
+                  >
+                    <Image
                       src={country_flag}
                       alt={country_name}
                       width={35}
                       height={50}
-                      className="object-contain rounded-xs"
+                      className="object-contain rounded-xs w-9 h-9"
                     />
                     <span className="flex items-center gap-2 text-lg">
                       {country_name}

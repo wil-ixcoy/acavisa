@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import Image from "next/image";
+
 export default function ContactUs() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,13 +25,20 @@ export default function ContactUs() {
     setSuccessMessage(null);
     setErrorMessage(null);
 
+    const selectedCountryId = localStorage.getItem("selectedCountryId");
+    if (!selectedCountryId) {
+      setErrorMessage("Por favor selecciona un país antes de enviar el formulario.");
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch("/api/contact-us", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ fullName, email, message }),
+        body: JSON.stringify({ fullName, email, message, country: selectedCountryId }),
       });
 
       if (response.ok) {
@@ -56,7 +64,8 @@ export default function ContactUs() {
   return (
     <div
       className="w-full h-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
+      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}
+    >
       <header>
         <Header />
         <NavBar />
@@ -101,7 +110,7 @@ export default function ContactUs() {
               />
               <section className="flex flex-col">
                 <h3 className="text-sm md:text-lg font-bold">
-                  Correo electronico
+                  Correo electrónico
                 </h3>
                 <p className="text-xs md:text-lg">acavisa.info@acavisa.com</p>
               </section>
@@ -117,7 +126,8 @@ export default function ContactUs() {
               <div className="mt-4">
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-deepGray">
+                  className="block text-sm font-medium text-deepGray"
+                >
                   Tu nombre
                 </label>
                 <Input
@@ -133,7 +143,8 @@ export default function ContactUs() {
               <div className="mt-4">
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-deepGray">
+                  className="block text-sm font-medium text-deepGray"
+                >
                   Tu E-Mail
                 </label>
                 <Input
@@ -149,7 +160,8 @@ export default function ContactUs() {
               <div className="mt-4">
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-deepGray">
+                  className="block text-sm font-medium text-deepGray"
+                >
                   Mensaje
                 </label>
                 <Textarea
@@ -167,7 +179,8 @@ export default function ContactUs() {
                 className={`bg-primary rounded-none w-full sm:w-1/3 mt-4 hover:bg-secondary ${
                   isLoading ? "opacity-70 cursor-wait" : ""
                 }`}
-                disabled={isLoading}>
+                disabled={isLoading}
+              >
                 {isLoading ? "Enviando..." : "Enviar"}
               </Button>
             </form>
