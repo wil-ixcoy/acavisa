@@ -69,7 +69,7 @@ export default function JoinUs() {
         setMessage("");
         setSelectedFile(null);
         if (fileInputRef.current) {
-          fileInputRef.current.value = ""; // Limpiamos el input de archivo
+          fileInputRef.current.value = "";
         }
       } else {
         const errorData = await response.json();
