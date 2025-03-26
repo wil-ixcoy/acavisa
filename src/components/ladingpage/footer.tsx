@@ -12,10 +12,9 @@ export default function Footer() {
             height={120}
             className="object-contain mb-2"
           />
-          <span className="text-sm">SOMOS TU SOCIO DE NEGOCIOS</span>
         </div>
 
-        <div className="flex flex-col items-center md:items-start space-y-4 md:space-y-2">
+        <div className="flex flex-col items-center md:items-start space-y-4 md:space-y-2 text-sm md:text-md">
           <span className="font-semibold">¿Necesitas ayuda?</span>
           <div className="flex items-center space-x-2">
             <Image
