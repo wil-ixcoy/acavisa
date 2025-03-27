@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Header from "@/components/ladingpage/header";
@@ -10,6 +9,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import Image from "next/image";
+
+const getCookie = (name: string): string | null => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return parts.pop()?.split(";").shift() || null;
+  }
+  return null;
+};
+
 export default function ContactUs() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,13 +33,27 @@ export default function ContactUs() {
     setSuccessMessage(null);
     setErrorMessage(null);
 
+    const selectedCountryId = getCookie("selectedCountryId");
+    if (!selectedCountryId) {
+      setErrorMessage(
+        "Por favor selecciona un país antes de enviar el formulario."
+      );
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch("/api/contact-us", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ fullName, email, message }),
+        body: JSON.stringify({
+          fullName,
+          email,
+          message,
+          country: selectedCountryId,
+        }),
       });
 
       if (response.ok) {
@@ -45,9 +68,8 @@ export default function ContactUs() {
         );
         console.error("Error al enviar a la API:", errorData);
       }
-    } catch (err: any) {
-      setErrorMessage("Ocurrió un error inesperado.");
-      console.error("Error:", err);
+    } catch {
+      setErrorMessage("Ocurrió un error inesperado. Por favor, vuelve a intentarlo");
     } finally {
       setIsLoading(false);
     }
@@ -101,7 +123,7 @@ export default function ContactUs() {
               />
               <section className="flex flex-col">
                 <h3 className="text-sm md:text-lg font-bold">
-                  Correo electronico
+                  Correo electrónico
                 </h3>
                 <p className="text-xs md:text-lg">acavisa.info@acavisa.com</p>
               </section>

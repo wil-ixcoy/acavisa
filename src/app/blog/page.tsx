@@ -3,7 +3,6 @@ import NavBar from "@/components/ladingpage/navBar";
 import Footer from "@/components/ladingpage/footer";
 import BlogCard from "@/components/ladingpage/blogCard";
 
-// Página de blog - 
 export default function Blog() {
   const blog = [
     {

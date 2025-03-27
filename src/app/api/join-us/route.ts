@@ -11,6 +11,7 @@ export async function POST(request: Request) {
   const desiredPosition = formData.get("desiredPosition") as string;
   const message = formData.get("message") as string;
   const cvFile = formData.get("cv") as File | null;
+  const country = formData.get("country") as string;
 
   const supabase = await createClient();
 
@@ -49,6 +50,7 @@ export async function POST(request: Request) {
           desired_position: desiredPosition,
           message,
           cv_url: cvUrl,
+          country, 
         },
       ]);
 

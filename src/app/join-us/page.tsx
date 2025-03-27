@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Header from "@/components/ladingpage/header";
@@ -8,6 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useRef, useState } from "react";
+
+const getCookie = (name: string): string | null => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return parts.pop()?.split(";").shift() || null;
+  }
+  return null;
+};
 
 export default function JoinUs() {
   const [fullName, setFullName] = useState("");
@@ -42,8 +50,16 @@ export default function JoinUs() {
     formData.append("desiredPosition", desiredPosition);
     formData.append("message", message);
     if (selectedFile) {
-      console.log(selectedFile);
       formData.append("cv", selectedFile);
+    }
+
+    const selectedCountryId = getCookie("selectedCountryId");
+    if (selectedCountryId) {
+      formData.append("country", selectedCountryId);
+    } else {
+      setErrorMessage("Por favor selecciona un país antes de enviar el formulario.");
+      setIsLoading(false);
+      return;
     }
 
     try {
@@ -60,15 +76,17 @@ export default function JoinUs() {
         setDesiredPosition("");
         setMessage("");
         setSelectedFile(null);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
       } else {
         const errorData = await response.json();
         setErrorMessage(
           errorData.error || "Error al enviar la solicitud. Inténtalo de nuevo."
         );
       }
-    } catch (err: any) {
-      setErrorMessage("Ocurrió un error inesperado.");
-      console.error("Error:", err);
+    } catch{
+      setErrorMessage("Ocurrió un error inesperado. Por favor, vuelve a intentarlo");
     } finally {
       setIsLoading(false);
     }
@@ -77,7 +95,8 @@ export default function JoinUs() {
   return (
     <div
       className="w-full h-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
+      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}
+    >
       <header>
         <Header />
         <NavBar />
@@ -165,7 +184,8 @@ export default function JoinUs() {
                 className={`bg-primary md:w-1/4 rounded-none mt-6 hover:bg-secondary text-sm md:text-base ${
                   isLoading ? "opacity-70 cursor-wait" : ""
                 }`}
-                disabled={isLoading}>
+                disabled={isLoading}
+              >
                 {isLoading ? "Enviando..." : "Enviar"}
               </Button>
             </form>
