@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Header from "@/components/ladingpage/header";
@@ -8,6 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useRef, useState } from "react";
+
+const getCookie = (name: string): string | null => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return parts.pop()?.split(";").shift() || null;
+  }
+  return null;
+};
 
 export default function JoinUs() {
   const [fullName, setFullName] = useState("");
@@ -45,7 +53,7 @@ export default function JoinUs() {
       formData.append("cv", selectedFile);
     }
 
-    const selectedCountryId = localStorage.getItem("selectedCountryId");
+    const selectedCountryId = getCookie("selectedCountryId");
     if (selectedCountryId) {
       formData.append("country", selectedCountryId);
     } else {
@@ -77,9 +85,8 @@ export default function JoinUs() {
           errorData.error || "Error al enviar la solicitud. Inténtalo de nuevo."
         );
       }
-    } catch (err: any) {
-      setErrorMessage("Ocurrió un error inesperado.");
-      console.error("Error:", err);
+    } catch{
+      setErrorMessage("Ocurrió un error inesperado. Por favor, vuelve a intentarlo");
     } finally {
       setIsLoading(false);
     }

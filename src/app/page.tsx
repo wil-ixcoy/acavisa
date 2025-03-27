@@ -49,7 +49,7 @@ export default function Home() {
 
   const handleCountrySelect = (countryId: string) => {
     localStorage.setItem("selectedCountryId", countryId);
-  
+    document.cookie = `selectedCountryId=${countryId}; path=/; max-age=31536000`;
   };
 
   return (

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Header from "@/components/ladingpage/header";
@@ -10,6 +9,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import Image from "next/image";
+
+const getCookie = (name: string): string | null => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return parts.pop()?.split(";").shift() || null;
+  }
+  return null;
+};
 
 export default function ContactUs() {
   const [fullName, setFullName] = useState("");
@@ -25,9 +33,11 @@ export default function ContactUs() {
     setSuccessMessage(null);
     setErrorMessage(null);
 
-    const selectedCountryId = localStorage.getItem("selectedCountryId");
+    const selectedCountryId = getCookie("selectedCountryId");
     if (!selectedCountryId) {
-      setErrorMessage("Por favor selecciona un país antes de enviar el formulario.");
+      setErrorMessage(
+        "Por favor selecciona un país antes de enviar el formulario."
+      );
       setIsLoading(false);
       return;
     }
@@ -38,7 +48,12 @@ export default function ContactUs() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ fullName, email, message, country: selectedCountryId }),
+        body: JSON.stringify({
+          fullName,
+          email,
+          message,
+          country: selectedCountryId,
+        }),
       });
 
       if (response.ok) {
@@ -53,9 +68,8 @@ export default function ContactUs() {
         );
         console.error("Error al enviar a la API:", errorData);
       }
-    } catch (err: any) {
-      setErrorMessage("Ocurrió un error inesperado.");
-      console.error("Error:", err);
+    } catch {
+      setErrorMessage("Ocurrió un error inesperado. Por favor, vuelve a intentarlo");
     } finally {
       setIsLoading(false);
     }
@@ -64,8 +78,7 @@ export default function ContactUs() {
   return (
     <div
       className="w-full h-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}
-    >
+      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
       <header>
         <Header />
         <NavBar />
@@ -126,8 +139,7 @@ export default function ContactUs() {
               <div className="mt-4">
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-deepGray"
-                >
+                  className="block text-sm font-medium text-deepGray">
                   Tu nombre
                 </label>
                 <Input
@@ -143,8 +155,7 @@ export default function ContactUs() {
               <div className="mt-4">
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-deepGray"
-                >
+                  className="block text-sm font-medium text-deepGray">
                   Tu E-Mail
                 </label>
                 <Input
@@ -160,8 +171,7 @@ export default function ContactUs() {
               <div className="mt-4">
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-deepGray"
-                >
+                  className="block text-sm font-medium text-deepGray">
                   Mensaje
                 </label>
                 <Textarea
@@ -179,8 +189,7 @@ export default function ContactUs() {
                 className={`bg-primary rounded-none w-full sm:w-1/3 mt-4 hover:bg-secondary ${
                   isLoading ? "opacity-70 cursor-wait" : ""
                 }`}
-                disabled={isLoading}
-              >
+                disabled={isLoading}>
                 {isLoading ? "Enviando..." : "Enviar"}
               </Button>
             </form>
