@@ -13,10 +13,11 @@ interface Country {
 }
 
 interface ApiResponse {
-  categories: Country[];
+  countries: Country[];
 }
 
 export default function Home() {
+  
   const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,14 +32,13 @@ export default function Home() {
 
         const data: ApiResponse = await response.json();
 
-        if (Array.isArray(data.categories)) {
-          setCountries(data.categories);
+        if (Array.isArray(data.countries)) {
+          setCountries(data.countries);
         } else {
           setCountries([]);
         }
         setLoading(false);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (err) {
+      } catch {
         setCountries([]);
         setLoading(false);
       }
