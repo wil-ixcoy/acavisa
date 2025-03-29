@@ -5,9 +5,32 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import SidebarMenu from "./sidebarMenu";
 
+/**
+ * 
+ *   "Lubricantes",
+            "Baterías",
+            "Grasas",
+            "Productos de detallado",
+            "Sistemas de almacenamiento",
+            "Ruedas y rodamientos",
+            "Aceros",
+            "Centros de servicio automotriz",
+ */
+interface Category {
+  id: string;
+  created_at: string;
+  country: string;
+  category: string;
+  image: string;
+}
+
+interface ApiResponse {
+  categories: Category[];
+}
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -18,9 +41,15 @@ export default function NavBar() {
           throw new Error("Error fetching categories");
         }
 
-        const data = await response.json();
-        console.log(data);
+        const data: ApiResponse = await response.json();
+
+        if (Array.isArray(data.categories)) {
+          setCategories(data.categories);
+        } else {
+          setCategories([]);
+        }
       } catch (err) {
+        setCategories([]);
         console.error(err);
       }
     };
@@ -45,29 +74,19 @@ export default function NavBar() {
         <SidebarMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
         <ul className="hidden md:flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium items-center">
-          {[
-            "Lubricantes",
-            "Baterías",
-            "Grasas",
-            "Productos de detallado",
-            "Sistemas de almacenamiento",
-            "Ruedas y rodamientos",
-            "Aceros",
-            "Centros de servicio automotriz",
-          ].map((category, index, arr) => {
-            // Convertir la categoría a slug
-            const categorySlug = category.toLowerCase().replace(/\s+/g, "-");
+          {categories.map((category, index, arr) => {
+            const categorySlug = category.id
 
             return (
               <li
-                key={category}
+                key={category.category}
                 className={`flex items-center ${
                   index !== arr.length - 1 ? "border-r pr-4" : ""
                 }`}>
                 <Link
                   href={`/categories/${categorySlug}`}
                   className="hover:underline">
-                  {category}
+                  {category.category}
                 </Link>
               </li>
             );
