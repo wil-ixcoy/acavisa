@@ -5,14 +5,7 @@ export const countryType = defineType({
   title: 'País',
   type: 'document',
   fields: [
-    defineField({
-      name: 'id',
-      title: 'ID',
-      type: 'string',
-      readOnly: true,
-      initialValue: () => crypto.randomUUID(),
-    }),
-   
+
     defineField({
       name: 'country_name',
       title: 'Nombre del país',

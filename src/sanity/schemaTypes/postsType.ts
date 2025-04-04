@@ -1,22 +1,30 @@
 import { defineField, defineType } from 'sanity';
 
-export const productCategoryType = defineType({
-  name: 'productCategory',
-  title: 'Categoría de Producto',
+export const postType = defineType({
+  name: 'post',
+  title: 'Publicación',
   type: 'document',
   fields: [
     defineField({
-      name: 'category',
-      title: 'Nombre de la Categoría',
+      name: 'title',
+      title: 'Título',
       type: 'string',
+    }),
+    defineField({
+      name: 'description',
+      title: 'Descripción',
+      type: 'text',
+    }),
+    defineField({
+      name: 'content',
+      title: 'Contenido',
+      type: 'text',
     }),
     defineField({
       name: 'image',
       title: 'Imagen',
       type: 'image',
-      options: {
-        hotspot: true,
-      },
+      options: { hotspot: true },
       fields: [
         defineField({
           name: 'alt',
@@ -26,25 +34,28 @@ export const productCategoryType = defineType({
       ],
     }),
     defineField({
-      name: 'country',
-      title: 'País',
+      name: 'author',
+      title: 'Autor',
+      type: 'string',
+    }),
+    defineField({
+      name: 'type',
+      title: 'Categoría',
       type: 'reference',
-      to: [{ type: 'country' }],
-      options: {
-        disableNew: true,
-      },
+      to: [{ type: 'postCategory' }],
+      options: { disableNew: true },
     }),
     defineField({
       name: 'created_at',
       title: 'Fecha de creación',
       type: 'datetime',
-      readOnly: true,
       initialValue: () => new Date().toISOString(),
+      readOnly: true,
     }),
   ],
   preview: {
     select: {
-      title: 'category',
+      title: 'title',
       media: 'image',
     },
   },

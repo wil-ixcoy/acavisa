@@ -1,53 +1,69 @@
+"use client";
+
 import Header from "@/components/ladingpage/header";
 import NavBar from "@/components/ladingpage/navBar";
 import Footer from "@/components/ladingpage/footer";
 import Product from "@/components/ladingpage/productCard";
-import { headers } from "next/headers";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { sanityClient } from "../../../../lib/sanity";
 
 interface Product {
+  _id: string;
   created_at: string;
-  nombre_producto: string;
-  image: string;
+  product_name: string;
+  image: string; // Ahora image es directamente la URL como string
   description: string;
   product_code: string;
-  category: string;
+  category: {
+    _ref: string;
+    _type: string;
+  };
 }
 
-interface ApiResponse {
-  products: Product[];
-}
+export default function ProductsPage() {
+  const params = useParams();
+  const categoryId = params.categoryId as string;
 
-interface PageProps {
-  params: Promise<{ categoryId: string }>;
-}
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-export default async function ProductsPage({ params }: PageProps) {
-  const { categoryId } = await params;
-  const image ="https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const query = `
+          *[_type == "product" && references($categoryId) && defined(image.asset)]{
+            "_id": _id,
+            created_at,
+            product_name,
+            "image": image.asset->url, // Aseguramos que devuelva la URL
+            description,
+            product_code,
+            category
+          }
+        `;
+        const data: Product[] = await sanityClient.fetch(query, { categoryId });
 
-  let products: Product[] = [];
-  let error: string | null = null;
-  const baseUrl =
-  process.env.NEXT_PUBLIC_API_BASE_URL || `http://${(await headers()).get("host")}`;
+        console.log("Productos devueltos por Sanity:", data); 
 
+        if (!data || data.length === 0) {
+          throw new Error("No se encontraron productos para esta categoría");
+        }
 
-  try {
-    const response = await fetch(`${baseUrl}/api/categories/${categoryId}/products`, {
-      method: "GET",
-      cache: "no-store",
-    });
-    
-    if (!response.ok) {
-      throw new Error("Error al obtener los productos");
-    }
+        const validProducts = data.filter((product) => product.image && typeof product.image === "string");
+        setProducts(validProducts);
+      } catch (err) {
+        console.error("Error fetching products from Sanity:", err);
+        setError("No se pudieron cargar los productos.");
+        setProducts([]);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    const data: ApiResponse = await response.json();
-
-    console.log(data)
-    products = data.products || [];
-  } catch {
-    error = "No se pudieron cargar los productos.";
-  }
+    fetchProducts();
+  }, [categoryId]);
 
   return (
     <div
@@ -61,15 +77,17 @@ export default async function ProductsPage({ params }: PageProps) {
 
       <main className="mx-auto pt-1 pb-13 px-4 md:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10">
-          {error ? (
+          {loading ? (
+            <p className="text-center col-span-3">Cargando productos...</p>
+          ) : error ? (
             <p className="text-center col-span-3">{error}</p>
           ) : products.length > 0 ? (
             products.map((product) => (
               <Product
-                key={product.product_code} 
+                key={product.product_code}
                 id={product.product_code}
-                title={product.nombre_producto}
-                image={product.image || image}
+                title={product.product_name}
+                image={product.image} 
               />
             ))
           ) : (

@@ -4,9 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
+import { sanityClient } from "../../lib/sanity"; 
 
 interface Category {
-  id: string;
+  _id: string; 
   created_at: string;
   country: string;
   category: string;
@@ -20,22 +21,26 @@ export default function Category() {
   const [categoryData, setCategoryData] = useState<Category | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const image ="https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const response = await fetch(`/api/categories/${categoryId}`, {
-          method: "GET",
-        });
+        const query = `*[_type == "productCategory" && _id == $categoryId][0]{
+          _id,
+          category,
+          "image": image.asset->url,
+          created_at,
+          "country": country->name
+        }`;
 
-        if (!response.ok) {
-          throw new Error("Error fetching category");
+        const data: Category | null = await sanityClient.fetch(query, { categoryId });
+
+        if (!data) {
+          throw new Error("Categoría no encontrada");
         }
 
-        const data = await response.json();
-        setCategoryData(data.categories);
-      } catch  {
+        setCategoryData(data);
+      } catch {
         setError("No se pudo cargar la categoría.");
         setCategoryData(null);
       } finally {
@@ -45,6 +50,7 @@ export default function Category() {
 
     fetchCategory();
   }, [categoryId]);
+
   if (isLoading) {
     return <div>Cargando categoría...</div>;
   }
@@ -54,16 +60,16 @@ export default function Category() {
   }
 
   return (
-    <section className="">
+    <section>
       <div className="bg-primary w-full md:w-4/6 h-auto px-4 py-2">
         <h2 className="text-xl md:text-3xl font-bold text-center text-white uppercase">
-          {categoryData.category} 
+          {categoryData.category}
         </h2>
       </div>
       <div className="w-60 md:w-72 mt-6 flex flex-col justify-center">
         <div className="w-60 md:w-72 rounded-t-lg overflow-hidden shadow-md bg-white">
           <Image
-            src={categoryData.image || image}
+            src={categoryData.image}
             alt={categoryData.category}
             width={300}
             height={200}
@@ -71,7 +77,7 @@ export default function Category() {
           />
         </div>
         <Link
-          href={`/categories/${categoryData.id}/products`}
+          href={`/categories/${categoryData._id}/products`}
           className="p-4 w-auto bg-white rounded-b-lg shadow-md mt-1"
         >
           <h3 className="text-primary text-lg md:text-xl text-center font-semibold uppercase">

@@ -10,6 +10,8 @@ export const structure: StructureResolver = (S) =>
         "Categorías de los productos"
       ),
       S.documentTypeListItem("country").title("Paises de operación"),
+      S.documentTypeListItem("postCategory").title("Categorías de Posts"),
+      S.documentTypeListItem("post").title("Posts"),
       S.divider(),
       ...S.documentTypeListItems().filter(
         (item) =>
@@ -21,6 +23,7 @@ export const structure: StructureResolver = (S) =>
             "product",
             "productCategory",
             "country",
+            "postCategory"
           ].includes(item.getId()!)
       ),
     ]);

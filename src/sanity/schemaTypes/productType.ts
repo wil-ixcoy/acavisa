@@ -6,14 +6,6 @@ export const productType = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'id',
-      title: 'ID',
-      type: 'string',
-      readOnly: true,
-      initialValue: () => crypto.randomUUID(),
-    }),
-
-    defineField({
       name: 'product_name',
       title: 'Nombre del Producto',
       type: 'string',

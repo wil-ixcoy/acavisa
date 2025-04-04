@@ -3,42 +3,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { sanityClient } from "../lib/sanity"; // Ajusta la ruta según tu estructura
 
 interface Country {
-  id: string;
-  created_at: string;
+  id: string; // Representa el _id interno de Sanity
   country_name: string;
   country_flag: string;
-  country_code: string;
-}
-
-interface ApiResponse {
-  countries: Country[];
 }
 
 export default function Home() {
-  
   const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await fetch("/api/countries");
+        const data = await sanityClient.fetch(`
+          *[_type == "country"] {
+            "id": _id,
+            country_name,
+            "country_flag": country_flag.asset->url
+          }
+        `);
 
-        if (!response.ok) {
-          throw new Error("Error fetching countries");
-        }
-
-        const data: ApiResponse = await response.json();
-
-        if (Array.isArray(data.countries)) {
-          setCountries(data.countries);
-        } else {
-          setCountries([]);
-        }
+        setCountries(data);
         setLoading(false);
-      } catch {
+      } catch (error) {
+        console.error("Error fetching countries from Sanity", error);
         setCountries([]);
         setLoading(false);
       }
