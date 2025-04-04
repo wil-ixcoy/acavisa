@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Kanit } from "next/font/google";
 import "./globals.css";
+import { ContactInfoProvider } from "@/lib/ContactInforContext";
 
 // Fuente Kanit
 const kanit = Kanit({
@@ -24,15 +25,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link
-          rel="icon"
-          href="/icon/favicon.png"
-          type="image/png"
-          sizes="90"
-        />
+        <link rel="icon" href="/icon/favicon.png" type="image/png" sizes="90" />
         <link rel="icon" href="/logos/favicon.png" type="image/png" />
       </head>
-      <body className={`${kanit.className}`}>{children}</body>
+      <body className={`${kanit.className}`}>
+        <ContactInfoProvider>{children}</ContactInfoProvider>
+      </body>
     </html>
   );
 }
