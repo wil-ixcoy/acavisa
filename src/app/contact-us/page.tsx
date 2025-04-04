@@ -62,14 +62,24 @@ export default function ContactUs() {
         setEmail("");
         setMessage("");
       } else {
-        const errorData = await response.json();
+        let errorData;
+        try {
+          errorData = await response.json();
+        } catch {
+          throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
         setErrorMessage(
           errorData.error || "Error al enviar el mensaje. Inténtalo de nuevo."
         );
         console.error("Error al enviar a la API:", errorData);
       }
-    } catch {
-      setErrorMessage("Ocurrió un error inesperado. Por favor, vuelve a intentarlo");
+    } catch (e) {
+      console.error("Error en handleSubmit:", e);
+      setErrorMessage(
+        e instanceof Error
+          ? e.message
+          : "Ocurrió un error inesperado. Por favor, vuelve a intentarlo"
+      );
     } finally {
       setIsLoading(false);
     }
@@ -78,7 +88,8 @@ export default function ContactUs() {
   return (
     <div
       className="w-full h-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
+      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}
+    >
       <header>
         <Header />
         <NavBar />
@@ -139,7 +150,8 @@ export default function ContactUs() {
               <div className="mt-4">
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-deepGray">
+                  className="block text-sm font-medium text-deepGray"
+                >
                   Tu nombre
                 </label>
                 <Input
@@ -155,7 +167,8 @@ export default function ContactUs() {
               <div className="mt-4">
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-deepGray">
+                  className="block text-sm font-medium text-deepGray"
+                >
                   Tu E-Mail
                 </label>
                 <Input
@@ -171,7 +184,8 @@ export default function ContactUs() {
               <div className="mt-4">
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-deepGray">
+                  className="block text-sm font-medium text-deepGray"
+                >
                   Mensaje
                 </label>
                 <Textarea
@@ -189,7 +203,8 @@ export default function ContactUs() {
                 className={`bg-primary rounded-none w-full sm:w-1/3 mt-4 hover:bg-secondary ${
                   isLoading ? "opacity-70 cursor-wait" : ""
                 }`}
-                disabled={isLoading}>
+                disabled={isLoading}
+              >
                 {isLoading ? "Enviando..." : "Enviar"}
               </Button>
             </form>

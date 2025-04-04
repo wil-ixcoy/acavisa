@@ -1,6 +1,5 @@
 import type { StructureResolver } from "sanity/structure";
 
-// https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
   S.list()
     .title("Acavisa Studio")
@@ -12,6 +11,8 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("country").title("Paises de operación"),
       S.documentTypeListItem("postCategory").title("Categorías de Posts"),
       S.documentTypeListItem("post").title("Posts"),
+      S.documentTypeListItem("contactRequest").title("Mensajes de Contacto"),
+      S.documentTypeListItem("jobApplicant").title("Solicitantes de Empleo"),
       S.divider(),
       ...S.documentTypeListItems().filter(
         (item) =>
@@ -23,7 +24,9 @@ export const structure: StructureResolver = (S) =>
             "product",
             "productCategory",
             "country",
-            "postCategory"
+            "postCategory",
+            "contactRequest",
+            "jobApplicant", 
           ].includes(item.getId()!)
       ),
     ]);
