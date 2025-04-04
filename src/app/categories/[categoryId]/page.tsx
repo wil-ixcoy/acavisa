@@ -2,6 +2,7 @@ import Header from "@/components/ladingpage/header";
 import NavBar from "@/components/ladingpage/navBar";
 import Footer from "@/components/ladingpage/footer";
 import Category from "@/components/ladingpage/categoryCard";
+import HelpComponent from "@/components/ladingpage/helpComponent";
 
 export default function CategoryPage() {
   return (
@@ -13,7 +14,10 @@ export default function CategoryPage() {
         <Header />
         <NavBar />
       </header>
-
+      <div className="mt-4">
+          <HelpComponent/>
+          </div>
+    
       <main className="mx-auto py-10 px-10">
         <Category />
       </main>

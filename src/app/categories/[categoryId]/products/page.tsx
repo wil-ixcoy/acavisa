@@ -7,8 +7,8 @@ import Product from "@/components/ladingpage/productCard";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { sanityClient } from "../../../../lib/sanity";
+import HelpComponent from "@/components/ladingpage/helpComponent";
 
-// Función para obtener el valor de una cookie
 const getCookie = (name: string): string | null => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -103,6 +103,9 @@ export default function ProductsPage() {
         <Header />
         <NavBar />
       </header>
+      <div className="mt-4">
+      <HelpComponent/>
+      </div>
 
       <main className="max-w-7xl mx-auto py-6 sm:py-8 md:py-10 px-4 sm:px-6 lg:px-8">
     
