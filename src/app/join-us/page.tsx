@@ -85,7 +85,7 @@ export default function JoinUs() {
           errorData.error || "Error al enviar la solicitud. Inténtalo de nuevo."
         );
       }
-    } catch{
+    } catch {
       setErrorMessage("Ocurrió un error inesperado. Por favor, vuelve a intentarlo");
     } finally {
       setIsLoading(false);

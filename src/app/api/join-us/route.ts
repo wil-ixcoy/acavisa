@@ -1,65 +1,53 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { NextResponse } from "next/server";
-import { createClient } from "@/utils/supabase/server";
-import { v4 as uuidv4 } from "uuid";
+import { NextResponse } from 'next/server';
+import { sanityClient } from '../../../lib/sanity';
 
 export async function POST(request: Request) {
-  const formData = await request.formData();
-  const fullName = formData.get("fullName") as string;
-  const email = formData.get("email") as string;
-  const profession = formData.get("profession") as string;
-  const desiredPosition = formData.get("desiredPosition") as string;
-  const message = formData.get("message") as string;
-  const cvFile = formData.get("cv") as File | null;
-  const country = formData.get("country") as string;
-
-  const supabase = await createClient();
-
   try {
+    const formData = await request.formData();
+    const fullName = formData.get("fullName") as string;
+    const email = formData.get("email") as string;
+    const profession = formData.get("profession") as string;
+    const desiredPosition = formData.get("desiredPosition") as string;
+    const message = formData.get("message") as string;
+    const cvFile = formData.get("cv") as File | null;
+    const country = formData.get("country") as string;
+
+    if (!fullName || !email || !profession || !desiredPosition || !message || !country) {
+      return NextResponse.json({ error: 'Todos los campos son obligatorios' }, { status: 400 });
+    }
+
     let cvUrl = null;
     if (cvFile) {
-      const fileExt = cvFile.name.split(".").pop();
-      const fileName = `${uuidv4()}.${fileExt}`;
-      const filePath = `CVs/${fileName}`;
+      const fileName = `${Date.now()}-${cvFile.name}`;
+      const fileAsset = await sanityClient.assets.upload('file', cvFile, {
+        filename: fileName,
+      });
 
-      const { error: uploadError } = await supabase.storage
-        .from("media")
-        .upload(filePath, cvFile, {
-          cacheControl: "3600",
-          upsert: false,
-        });
-
-      if (uploadError) {
-        return NextResponse.json(
-          { error: uploadError.message },
-          { status: 500 }
-        );
+      if (!fileAsset.url) {
+        return NextResponse.json({ error: 'Error al subir el archivo CV' }, { status: 500 });
       }
 
-      cvUrl = supabase.storage.from("media").getPublicUrl(filePath)
-        .data.publicUrl;
+      cvUrl = fileAsset.url;
     }
 
-    const { error: insertError } = await supabase
-      .from("job_applicants")
-      .insert([
-        {
-          full_name: fullName,
-          email,
-          profession,
-          desired_position: desiredPosition,
-          message,
-          cv_url: cvUrl,
-          country, 
-        },
-      ]);
+    const newApplicant = await sanityClient.create({
+      _type: 'jobApplicant',
+      fullName,
+      email,
+      profession,
+      desiredPosition,
+      message,
+      cvUrl, 
+      country: {
+        _type: 'reference',
+        _ref: country, 
+      },
+      created_at: new Date().toISOString(),
+    });
 
-    if (insertError) {
-      return NextResponse.json({ error: insertError.message }, { status: 500 });
-    }
-
-    return NextResponse.json({ success: true }, { status: 200 });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ message: 'Solicitud enviada con éxito', data: newApplicant }, { status: 200 });
+  } catch (error) {
+    console.error('Error al procesar la solicitud:', error);
+    return NextResponse.json({ error: 'Error al procesar la solicitud' }, { status: 500 });
   }
 }
