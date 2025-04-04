@@ -1,41 +1,51 @@
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import Image from "next/image";
+"use client";
 
-const newsItems = [
-  {
-    title: "Noticia 1",
-    image:
-      "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    title: "Noticia 2",
-    image:
-      "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    title: "Noticia 3",
-    image:
-      "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    title: "Noticia 4",
-    image:
-      "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    title: "Noticia 5",
-    image:
-      "https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-];
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { sanityClient } from "../../lib/sanity";
+
+interface Post {
+  _id: string;
+  title: string;
+  image: string;
+  created_at: string;
+}
 
 export default function News() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const query = `
+          *[_type == "post" && defined(image.asset)] | order(created_at desc)[0...3]{
+            "_id": _id,
+            title,
+            "image": image.asset->url,
+            created_at
+          }
+        `;
+        const data: Post[] = await sanityClient.fetch(query);
+
+        if (!data || data.length === 0) {
+          throw new Error("No se encontraron publicaciones");
+        }
+
+        setPosts(data);
+      } catch (err) {
+        console.error("Error fetching posts from Sanity:", err);
+        setError("No se pudieron cargar las publicaciones.");
+        setPosts([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
     <section className="p-4 mb-6 mt-10">
       <div className="flex items-center justify-between mb-4">
@@ -44,26 +54,29 @@ export default function News() {
         </div>
       </div>
       <div className="w-full h-auto p-5">
-        <Carousel className="w-3/4 md:w-5/6 lg:w-full max-w-4xl mx-auto">
-          <CarouselContent>
-            {newsItems.map((news, index) => (
-              <CarouselItem key={index} className="basis-full md:basis-1/3">
-                <div className="relative w-full h-80">
+        {loading ? (
+          <p className="text-center">Cargando publicaciones...</p>
+        ) : error ? (
+          <p className="text-center text-red-500">{error}</p>
+        ) : posts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12 max-w-7xl mx-auto">
+            {posts.map((post) => (
+              <div key={post._id} className="text-center">
+                <div className="relative w-full h-64 sm:h-72 md:h-80 lg:h-96">
                   <Image
-                    src={news.image}
-                    alt={news.title}
-                    width={400}
-                    height={600}
-                    className="w-full h-full object-cover"
+                    src={post.image}
+                    alt={post.title}
+                    width={300} 
+                    height={400} 
+                    className="w-full h-full object-cover "
                   />
                 </div>
-              </CarouselItem>
+              </div>
             ))}
-          </CarouselContent>
-
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+          </div>
+        ) : (
+          <p className="text-center">No hay publicaciones disponibles.</p>
+        )}
       </div>
     </section>
   );

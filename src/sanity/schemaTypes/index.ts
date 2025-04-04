@@ -7,6 +7,7 @@ import { postCategoryType } from "./postCategoryType";
 import { postType } from "./postsType";
 import { contactRequestType } from "./contactRequestType";
 import { jobApplicantType } from "./jobApplicantType";
+import { contactInfoType } from "./contactInfoType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -16,6 +17,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     postCategoryType,
     postType,
     contactRequestType,
-    jobApplicantType
+    jobApplicantType,
+    contactInfoType
   ],
 };

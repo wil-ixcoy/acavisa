@@ -1,14 +1,20 @@
+"use client";
+
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import SearchBar from "@/components/ladingpage/searchBar";
 import Link from "next/link";
+import { useContactInfo } from "../../lib/ContactInforContext";
 
 // Header component
 export default function Header() {
+  const { contactInfo, loading, error } = useContactInfo();
+
   return (
     <Card
       className="w-full bg-cover bg-center"
-      style={{ backgroundImage: "url('/backgrounds/background-header.png')" }}>
+      style={{ backgroundImage: "url('/backgrounds/background-header.png')" }}
+    >
       <div className="flex flex-col lg:flex-row items-center justify-center px-4 lg:px-6 mt-3">
         <section className="flex items-center lg:mr-20">
           <Link href="/home">
@@ -22,7 +28,7 @@ export default function Header() {
           </Link>
         </section>
 
-        <section className=" lg:ml-20 flex flex-col items-center lg:items-end mt-3 lg:mt-0 lg:mr-8 text-sm text-deep-gray">
+        <section className="lg:ml-20 flex flex-col items-center lg:items-end mt-3 lg:mt-0 lg:mr-8 text-sm text-deep-gray">
           <div className="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-4">
             <div className="flex items-center space-x-1 text-primary">
               <Image
@@ -32,7 +38,7 @@ export default function Header() {
                 height={20}
                 className="object-contain"
               />
-              <span className="font-bold">EL SALVADOR</span>
+              <span className="font-bold uppercase">{contactInfo?.name}</span>
             </div>
 
             <span className="hidden lg:block text-primary">|</span>
@@ -45,24 +51,38 @@ export default function Header() {
                 height={60}
                 className="object-contain mr-4"
               />
-              <span className="font-bold">
-                <strong>Call Center:</strong> 2231-4200
-              </span>
+              {loading ? (
+                <span>Cargando...</span>
+              ) : error ? (
+                <span className="text-red-500">{error}</span>
+              ) : (
+                <span className="font-bold">
+                  <strong>Call Center:</strong>{" "}
+                  {contactInfo?.callcenter}
+                </span>
+              )}
             </div>
 
             <span className="hidden lg:block text-primary">|</span>
 
             <div className="flex items-center space-x-1 text-primary">
-            <Image
+              <Image
                 src="/icons/whatsapp.png"
                 alt="whatsApp"
                 width={22}
                 height={60}
                 className="object-contain mr-4"
               />
-              <span className="font-bold">
-                <strong>WhatsApp:</strong> 6025-1411
-              </span>
+              {loading ? (
+                <span>Cargando...</span>
+              ) : error ? (
+                <span className="text-red-500">{error}</span>
+              ) : (
+                <span className="font-bold">
+                  <strong>WhatsApp:</strong>{" "}
+                  {contactInfo?.whatsapp}
+                </span>
+              )}
             </div>
           </div>
 
