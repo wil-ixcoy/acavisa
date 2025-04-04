@@ -10,6 +10,7 @@ import PromotionsSection from "@/components/ladingpage/promotions";
 import VideoComponent from "@/components/ladingpage/videoComponent";
 import Footer from "@/components/ladingpage/footer";
 import News from "@/components/ladingpage/news";
+import ChatButton from '@/components/ladingpage/chatUs'
 import { useState, useEffect } from "react";
 import { sanityClient } from "../../lib/sanity";
 
@@ -62,7 +63,6 @@ export default function Home() {
         const data: ContactInfo = await sanityClient.fetch(query, { countryId: selectedCountryId });
 
         if (data) {
-          // Guardar la información de contacto en localStorage
           localStorage.setItem("contactInfo", JSON.stringify(data));
           setContactInfo(data);
         } else {
@@ -82,6 +82,7 @@ export default function Home() {
         <Header />
         <NavBar />
       </header>
+      <ChatButton/>
       <Ads />
       <HelpComponent />
       <CategoryCard />
