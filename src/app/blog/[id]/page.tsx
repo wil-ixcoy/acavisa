@@ -1,74 +1,143 @@
+"use client";
+
 import Image from "next/image";
 import Header from "@/components/ladingpage/header";
 import NavBar from "@/components/ladingpage/navBar";
 import Footer from "@/components/ladingpage/footer";
-import Title from "@/components/ladingpage/title";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { sanityClient } from "../../../lib/sanity";
+
+const getCookie = (name: string): string | null => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return parts.pop()?.split(";").shift() || null;
+  }
+  return null;
+};
+
+interface Post {
+  _id: string;
+  title: string;
+  content: string;
+  image: string;
+  created_at: string;
+  category: string;
+  countryId: string;
+}
 
 interface ArticleProps {
   params: Promise<{ id: string }>;
 }
 
-export default async function Article({ params }: ArticleProps) {
+export default function Article({ params }: ArticleProps) {
+  const [post, setPost] = useState<Post | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const { id } = await params;
-  
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const { id } = await params;
+        const selectedCountryId = getCookie("selectedCountryId");
+
+        if (!selectedCountryId) {
+          throw new Error("No se ha seleccionado un país");
+        }
+
+        const query = `
+          *[_type == "post" && _id == $id][0]{
+            "_id": _id,
+            title,
+            content,
+            "image": image.asset->url,
+            created_at,
+            "category": type->name,
+            "countryId": type->country->_id
+          }
+        `;
+        const data: Post = await sanityClient.fetch(query, { id });
+
+        if (!data) {
+          throw new Error("No se encontró la publicación");
+        }
+
+        if (data.countryId !== selectedCountryId) {
+          throw new Error(
+            "Esta publicación no está disponible para el país seleccionado"
+          );
+        }
+
+        setPost(data);
+      } catch (err) {
+        console.error("Error fetching post from Sanity:", err);
+        setError("No se pudo cargar la publicación.");
+        setPost(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPost();
+  }, [params]);
+
   return (
-    <div   className="w-full h-full bg-cover bg-center bg-no-repeat"
-    style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
+    <div
+      className="w-full h-full bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
       <header>
         <Header />
         <NavBar />
       </header>
 
-      <main className="container mx-auto p-4">
-        <Title>
-          <h1>{id}</h1>
-        </Title>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center mt-8">
-          <div className="relative w-full h-64">
-            <Image
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGuofM315EjCsph8Bl8A9TBzRTbYaUuACt_w&s"
-              alt="Metales No Ferrosos"
-              layout="fill"
-              objectFit="cover"
-              className=""
-            />
-          </div>
-          <div className="p-4">
-            <h2 className="text-2xl font-semibold mb-2">METALES NO FERROSOS</h2>
-            <h3 className="text-lg font-medium mb-1">APLICACIONES</h3>
-            <p className="">
-              Partes y repuestos de grandes dimensiones sometidas a muy altos
-              esfuerzos. Ejes para hélices de avión. Vástagos y pines. Partes de
-              protección de maquinaria. Moldes de soplado y plásticos.
-            </p>
-          </div>
-        </div>
+      <main className="">
+        {loading ? (
+          <p className="text-center text-sm sm:text-base">
+            Cargando publicación...
+          </p>
+        ) : error ? (
+          <p className="text-center text-red-500 text-sm sm:text-base">
+            {error}
+          </p>
+        ) : post ? (
+          <>
+            <div className="relative w-full h-40 sm:h-48 md:h-56 lg:h-84 mb-6 sm:mb-8 md:mb-10 rounded-lg">
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                className="object-fill"
+              />
+              <div className="absolute inset-0 mix-blend-multiply rounded-lg"></div>
+              <div className="absolute inset-0 flex items-center justify-center"></div>
+            </div>
+            <h1 className=" text-primary text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center drop-shadow-lg px-2 sm:px-4 uppercase">
+              {post.title}
+            </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center mt-8">
-          <div className="p-4 order-2 md:order-1">
-            <h2 className="text-2xl font-semibold mb-2">
-              ACEROS PARA MAQUINARIA
-            </h2>
-            <h3 className="text-lg font-medium mb-1">APLICACIONES</h3>
-            <p className="">
-              Partes y repuestos de maquinaria de grandes dimensiones sometidas
-              a muy altos esfuerzos. Árboles de transmisión. Barras de torsión.
-              Ejes para hélices de aviones. Pernos y tuercas. Vástagos y pines.
-              Brazos de dirección y muñones.
-            </p>
-          </div>
-          <div className="relative w-full h-64 order-1 md:order-2">
-            <Image
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGuofM315EjCsph8Bl8A9TBzRTbYaUuACt_w&s"
-              alt="Aceros para Maquinaria"
-              layout="fill"
-              objectFit="cover"
-              className=""
-            />
-          </div>
-        </div>
+            <div className="grid text-justify mx-20">
+              <div className="order-2 md:order-1">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 mb-2">
+                  {post.category}
+                </h2>
+                <p className="text-gray-600 text-sm sm:text-base">
+                  {post.content}
+                </p>
+                <Link href="/blog" className="mt-8 block text-primary hover:text-black">Regresar</Link>
+
+              </div>
+            </div>
+          </>
+        ) : (
+          <p className="text-center text-sm sm:text-base">
+            No se encontró la publicación.
+          </p>
+        )}
+
       </main>
+
+      
 
       <Footer />
     </div>

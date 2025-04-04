@@ -23,7 +23,7 @@ export default function NavBar() {
     const fetchCategories = async () => {
       try {
         const query = `*[_type == "productCategory"]{
-          "_id": _id, // Corrección: comillas dobles alrededor de "_id"
+          "_id": _id, 
           category,
           "image": image.asset->url,
           created_at,
