@@ -1,13 +1,19 @@
 import Image from "next/image";
-//import Link from "next/link";
+import Link from "next/link";
 
 interface ProductProps {
   image: string;
   title: string;
   id: string;
+  categoryId: string;
 }
 
-export default function Product({ image, title, id }: ProductProps) {
+export default function Product({
+  image,
+  title,
+  id,
+  categoryId,
+}: ProductProps) {
   return (
     <section className="">
       <div className="w-72 mt-6 flex flex-col justify-center">
@@ -22,17 +28,11 @@ export default function Product({ image, title, id }: ProductProps) {
         </div>
 
         <div className="p-4 w-auto bg-white rounded-b-lg shadow-md mt-1">
-          <h3 className="text-primary text-lg md:text-xl text-center font-semibold uppercase hover:underline">
-            {title}
-          </h3>
-
-          {/*
-<Link href={`/product/${id}`}>
-  <h3 className="text-primary text-lg md:text-xl text-center font-semibold uppercase hover:underline">
-    {title}
-  </h3>
-</Link>
-*/}
+          <Link href={`/categories/${categoryId}/products/${id}`}>
+            <h3 className="text-primary text-lg md:text-xl text-center font-semibold uppercase hover:underline">
+              {title}
+            </h3>
+          </Link>
         </div>
       </div>
     </section>

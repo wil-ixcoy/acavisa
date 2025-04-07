@@ -114,9 +114,10 @@ export default function ProductsPage() {
             products.map((product) => (
               <Product
                 key={product.product_code}
-                id={product.product_code}
+                id={product._id}
                 title={product.product_name}
                 image={product.image}
+                categoryId={categoryId}
               />
             ))
           ) : (
