@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { ChevronRight } from "lucide-react";
 import { sanityClient } from "../../lib/sanity";
 
-// Función para obtener el valor de una cookie
 const getCookie = (name: string): string | null => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -20,7 +19,7 @@ interface SubItem {
   description: string;
   image: string;
   alt?: string;
-  url?: string; // Nuevo campo para la URL
+  url?: string; 
 }
 
 interface Promotion {
@@ -36,7 +35,6 @@ export default function PromotionsSection() {
   const [promotions, setPromotions] = useState<Promotion[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Colores de fondo fijos para los subítems
   const bgColors = ["bg-red-600", "bg-gray-800", "bg-green-700"];
 
   useEffect(() => {
@@ -69,7 +67,6 @@ export default function PromotionsSection() {
           countryId: selectedCountryId,
         });
 
-        // Filtrar promociones y subítems con imágenes válidas
         const validPromotions = data
           .filter(
             (promo) =>
@@ -119,8 +116,7 @@ export default function PromotionsSection() {
     );
   }
 
-  // Calcular la altura total de los subítems
-  const subItemHeight = 100; // Altura fija de cada subítem en px
+  const subItemHeight = 100; 
   const subItemsCount = promotions[0]?.subItems.length || 0;
   const totalSubItemsHeight = subItemHeight * subItemsCount;
 
