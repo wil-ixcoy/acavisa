@@ -63,9 +63,9 @@ export default function Home() {
     <div className="h-screen bg-gray-100">
       <div
         className="w-full h-[108px] bg-cover bg-center flex justify-center shadow-lg"
-        style={{ backgroundImage: "url('backgrounds/background-header.png')" }}>
+        style={{ backgroundImage: "url('https://firebasestorage.googleapis.com/v0/b/clothes-store-bdd31.appspot.com/o/acavisa%2Fbackground-header.png?alt=media&token=1c7c8072-f8c0-4f27-a7ca-8eeecedda61c')" }}>
         <Image
-          src={"/logos/horizontal-acavisa-full-color.png"}
+          src="https://firebasestorage.googleapis.com/v0/b/clothes-store-bdd31.appspot.com/o/acavisa%2Fhorizontal-acavisa-full-color.png?alt=media&token=ceda6ae6-6799-409d-a107-7336ced55276"
           alt="ACAVISA"
           width={200}
           height={80}
@@ -107,7 +107,7 @@ export default function Home() {
                       {country_name}
                     </span>
                     <Image
-                      src={"icons/arrow-select-country.png"}
+                      src="https://firebasestorage.googleapis.com/v0/b/clothes-store-bdd31.appspot.com/o/acavisa%2Farrow-select-country.png?alt=media&token=e8fc95af-4b3f-4f33-8c3b-2c3e14f9f76f"
                       alt="arrow"
                       width={20}
                       height={20}
