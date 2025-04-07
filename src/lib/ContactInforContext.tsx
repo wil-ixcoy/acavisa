@@ -9,7 +9,6 @@ import {
 } from "react";
 import { sanityClient } from "./sanity";
 
-// Función para obtener el valor de una cookie
 const getCookie = (name: string): string | null => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -29,6 +28,7 @@ interface ContactInfo {
   instagram?: string;
   facebook?: string;
   tiktok?: string;
+  country_flag: string; 
 }
 
 interface ContactInfoContextType {
@@ -57,7 +57,7 @@ export const ContactInfoProvider = ({ children }: { children: ReactNode }) => {
 
         const query = `
           *[_type == "contactInfo" && country->_id == $countryId][0]{
-          name,
+            name,
             callcenter,
             whatsapp,
             direccion,
@@ -65,7 +65,8 @@ export const ContactInfoProvider = ({ children }: { children: ReactNode }) => {
             linkedin,
             instagram,
             facebook,
-            tiktok
+            tiktok,
+            "country_flag": country->country_flag.asset->url
           }
         `;
         const data: ContactInfo = await sanityClient.fetch(query, {

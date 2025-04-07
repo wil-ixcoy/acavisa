@@ -6,7 +6,6 @@ import SearchBar from "@/components/ladingpage/searchBar";
 import Link from "next/link";
 import { useContactInfo } from "../../lib/ContactInforContext";
 
-// Header component
 export default function Header() {
   const { contactInfo, loading, error } = useContactInfo();
 
@@ -32,10 +31,10 @@ export default function Header() {
           <div className="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-4">
             <div className="flex items-center space-x-1 text-primary">
               <Image
-                src="/icons/el-salvador.png"
+                src={contactInfo?.country_flag}
                 alt="sv"
-                width={22}
-                height={20}
+                width={32}
+                height={30}
                 className="object-contain"
               />
               <span className="font-bold uppercase">{contactInfo?.name}</span>
