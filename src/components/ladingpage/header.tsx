@@ -18,7 +18,7 @@ export default function Header() {
         <section className="flex items-center lg:mr-20">
           <Link href="/home">
             <Image
-              src="public/logos/horizontal-acavisa-full-color.png"
+              src="/logos/horizontal-acavisa-full-color.png"
               alt="ACAVISA"
               width={250}
               height={120}
@@ -44,7 +44,7 @@ export default function Header() {
 
             <div className="flex items-center space-x-1 text-primary">
               <Image
-                src="public/icons/llamada-telefonica-full-collor.png"
+                src="/icons/llamada-telefonica-full-collor.png"
                 alt="call"
                 width={22}
                 height={60}
@@ -66,7 +66,7 @@ export default function Header() {
 
             <div className="flex items-center space-x-1 text-primary">
               <Image
-                src="public/icons/whatsapp.png"
+                src="/icons/whatsapp.png"
                 alt="whatsApp"
                 width={22}
                 height={60}

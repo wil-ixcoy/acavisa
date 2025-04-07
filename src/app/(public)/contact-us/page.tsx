@@ -100,7 +100,7 @@ export default function ContactUs() {
             </p>
             <div className="flex items-center mb-4">
               <Image
-                src="public/icons/ubicacion-4.png"
+                src="/icons/ubicacion-4.png"
                 alt="pin"
                 width={25}
                 height={60}
@@ -115,7 +115,7 @@ export default function ContactUs() {
             </div>
             <div className="flex items-center mb-4">
               <Image
-                src="public/icons/correo-electronico-3.png"
+                src="/icons/correo-electronico-3.png"
                 alt="email"
                 width={25}
                 height={60}

@@ -122,7 +122,7 @@ export default function SearchBar() {
           disabled={loading}
         >
           <Image
-            src="public/icons/search.png"
+            src="/icons/search.png"
             alt="search"
             width={20}
             height={60}

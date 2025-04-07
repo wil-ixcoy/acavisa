@@ -14,7 +14,7 @@ export default function HelpComponent() {
               className=" p-2 md:p-3 xl:p-3.5 w-9 h-10 md:w-10 md:h-12 lg:w-16 lg:h-12 xl:w-13 xl:h-14 bg-cover bg-center mr-6 relative"
               style={{ backgroundImage: "url('/icons/rombo.svg')" }}>
               <Image
-                src="public/icons/charla-2.png"
+                src="/icons/charla-2.png"
                 alt="Chat en Línea"
                 width={38}
                 height={38}
@@ -31,7 +31,7 @@ export default function HelpComponent() {
               className=" p-2 md:p-3 xl:p-3.5 w-9 h-10 md:w-10 md:h-12 lg:w-16 lg:h-12 xl:w-13 xl:h-14 bg-cover bg-center mr-6 relative"
               style={{ backgroundImage: "url('/icons/rombo.svg')" }}>
               <Image
-                src="public/icons/llamada-telefonica-2.png"
+                src="/icons/llamada-telefonica-2.png"
                 alt="llamda"
                 width={38}
                 height={38}
@@ -50,7 +50,7 @@ export default function HelpComponent() {
               className=" p-2 md:p-3 xl:p-3.5 w-9 h-10 md:w-10 md:h-12 lg:w-16 lg:h-12 xl:w-13 xl:h-14 bg-cover bg-center mr-6 relative"
               style={{ backgroundImage: "url('/icons/rombo.svg')" }}>
               <Image
-                src="public/icons/whatsapp-2.png"
+                src="/icons/whatsapp-2.png"
                 alt="whatsApp"
                 width={38}
                 height={38}
@@ -69,7 +69,7 @@ export default function HelpComponent() {
               className=" p-2 md:p-3 xl:p-2.5 w-9 h-10 md:w-10 md:h-12 lg:w-16 lg:h-12 xl:w-13 xl:h-14 bg-cover bg-center mr-6 relative"
               style={{ backgroundImage: "url('/icons/rombo.svg')" }}>
               <Image
-                src="public/icons/ubicacion-2.png"
+                src="/icons/ubicacion-2.png"
                 alt="ubicacion"
                 width={38}
                 height={38}
