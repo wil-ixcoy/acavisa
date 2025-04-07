@@ -71,6 +71,7 @@ export default function Home() {
           height={80}
           className="object-contain"
           priority={false}
+          unoptimized
         />
       </div>
 
@@ -112,6 +113,7 @@ export default function Home() {
                       height={20}
                       className="object-contain"
                       priority={false}
+                      unoptimized
                     />
                   </Button>
                 </Link>
