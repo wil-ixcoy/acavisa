@@ -94,7 +94,7 @@ export default function Home() {
         </div>
         <div className="w-full h-auto bg-gray-200 p-5">
           <Image
-            src="/examples/brands.png"
+            src="/public/examples/brands.png"
             alt="Marcas"
             width={600}
             height={300}

@@ -11,7 +11,7 @@ export default function Footer() {
       <div className="w-full flex flex-col md:flex-row items-center justify-center text-center md:text-left gap-10 md:gap-36">
         <div className="flex flex-col items-center md:items-start">
           <Image
-            src="/logos/LOGOS ACAVISA_ACAVISA VERTICAL BLANCO.png"
+            src="/public/logos/LOGOS ACAVISA_ACAVISA VERTICAL BLANCO.png"
             alt="ACAVISA"
             width={220}
             height={120}
@@ -29,7 +29,7 @@ export default function Footer() {
             <>
               <div className="flex items-center space-x-2">
                 <Image
-                  src="/icons/llamada-telefonica-2.png"
+                  src="/public/icons/llamada-telefonica-2.png"
                   alt="llamada"
                   width={24}
                   height={24}
@@ -39,7 +39,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-2">
                 <Image
-                  src="/icons/whatsapp-2.png"
+                  src="/public/icons/whatsapp-2.png"
                   alt="whatsapp"
                   width={24}
                   height={24}
@@ -49,7 +49,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-2">
                 <Image
-                  src="/icons/correo-electronico-2.png"
+                  src="/public/icons/correo-electronico-2.png"
                   alt="correo"
                   width={24}
                   height={24}
@@ -61,7 +61,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-2">
                 <Image
-                  src="/icons/ubicacion-2.png"
+                  src="/public/icons/ubicacion-2.png"
                   alt="ubicacion"
                   width={24}
                   height={24}
@@ -87,7 +87,7 @@ export default function Footer() {
                 {contactInfo?.linkedin && (
                   <a href={contactInfo.linkedin} target="_blank" rel="noopener noreferrer">
                     <Image
-                      src="/icons/logotipo-de-linkedin.png"
+                      src="/public/icons/logotipo-de-linkedin.png"
                       alt="linkedin"
                       width={18}
                       height={18}
@@ -98,7 +98,7 @@ export default function Footer() {
                 {contactInfo?.instagram && (
                   <a href={contactInfo.instagram} target="_blank" rel="noopener noreferrer">
                     <Image
-                      src="/icons/logotipo-de-instagram.png"
+                      src="/public/icons/logotipo-de-instagram.png"
                       alt="instagram"
                       width={18}
                       height={18}
@@ -109,7 +109,7 @@ export default function Footer() {
                 {contactInfo?.facebook && (
                   <a href={contactInfo.facebook} target="_blank" rel="noopener noreferrer">
                     <Image
-                      src="/icons/facebook-2.png"
+                      src="/public/icons/facebook-2.png"
                       alt="facebook"
                       width={18}
                       height={18}
