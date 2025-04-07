@@ -16,7 +16,8 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("contactInfo").title(
         "Información empresarial por país"
       ),
-      S.documentTypeListItem("headerAd").title("Anuncios de encabezado"),
+      S.documentTypeListItem("headerAd").title("Anuncios"),
+      S.documentTypeListItem("promotion").title("Promociones"),
       S.divider(),
       ...S.documentTypeListItems().filter(
         (item) =>
@@ -33,6 +34,7 @@ export const structure: StructureResolver = (S) =>
             "jobApplicant",
             "contactInfo",
             "headerAd",
+            "promotion",
           ].includes(item.getId()!)
       ),
     ]);

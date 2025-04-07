@@ -1,28 +1,129 @@
-import Image from "next/image";
-import { ChevronRight } from "lucide-react";
+"use client";
 
-const promotions = [
-  {
-    title: "¡Nuestras Baterías!",
-    description: "Conoce nuestra variedad",
-    bgColor: "bg-red-600",
-    icon: "🔋",
-  },
-  {
-    title: "¡Viaja Seguro!",
-    description: "Mira estos tips",
-    bgColor: "bg-gray-800",
-    icon: "🚗",
-  },
-  {
-    title: "Calidad y Garantía",
-    description: "Conoce las ventajas de usar Tecnovolt",
-    bgColor: "bg-primary",
-    icon: "✅",
-  },
-];
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { ChevronRight } from "lucide-react";
+import { sanityClient } from "../../lib/sanity";
+
+// Función para obtener el valor de una cookie
+const getCookie = (name: string): string | null => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return parts.pop()?.split(";").shift() || null;
+  }
+  return null;
+};
+
+interface SubItem {
+  title: string;
+  description: string;
+  image: string;
+  alt?: string;
+  url?: string; // Nuevo campo para la URL
+}
+
+interface Promotion {
+  _id: string;
+  title: string;
+  description: string;
+  image: string;
+  alt?: string;
+  subItems: SubItem[];
+}
 
 export default function PromotionsSection() {
+  const [promotions, setPromotions] = useState<Promotion[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Colores de fondo fijos para los subítems
+  const bgColors = ["bg-red-600", "bg-gray-800", "bg-green-700"];
+
+  useEffect(() => {
+    const fetchPromotions = async () => {
+      try {
+        const selectedCountryId = getCookie("selectedCountryId");
+        if (!selectedCountryId) {
+          setPromotions([]);
+          setLoading(false);
+          return;
+        }
+
+        const query = `
+          *[_type == "promotion" && country->_id == $countryId && startDate <= now() && endDate >= now()] | order(_createdAt desc) [0...1] {
+            _id,
+            title,
+            description,
+            "image": image.asset->url,
+            "alt": image.alt,
+            subItems[] {
+              title,
+              description,
+              "image": image.asset->url,
+              "alt": image.alt,
+              url // Nuevo campo
+            }
+          }
+        `;
+        const data: Promotion[] = await sanityClient.fetch(query, {
+          countryId: selectedCountryId,
+        });
+
+        // Filtrar promociones y subítems con imágenes válidas
+        const validPromotions = data
+          .filter(
+            (promo) =>
+              promo.image &&
+              typeof promo.image === "string" &&
+              promo.image.trim() !== "" &&
+              promo.image.startsWith("http")
+          )
+          .map((promo) => ({
+            ...promo,
+            subItems: promo.subItems
+              .filter(
+                (subItem) =>
+                  subItem.image &&
+                  typeof subItem.image === "string" &&
+                  subItem.image.trim() !== "" &&
+                  subItem.image.startsWith("http")
+              )
+              .slice(0, 3), // Limitar a 3 subítems
+          }));
+
+        setPromotions(validPromotions);
+      } catch (error) {
+        console.error("Error fetching promotions from Sanity:", error);
+        setPromotions([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPromotions();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="w-full p-4 text-center text-gray-500">
+        Cargando promociones...
+      </div>
+    );
+  }
+
+  if (promotions.length === 0) {
+    return (
+      <div className="w-full p-4 text-center text-gray-500">
+        No hay promociones disponibles.
+      </div>
+    );
+  }
+
+  // Calcular la altura total de los subítems
+  const subItemHeight = 100; // Altura fija de cada subítem en px
+  const subItemsCount = promotions[0]?.subItems.length || 0;
+  const totalSubItemsHeight = subItemHeight * subItemsCount;
+
   return (
     <div className="w-full p-4">
       <h2 className="bg-secondary text-white px-4 py-2 text-lg font-bold inline-block uppercase">
@@ -30,32 +131,51 @@ export default function PromotionsSection() {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-        <div className="relative hidden md:block">
-          <Image
-            src="https://plus.unsplash.com/premium_photo-1677009541899-28700f6c20a8?q=80&w=1995&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Promoción"
-            width={600}
-            height={300}
-            className="w-full h-auto shadow-lg"
-          />
+        <div className="relative hidden md:block h-full">
+          {promotions[0]?.image && (
+            <Image
+              src={promotions[0].image}
+              alt={promotions[0].alt || "Promoción"}
+              width={600}
+              height={totalSubItemsHeight}
+              style={{ height: `${totalSubItemsHeight}px` }}
+              className="w-full object-cover"
+            />
+          )}
         </div>
 
-        <div className="flex flex-col justify-between gap-4">
-          {promotions.map((promo, index) => (
-            <div
+        <div className="grid grid-cols-1 gap-1"> 
+          {promotions[0]?.subItems.map((subItem, index) => (
+            <a
               key={index}
-              className={`${promo.bgColor} flex items-center text-white shadow-lg cursor-pointer hover:opacity-80 transition`}>
-              <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mx-4">{promo.icon}</span>
-
-              <div className="flex-1">
-                <h3 className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl">{promo.title}</h3>
-                <p className="text-sm sm:text-base md:text-lg lg:text-xl">{promo.description}</p>
+              href={subItem.url || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${bgColors[index % bgColors.length]} flex items-center text-white cursor-pointer hover:opacity-80 transition-all h-[${subItemHeight}px]`}
+            >
+              <div className="w-16 h-16 flex-shrink-0">
+                <Image
+                  src={subItem.image}
+                  alt={subItem.alt || subItem.title}
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-contain p-2"
+                />
               </div>
 
-              <div className="w-10 h-16 md:h-20 lg:h-24 flex items-center justify-center bg-secondary">
+              <div className="flex-1 px-2 py-2">
+                <h3 className="font-bold text-sm sm:text-base md:text-lg">
+                  {subItem.title}
+                </h3>
+                <p className="text-xs sm:text-sm md:text-base">
+                  {subItem.description}
+                </p>
+              </div>
+
+              <div className="w-10 h-full flex items-center justify-center bg-green-800">
                 <ChevronRight className="w-6 h-6 text-white" />
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

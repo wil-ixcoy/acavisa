@@ -11,7 +11,6 @@ import ChatButton from "@/components/ladingpage/chatUs";
 import { useState, useEffect } from "react";
 import { sanityClient } from "../../../lib/sanity";
 
-// Función para obtener el valor de una cookie
 const getCookie = (name: string): string | null => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
