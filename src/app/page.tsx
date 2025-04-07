@@ -26,7 +26,7 @@ export default function Home() {
 
   useEffect(() => {
     const resetData = () => {
-      clearCookies(); 
+      clearCookies();
       localStorage.clear();
     };
 
@@ -65,11 +65,12 @@ export default function Home() {
         className="w-full h-[108px] bg-cover bg-center flex justify-center shadow-lg"
         style={{ backgroundImage: "url('backgrounds/background-header.png')" }}>
         <Image
-          src="/logos/horizontal-acavisa-full-color.png"
+          src={"/logos/horizontal-acavisa-full-color.png"}
           alt="ACAVISA"
           width={200}
           height={80}
           className="object-contain"
+          priority={false}
         />
       </div>
 
@@ -99,16 +100,18 @@ export default function Home() {
                       width={35}
                       height={50}
                       className="object-contain rounded-xs w-9 h-9"
+                      priority={false}
                     />
                     <span className="flex items-center gap-2 text-lg">
                       {country_name}
                     </span>
                     <Image
-                      src="/icons/arrow-select-country.png"
+                      src={"icons/arrow-select-country.png"}
                       alt="arrow"
                       width={20}
                       height={20}
                       className="object-contain"
+                      priority={false}
                     />
                   </Button>
                 </Link>
