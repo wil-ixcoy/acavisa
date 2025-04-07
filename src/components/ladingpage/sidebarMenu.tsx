@@ -30,7 +30,7 @@ export default function SidebarMenu({ isOpen, onClose }: SidebarMenuProps) {
         }`}>
         <div className="bg-secondary text-white p-3 flex items-center space-x-2">
           <Image
-            src="/public/icons/home.png"
+            src="/icons/home.png"
             alt="home"
             width={25}
             height={60}
@@ -40,7 +40,7 @@ export default function SidebarMenu({ isOpen, onClose }: SidebarMenuProps) {
         </div>
         <div className="bg-secondary text-white p-3 flex items-center space-x-2">
           <Image
-            src="/public/icons/categories.png"
+            src="/icons/categories.png"
             alt="categories"
             width={25}
             height={60}
@@ -57,7 +57,7 @@ export default function SidebarMenu({ isOpen, onClose }: SidebarMenuProps) {
               className="w-full flex items-center justify-start text-primary font-bold p-3 border-t border-gray-200 hover:bg-gray-100 transition"
               onClick={onClose}>
               <Image
-                src="/public/icons/arrow-sidebar.png"
+                src="/icons/arrow-sidebar.png"
                 alt="pin"
                 width={20}
                 height={60}

@@ -65,7 +65,7 @@ export default function Home() {
         className="w-full h-[108px] bg-cover bg-center flex justify-center shadow-lg"
         style={{ backgroundImage: "url('backgrounds/background-header.png')" }}>
         <Image
-          src="/public/logos/horizontal-acavisa-full-color.png"
+          src="/logos/horizontal-acavisa-full-color.png"
           alt="ACAVISA"
           width={200}
           height={80}
@@ -104,7 +104,7 @@ export default function Home() {
                       {country_name}
                     </span>
                     <Image
-                      src="/public/icons/arrow-select-country.png"
+                      src="/icons/arrow-select-country.png"
                       alt="arrow"
                       width={20}
                       height={20}

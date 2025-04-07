@@ -22,7 +22,7 @@ export default function ChatButton() {
 
       <div className="bg-green-800 p-3 rounded-full">
         <Image
-          src="/public/icons/whatsapp-2.png"
+          src="/icons/whatsapp-2.png"
           alt="Chat"
           width={24}
           height={24}
