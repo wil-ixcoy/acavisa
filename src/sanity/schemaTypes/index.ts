@@ -8,6 +8,7 @@ import { postType } from "./postsType";
 import { contactRequestType } from "./contactRequestType";
 import { jobApplicantType } from "./jobApplicantType";
 import { contactInfoType } from "./contactInfoType";
+import { headerAdType } from "./headerAdType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -18,6 +19,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     postType,
     contactRequestType,
     jobApplicantType,
-    contactInfoType
+    contactInfoType,
+    headerAdType
   ],
 };

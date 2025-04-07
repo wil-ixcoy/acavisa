@@ -13,7 +13,10 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("post").title("Posts"),
       S.documentTypeListItem("contactRequest").title("Mensajes de Contacto"),
       S.documentTypeListItem("jobApplicant").title("Solicitantes de Empleo"),
-      S.documentTypeListItem("contactInfo").title("Información empresarial por país"),
+      S.documentTypeListItem("contactInfo").title(
+        "Información empresarial por país"
+      ),
+      S.documentTypeListItem("headerAd").title("Anuncios de encabezado"),
       S.divider(),
       ...S.documentTypeListItems().filter(
         (item) =>
@@ -27,8 +30,9 @@ export const structure: StructureResolver = (S) =>
             "country",
             "postCategory",
             "contactRequest",
-            "jobApplicant", 
-            'contactInfo'
+            "jobApplicant",
+            "contactInfo",
+            "headerAd",
           ].includes(item.getId()!)
       ),
     ]);
