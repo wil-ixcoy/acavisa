@@ -1,12 +1,13 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { sanityClient } from "../lib/sanity"; // Ajusta la ruta según tu estructura
+import { sanityClient } from "../lib/sanity";
 
 interface Country {
-  id: string; // Representa el _id interno de Sanity
+  id: string;
   country_name: string;
   country_flag: string;
 }
@@ -15,7 +16,22 @@ export default function Home() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const clearCookies = () => {
+    const cookies = document.cookie.split("; ");
+    for (const cookie of cookies) {
+      const [name] = cookie.split("=");
+      document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+    }
+  };
+
   useEffect(() => {
+    const resetData = () => {
+      clearCookies(); 
+      localStorage.clear();
+    };
+
+    resetData();
+
     const fetchCountries = async () => {
       try {
         const data = await sanityClient.fetch(`
@@ -47,8 +63,7 @@ export default function Home() {
     <div className="h-screen bg-gray-100">
       <div
         className="w-full h-[108px] bg-cover bg-center flex justify-center shadow-lg"
-        style={{ backgroundImage: "url('backgrounds/background-header.png')" }}
-      >
+        style={{ backgroundImage: "url('backgrounds/background-header.png')" }}>
         <Image
           src="/logos/horizontal-acavisa-full-color.png"
           alt="ACAVISA"
@@ -77,8 +92,7 @@ export default function Home() {
                 <Link key={id} href="/home">
                   <Button
                     className="bg-secondary text-white flex justify-between w-60 h-12 py-2 px-4 rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
-                    onClick={() => handleCountrySelect(id)}
-                  >
+                    onClick={() => handleCountrySelect(id)}>
                     <Image
                       src={country_flag}
                       alt={country_name}

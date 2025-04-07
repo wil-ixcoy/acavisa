@@ -1,6 +1,3 @@
-import Header from "@/components/ladingpage/header";
-import NavBar from "@/components/ladingpage/navBar";
-import Footer from "@/components/ladingpage/footer";
 import Title from "@/components/ladingpage/title";
 import HistoryComponent from "@/components/ladingpage/historyComponent";
 import Timeline from "@/components/ladingpage/timeline";
@@ -46,11 +43,7 @@ const historyData = [
 
 export default function History() {
   return (
-    <div
-      className="w-full h-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
-      <Header />
-      <NavBar />
+    <div>
       <Title>
         <p>Historia</p>
       </Title>
@@ -113,8 +106,6 @@ export default function History() {
           </p>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

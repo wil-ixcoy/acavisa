@@ -1,12 +1,9 @@
 "use client";
 
-import Header from "@/components/ladingpage/header";
-import NavBar from "@/components/ladingpage/navBar";
-import Footer from "@/components/ladingpage/footer";
 import Product from "@/components/ladingpage/productCard";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { sanityClient } from "../../../../lib/sanity";
+import { sanityClient } from "../../../../../lib/sanity";
 import HelpComponent from "@/components/ladingpage/helpComponent";
 
 const getCookie = (name: string): string | null => {
@@ -96,13 +93,8 @@ export default function ProductsPage() {
 
   return (
     <div
-      className="w-full h-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}
     >
-      <header>
-        <Header />
-        <NavBar />
-      </header>
+ 
       <div className="mt-4">
       <HelpComponent/>
       </div>
@@ -135,7 +127,7 @@ export default function ProductsPage() {
         </div>
       </main>
 
-      <Footer />
+
     </div>
   );
 }

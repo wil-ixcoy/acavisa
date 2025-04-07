@@ -1,8 +1,5 @@
 "use client";
 
-import Header from "@/components/ladingpage/header";
-import NavBar from "@/components/ladingpage/navBar";
-import Footer from "@/components/ladingpage/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -57,7 +54,9 @@ export default function JoinUs() {
     if (selectedCountryId) {
       formData.append("country", selectedCountryId);
     } else {
-      setErrorMessage("Por favor selecciona un país antes de enviar el formulario.");
+      setErrorMessage(
+        "Por favor selecciona un país antes de enviar el formulario."
+      );
       setIsLoading(false);
       return;
     }
@@ -86,22 +85,16 @@ export default function JoinUs() {
         );
       }
     } catch {
-      setErrorMessage("Ocurrió un error inesperado. Por favor, vuelve a intentarlo");
+      setErrorMessage(
+        "Ocurrió un error inesperado. Por favor, vuelve a intentarlo"
+      );
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div
-      className="w-full h-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}
-    >
-      <header>
-        <Header />
-        <NavBar />
-      </header>
-
+    <div>
       <main className="max-w-4xl mx-auto py-10 px-6">
         <div className="grid grid-cols-1 gap-6 md:mt-6 items-start">
           <section className="p-6">
@@ -184,8 +177,7 @@ export default function JoinUs() {
                 className={`bg-primary md:w-1/4 rounded-none mt-6 hover:bg-secondary text-sm md:text-base ${
                   isLoading ? "opacity-70 cursor-wait" : ""
                 }`}
-                disabled={isLoading}
-              >
+                disabled={isLoading}>
                 {isLoading ? "Enviando..." : "Enviar"}
               </Button>
             </form>
@@ -199,8 +191,6 @@ export default function JoinUs() {
           </section>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

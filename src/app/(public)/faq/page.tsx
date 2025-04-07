@@ -1,7 +1,3 @@
-import Header from "@/components/ladingpage/header";
-import NavBar from "@/components/ladingpage/navBar";
-import Footer from "@/components/ladingpage/footer";
-
 import {
   Accordion,
   AccordionContent,
@@ -41,14 +37,7 @@ export default function Faq() {
   ];
 
   return (
-    <div
-      className="w-full h-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
-      <header>
-        <Header />
-        <NavBar />
-      </header>
-
+    <div>
       <main className="max-w-3xl mx-auto py-10 px-6">
         <div className="bg-white rounded-lg shadow-md p-6">
           <Title>
@@ -69,8 +58,6 @@ export default function Faq() {
           </Accordion>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

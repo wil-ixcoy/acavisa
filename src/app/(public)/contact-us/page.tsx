@@ -1,8 +1,5 @@
 "use client";
 
-import Header from "@/components/ladingpage/header";
-import NavBar from "@/components/ladingpage/navBar";
-import Footer from "@/components/ladingpage/footer";
 import Title from "@/components/ladingpage/title";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -86,15 +83,7 @@ export default function ContactUs() {
   };
 
   return (
-    <div
-      className="w-full h-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}
-    >
-      <header>
-        <Header />
-        <NavBar />
-      </header>
-
+    <div>
       <main className="max-w-6xl mx-auto py-10 px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:mt-6 items-start">
           <section className="p-6 text-verdeLimon">
@@ -150,8 +139,7 @@ export default function ContactUs() {
               <div className="mt-4">
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-deepGray"
-                >
+                  className="block text-sm font-medium text-deepGray">
                   Tu nombre
                 </label>
                 <Input
@@ -167,8 +155,7 @@ export default function ContactUs() {
               <div className="mt-4">
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-deepGray"
-                >
+                  className="block text-sm font-medium text-deepGray">
                   Tu E-Mail
                 </label>
                 <Input
@@ -184,8 +171,7 @@ export default function ContactUs() {
               <div className="mt-4">
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-deepGray"
-                >
+                  className="block text-sm font-medium text-deepGray">
                   Mensaje
                 </label>
                 <Textarea
@@ -203,8 +189,7 @@ export default function ContactUs() {
                 className={`bg-primary rounded-none w-full sm:w-1/3 mt-4 hover:bg-secondary ${
                   isLoading ? "opacity-70 cursor-wait" : ""
                 }`}
-                disabled={isLoading}
-              >
+                disabled={isLoading}>
                 {isLoading ? "Enviando..." : "Enviar"}
               </Button>
             </form>
@@ -218,8 +203,6 @@ export default function ContactUs() {
           </section>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

@@ -3,16 +3,13 @@
 import Image from "next/image";
 import Ads from "@/components/ladingpage/ads";
 import CategoryCard from "@/components/ladingpage/categoryHomeCard";
-import Header from "@/components/ladingpage/header";
 import HelpComponent from "@/components/ladingpage/helpComponent";
-import NavBar from "@/components/ladingpage/navBar";
 import PromotionsSection from "@/components/ladingpage/promotions";
 import VideoComponent from "@/components/ladingpage/videoComponent";
-import Footer from "@/components/ladingpage/footer";
 import News from "@/components/ladingpage/news";
-import ChatButton from '@/components/ladingpage/chatUs'
+import ChatButton from "@/components/ladingpage/chatUs";
 import { useState, useEffect } from "react";
-import { sanityClient } from "../../lib/sanity";
+import { sanityClient } from "../../../lib/sanity";
 
 // Función para obtener el valor de una cookie
 const getCookie = (name: string): string | null => {
@@ -60,13 +57,17 @@ export default function Home() {
             tiktok
           }
         `;
-        const data: ContactInfo = await sanityClient.fetch(query, { countryId: selectedCountryId });
+        const data: ContactInfo = await sanityClient.fetch(query, {
+          countryId: selectedCountryId,
+        });
 
         if (data) {
           localStorage.setItem("contactInfo", JSON.stringify(data));
           setContactInfo(data);
         } else {
-          console.error("No se encontró información de contacto para el país seleccionado");
+          console.error(
+            "No se encontró información de contacto para el país seleccionado"
+          );
         }
       } catch (err) {
         console.error("Error fetching contact info from Sanity:", err);
@@ -78,11 +79,8 @@ export default function Home() {
 
   return (
     <div>
-      <header>
-        <Header />
-        <NavBar />
-      </header>
-      <ChatButton/>
+      <header></header>
+      <ChatButton />
       <Ads />
       <HelpComponent />
       <CategoryCard />
@@ -106,7 +104,6 @@ export default function Home() {
         </div>
       </section>
       <News />
-      <Footer />
     </div>
   );
 }

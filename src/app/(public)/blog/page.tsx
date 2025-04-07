@@ -1,15 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import Header from "@/components/ladingpage/header";
-import NavBar from "@/components/ladingpage/navBar";
-import Footer from "@/components/ladingpage/footer";
 import BlogCard from "@/components/ladingpage/blogCard";
 import { useState, useEffect } from "react";
-import { sanityClient } from "../../lib/sanity";
+import { sanityClient } from "../../../lib/sanity";
 import Link from "next/link";
 
-// Función para obtener el valor de una cookie
 const getCookie = (name: string): string | null => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -89,15 +85,9 @@ export default function Blog() {
   return (
     <div
       className="w-full h-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}
-    >
-      <header>
-        <Header />
-        <NavBar />
-      </header>
-
-      <main >
-      {loading ? (
+      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
+      <main>
+        {loading ? (
           <p className="text-center">Cargando publicaciones...</p>
         ) : error ? (
           <p className="text-center text-red-500">{error}</p>
@@ -111,11 +101,11 @@ export default function Blog() {
             />
             <div className="absolute inset-0 bg-secondary bg-opacity-10 mix-blend-multiply"></div>
             <div className="absolute inset-0 flex items-center justify-center">
-             <Link href={`blog/${latestPost._id}`} className="bg-primary p-3">
-             <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-white text-center drop-shadow-lg px-4 uppercase">
-                {latestPost.title}
-              </h2>
-             </Link>
+              <Link href={`blog/${latestPost._id}`} className="bg-primary p-3">
+                <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-white text-center drop-shadow-lg px-4 uppercase">
+                  {latestPost.title}
+                </h2>
+              </Link>
             </div>
           </div>
         ) : (
@@ -124,28 +114,23 @@ export default function Blog() {
           </p>
         )}
 
-{otherPosts.length > 0 && (
-  <div className="px-4 md:px-8 lg:px-16 py-10">
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 lg:gap-10">
-      {otherPosts.map((post) => (
-        <div
-          key={post._id}
-          className="block"
-        >
-          <BlogCard
-            title={post.title}
-            description={post.content.substring(0, 150) + "..."}
-            imageUrl={post.image}
-            link={`/${post._id}`}
-          />
-        </div>
-      ))}
-    </div>
-  </div>
-)}
+        {otherPosts.length > 0 && (
+          <div className="px-4 md:px-8 lg:px-16 py-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 lg:gap-10">
+              {otherPosts.map((post) => (
+                <div key={post._id} className="block">
+                  <BlogCard
+                    title={post.title}
+                    description={post.content.substring(0, 150) + "..."}
+                    imageUrl={post.image}
+                    link={`/${post._id}`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </main>
-
-      <Footer />
     </div>
   );
 }
