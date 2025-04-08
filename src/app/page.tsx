@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { sanityClient } from "../lib/sanity";
 
 interface Country {
@@ -16,6 +16,8 @@ export default function Home() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const clearCookies = () => {
     const cookies = document.cookie.split("; ");
@@ -61,7 +63,9 @@ export default function Home() {
     fetchCountries();
   }, []);
 
-
+  useEffect(() => {
+    console.log("Current route:", pathname);
+  }, [pathname]);
 
   const handleCountrySelect = (countryId: string) => {
     if (typeof window !== "undefined") {
@@ -70,6 +74,11 @@ export default function Home() {
       document.cookie = `selectedCountryId=${countryId}; path=/; max-age=31536000`;
       console.log("localStorage selectedCountryId:", localStorage.getItem("selectedCountryId"));
       console.log("document.cookie:", document.cookie);
+
+      console.log("Navigating to /home with router.push");
+      setTimeout(() => {
+        router.push("/home");
+      }, 0);
     }
   };
 
@@ -80,11 +89,13 @@ export default function Home() {
         style={{ backgroundImage: "url('/backgrounds/background-header.png')" }}
       >
         <Image
-          src="/logos/horizontal-acavisa-full-color.png"
+          src="https://acavisa.vercel.app/logos/horizontal-acavisa-full-color.png"
           alt="ACAVISA"
           width={200}
           height={80}
           className="object-contain"
+          unoptimized
+          onError={() => console.error("Failed to load horizontal-acavisa-full-color.png")}
         />
       </div>
 
@@ -104,36 +115,36 @@ export default function Home() {
               <p>Cargando países...</p>
             ) : countries.length > 0 ? (
               countries.map(({ id, country_name, country_flag }) => (
-                <Link key={id} href="/home">
-                  <Button
-                    className="bg-secondary text-white flex justify-between w-60 h-12 py-2 px-4 rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
-                    onClick={() => {
-                      console.log("Button clicked for country ID:", id);
-                      console.log("Event propagation not prevented, Link should navigate");
-                      handleCountrySelect(id);
-                    }}
-                  >
-                    <Image
-                      src={country_flag}
-                      alt={country_name}
-                      width={35}
-                      height={50}
-                      className="object-contain rounded-xs w-9 h-9"
-                    />
-                    <span className="flex items-center gap-2 text-lg">
-                      {country_name}
-                    </span>
-                    <Image
-                      src="/icons/arrow-select-country.png"
-                      alt="arrow"
-                      width={20}
-                      height={20}
-                      className="object-contain"
-                      unoptimized
-                      onError={() => console.error("Failed to load arrow-select-country.png")}
-                    />
-                  </Button>
-                </Link>
+                <Button
+                  key={id}
+                  className="bg-secondary text-white flex justify-between w-60 h-12 py-2 px-4 rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
+                  onClick={(e) => {
+                    console.log(e);
+                    console.log("Button clicked for country ID:", id);
+                    handleCountrySelect(id);
+                  }}
+                >
+                  <Image
+                    src={country_flag}
+                    alt={country_name}
+                    width={35}
+                    height={50}
+                    className="object-contain rounded-xs w-9 h-9"
+                    onError={() => console.error(`Failed to load flag for ${country_name}`)}
+                  />
+                  <span className="flex items-center gap-2 text-lg">
+                    {country_name}
+                  </span>
+                  <Image
+                    src="https://acavisa.vercel.app/icons/arrow-select-country.png"
+                    alt="arrow"
+                    width={20}
+                    height={20}
+                    className="object-contain"
+                    unoptimized
+                    onError={() => console.error("Failed to load arrow-select-country.png")}
+                  />
+                </Button>
               ))
             ) : (
               <p>No se encontraron países.</p>
