@@ -10,6 +10,7 @@ interface Category {
   _id: string;
   created_at: string;
   country: string;
+  countryId: string;
   category: string;
   image: string;
 }
@@ -18,19 +19,41 @@ export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCountryId, setSelectedCountryId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const cookies = document.cookie.split("; ");
+      const countryCookie = cookies.find((cookie) => cookie.startsWith("selectedCountryId="));
+      if (countryCookie) {
+        const countryId = countryCookie.split("=")[1];
+        setSelectedCountryId(countryId);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const query = `*[_type == "productCategory"]{
-          "_id": _id, 
-          category,
-          "image": image.asset->url,
-          created_at,
-          "country": country->name
-        }`;
+        if (!selectedCountryId) {
+          console.log("Waiting for selectedCountryId to fetch categories...");
+          return;
+        }
 
-        const data: Category[] = await client.fetch(query);
+        const query = `
+          *[_type == "productCategory" && country._ref == $countryId] | order(position asc) {
+            "_id": _id, 
+            category,
+            "image": image.asset->url,
+            created_at,
+            "country": country->country_name,
+            "countryId": country->_id
+          }
+        `;
+
+        const params = { countryId: selectedCountryId };
+        const data: Category[] = await client.fetch(query, params);
+        console.log("Fetched categories:", data);
         setCategories(data);
       } catch (err) {
         console.error("Error fetching categories from Sanity:", err);
@@ -39,7 +62,7 @@ export default function NavBar() {
     };
 
     fetchCategories();
-  }, []);
+  }, [selectedCountryId]); 
 
   return (
     <nav className="w-full bg-primary text-white py-3 relative z-30">
@@ -59,37 +82,8 @@ export default function NavBar() {
         <SidebarMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
         <ul className="hidden md:flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium items-center">
-          {categories.map((category, index, arr) => {
-            const categorySlug = category._id; 
-
-            return (
-              <li
-                key={category._id}
-                className={`flex items-center ${
-                  index !== arr.length - 1 ? "border-r pr-4" : ""
-                }`}
-              >
-                <Link href={`/categories/${categorySlug}`} className="hover:underline">
-                  {category.category}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-
-        <Button
-          variant="outline"
-          className="bg-primary text-white border-none flex items-center gap-2 px-3 py-2 rounded-lg md:hidden"
-          onClick={() => setCategoriesOpen(!categoriesOpen)}
-        >
-          <span className="text-sm">Categorías</span>
-        </Button>
-      </div>
-
-      {categoriesOpen && (
-        <div className="md:hidden bg-green-900 text-white p-4 absolute w-full z-20">
-          <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium items-center">
-            {categories.map((category, index, arr) => {
+          {categories.length > 0 ? (
+            categories.map((category, index, arr) => {
               const categorySlug = category._id;
 
               return (
@@ -104,7 +98,44 @@ export default function NavBar() {
                   </Link>
                 </li>
               );
-            })}
+            })
+          ) : (
+            <li className="text-sm font-medium">Cargando categorías...</li>
+          )}
+        </ul>
+
+        <Button
+          variant="outline"
+          className="bg-primary text-white border-none flex items-center gap-2 px-3 py-2 rounded-lg md:hidden"
+          onClick={() => setCategoriesOpen(!categoriesOpen)}
+        >
+          <span className="text-sm">Categorías</span>
+        </Button>
+      </div>
+
+      {categoriesOpen && (
+        <div className="md:hidden bg-green-900 text-white p-4 absolute w-full z-20">
+          <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium items-center">
+            {categories.length > 0 ? (
+              categories.map((category, index, arr) => {
+                const categorySlug = category._id;
+
+                return (
+                  <li
+                    key={category._id}
+                    className={`flex items-center ${
+                      index !== arr.length - 1 ? "border-r pr-4" : ""
+                    }`}
+                  >
+                    <Link href={`/categories/${categorySlug}`} className="hover:underline">
+                      {category.category}
+                    </Link>
+                  </li>
+                );
+              })
+            ) : (
+              <li className="text-sm font-medium">Cargando categorías...</li>
+            )}
           </ul>
         </div>
       )}

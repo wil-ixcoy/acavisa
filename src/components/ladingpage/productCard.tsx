@@ -6,6 +6,7 @@ interface ProductProps {
   title: string;
   id: string;
   categoryId: string;
+  subCategoryId:string;
 }
 
 export default function Product({
@@ -13,6 +14,7 @@ export default function Product({
   title,
   id,
   categoryId,
+  subCategoryId
 }: ProductProps) {
   return (
     <section className="">
@@ -28,7 +30,7 @@ export default function Product({
         </div>
 
         <div className="p-4 w-auto bg-white rounded-b-lg shadow-md mt-1 h-23">
-          <Link href={`/categories/${categoryId}/products/${id}`}>
+          <Link href={`/categories/${categoryId}/subcategories/${subCategoryId}/products/${id}`}>
             <h3 className="text-primary text-lg md:text-xl text-center font-semibold uppercase hover:underline">
               {title}
             </h3>

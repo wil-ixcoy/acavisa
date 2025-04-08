@@ -10,6 +10,7 @@ import { jobApplicantType } from "./jobApplicantType";
 import { contactInfoType } from "./contactInfoType";
 import { headerAdType } from "./headerAdType";
 import { promotionType } from "./promotionType";
+import { subcategoryType } from "./subCategoryType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -22,6 +23,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     jobApplicantType,
     contactInfoType,
     headerAdType,
-    promotionType
+    promotionType,
+    subcategoryType
   ],
 };

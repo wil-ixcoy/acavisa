@@ -1,13 +1,13 @@
 import { defineField, defineType } from 'sanity';
 
-export const productCategoryType = defineType({
-  name: 'productCategory',
-  title: 'Categoría de Producto',
+export const subcategoryType = defineType({
+  name: 'subcategory',
+  title: 'Subcategoría de Producto',
   type: 'document',
   fields: [
     defineField({
-      name: 'category',
-      title: 'Nombre de la Categoría',
+      name: 'subcategory_name',
+      title: 'Nombre de la Subcategoría',
       type: 'string',
       validation: (Rule) => Rule.required().min(2).max(100),
     }),
@@ -27,21 +27,16 @@ export const productCategoryType = defineType({
       ],
     }),
     defineField({
-      name: 'position',
-      title: 'Posición',
-      type: 'number',
-      description: 'Define el orden de la categoría en el diseño (menor número = mayor prioridad).',
-      validation: (Rule) => Rule.min(0).integer(),
-    }),
-    defineField({
-      name: 'country',
-      title: 'País',
+      name: 'category',
+      title: 'Categoría Padre',
       type: 'reference',
-      to: [{ type: 'country' }],
+      to: [{ type: 'productCategory' }],
       options: {
         disableNew: true,
       },
+      validation: (Rule) => Rule.required(),
     }),
+
     defineField({
       name: 'created_at',
       title: 'Fecha de creación',
@@ -52,8 +47,16 @@ export const productCategoryType = defineType({
   ],
   preview: {
     select: {
-      title: 'category',
+      title: 'subcategory_name',
       media: 'image',
+      category: 'category.category',
+    },
+    prepare({ title, media, category }) {
+      return {
+        title,
+        media,
+        subtitle: category ? `Categoría: ${category}` : 'Sin categoría',
+      };
     },
   },
 });

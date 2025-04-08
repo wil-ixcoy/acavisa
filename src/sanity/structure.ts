@@ -4,10 +4,13 @@ export const structure: StructureResolver = (S) =>
   S.list()
     .title("Acavisa Studio")
     .items([
-      S.documentTypeListItem("product").title("Productos"),
       S.documentTypeListItem("productCategory").title(
         "Categorías de los productos"
       ),
+      S.documentTypeListItem("subcategory").title(
+        "Sub categorías de los productos"
+      ),
+      S.documentTypeListItem("product").title("Productos"),
       S.documentTypeListItem("country").title("Paises de operación"),
       S.documentTypeListItem("postCategory").title("Categorías de Posts"),
       S.documentTypeListItem("post").title("Posts"),
@@ -25,6 +28,7 @@ export const structure: StructureResolver = (S) =>
           ![
             "post",
             "category",
+            "subcategory",
             "author",
             "product",
             "productCategory",
