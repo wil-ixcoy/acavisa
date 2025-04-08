@@ -19,7 +19,7 @@ interface SubItem {
   description: string;
   image: string;
   alt?: string;
-  url?: string; 
+  url?: string;
 }
 
 interface Promotion {
@@ -85,7 +85,7 @@ export default function PromotionsSection() {
                   subItem.image.trim() !== "" &&
                   subItem.image.startsWith("http")
               )
-              .slice(0, 3), // Limitar a 3 subítems
+              .slice(0, 3),
           }));
 
         setPromotions(validPromotions);
@@ -116,7 +116,7 @@ export default function PromotionsSection() {
     );
   }
 
-  const subItemHeight = 100; 
+  const subItemHeight = 100;
   const subItemsCount = promotions[0]?.subItems.length || 0;
   const totalSubItemsHeight = subItemHeight * subItemsCount;
 
@@ -130,7 +130,7 @@ export default function PromotionsSection() {
         <div className="relative hidden md:block h-full">
           {promotions[0]?.image && (
             <Image
-              src={promotions[0].image}
+              src={promotions[0].image || null}
               alt={promotions[0].alt || "Promoción"}
               width={600}
               height={totalSubItemsHeight}
@@ -140,23 +140,26 @@ export default function PromotionsSection() {
           )}
         </div>
 
-        <div className="grid grid-cols-1 gap-1"> 
+        <div className="grid grid-cols-1 gap-1">
           {promotions[0]?.subItems.map((subItem, index) => (
             <a
               key={index}
               href={subItem.url || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${bgColors[index % bgColors.length]} flex items-center text-white cursor-pointer hover:opacity-80 transition-all h-[${subItemHeight}px]`}
-            >
+              className={`${bgColors[index % bgColors.length]} flex items-center text-white cursor-pointer hover:opacity-80 transition-all h-[${subItemHeight}px]`}>
               <div className="w-16 h-16 flex-shrink-0">
-                <Image
-                  src={subItem.image}
-                  alt={subItem.alt || subItem.title}
-                  width={64}
-                  height={64}
-                  className="w-full h-full object-contain p-2"
-                />
+                {subItem.image ? (
+                  <Image
+                    src={subItem.image}
+                    alt={subItem.alt || subItem.title}
+                    width={64}
+                    height={64}
+                    className="w-full h-full object-contain p-2"
+                  />
+                ) : (
+                  <p>No se encontró la imagen</p>
+                )}
               </div>
 
               <div className="flex-1 px-2 py-2">

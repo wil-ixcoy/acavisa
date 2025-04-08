@@ -20,7 +20,12 @@ export default function SearchBar() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showResults, setShowResults] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const normalizeText = (text: string) => {
     return text
@@ -64,15 +69,14 @@ export default function SearchBar() {
           setProducts([]);
           setShowResults(false);
         }
-      } catch (err) {
-        console.error("Error searching products:", err);
+      } catch {
         setError("Ocurrió un error al buscar productos");
         setProducts([]);
         setShowResults(false);
       } finally {
         setLoading(false);
       }
-    }, 300), 
+    }, 300),
     []
   );
 
@@ -127,25 +131,24 @@ export default function SearchBar() {
             width={20}
             height={60}
             className="object-contain w-6 h-6 sm:w-7 sm:h-7 text-deep-gray hover:text-black transition-colors"
+            unoptimized
           />
         </Button>
       </div>
-  
-      {error && (
+
+      {isMounted && error && (
         <div className="absolute top-full left-0 right-0 text-center text-red-500 text-sm z-50 mt-2">
           {error}
         </div>
       )}
-      {loading && (
+      {isMounted && loading && (
         <div className="absolute top-full left-0 right-0 text-center text-gray-500 text-sm z-50 mt-2">
           Buscando...
         </div>
       )}
-  
-      {showResults && products.length > 0 && (
-        <div
-          className="absolute top-5/6 left-0 w-full max-w-2xl bg-white border border-gray-300 rounded-lg shadow-lg z-50 mt-2 max-h-60 overflow-y-auto"
-        >
+
+      {isMounted && showResults && products.length > 0 && (
+        <div className="absolute top-5/6 left-0 w-full max-w-2xl bg-white border border-gray-300 rounded-lg shadow-lg z-50 mt-2 max-h-60 overflow-y-auto">
           <ul className="divide-y divide-gray-200">
             {products.map((product) => (
               <li
@@ -161,5 +164,4 @@ export default function SearchBar() {
       )}
     </div>
   );
-  
 }

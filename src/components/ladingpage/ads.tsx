@@ -52,7 +52,7 @@ export default function Ads() {
             ad.image &&
             typeof ad.image === "string" &&
             ad.image.trim() !== "" &&
-            ad.image.startsWith("http") 
+            ad.image.startsWith("http")
         );
 
         setAds(validAds);
@@ -101,7 +101,11 @@ export default function Ads() {
     <div className="w-full my-4">
       <section className="w-full h-60 md:h-80 relative overflow-hidden">
         {ads.map((ad, index) => {
-          if (!ad.image || ad.image.trim() === "" || !ad.image.startsWith("http")) {
+          if (
+            !ad.image ||
+            ad.image.trim() === "" ||
+            !ad.image.startsWith("http")
+          ) {
             return null;
           }
 
@@ -113,8 +117,7 @@ export default function Ads() {
               rel="noopener noreferrer"
               className={`absolute inset-0 transition-opacity duration-1000 ease-in-out cursor-pointer ${
                 index === currentAdIndex ? "opacity-100" : "opacity-0"
-              }`}
-            >
+              }`}>
               <Image
                 src={ad.image}
                 alt={ad.alt || "Publicidad"}

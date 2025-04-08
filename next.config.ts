@@ -11,12 +11,6 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "https://firebasestorage.googleapis.com",
-        port: "", 
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
         hostname: "encrypted-tbn0.gstatic.com",
         port: "",
         pathname: "/**",

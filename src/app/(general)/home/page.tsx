@@ -78,7 +78,6 @@ export default function Home() {
 
   return (
     <div>
-      <header></header>
       <ChatButton />
       <Ads />
       <HelpComponent />

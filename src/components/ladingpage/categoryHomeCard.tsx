@@ -14,7 +14,7 @@ import { sanityClient } from "../../lib/sanity";
 
 interface Category {
   _id: string;
-  category: string; 
+  category: string;
   image: string;
 }
 
@@ -40,8 +40,7 @@ export default function CategoryCarousel() {
         }
 
         setCategories(data);
-      } catch (err) {
-        console.error("Error fetching categories from Sanity:", err);
+      } catch {
         setError("No se pudieron cargar las categorías.");
         setCategories([]);
       } finally {
@@ -55,8 +54,7 @@ export default function CategoryCarousel() {
   return (
     <div
       className="w-full my-10 py-10"
-      style={{ backgroundImage: "url('/backgrounds/background-header.png')" }}
-    >
+      style={{ backgroundImage: "url('/backgrounds/background-header.png')" }}>
       {loading ? (
         <p className="text-center text-white">Cargando categorías...</p>
       ) : error ? (
@@ -65,16 +63,22 @@ export default function CategoryCarousel() {
         <Carousel className="w-2/4 md:w-5/6 lg:w-full max-w-4xl mx-auto">
           <CarouselContent>
             {categories.map((category) => (
-              <CarouselItem key={category._id} className="basis-full md:basis-1/2 lg:basis-1/3">
+              <CarouselItem
+                key={category._id}
+                className="basis-full md:basis-1/2 lg:basis-1/3">
                 <Link href={`/categories/${category._id}`}>
                   <div className="relative w-full">
-                    <Image
-                      src={category.image}
-                      alt={category.category}
-                      width={300}
-                      height={200}
-                      className="w-full h-48 object-cover rounded-lg"
-                    />
+                    {category.image ? (
+                      <Image
+                        src={category.image || null}
+                        alt={category.category}
+                        width={300}
+                        height={200}
+                        className="w-full h-48 object-cover rounded-lg"
+                      />
+                    ) : (
+                      <p>No se encontró la imagen</p>
+                    )}
                     <div className="absolute inset-0 bg-secondary bg-opacity-60 mix-blend-multiply rounded-lg"></div>
                     <div className="absolute inset-0 flex items-center justify-center">
                       <p className="text-white text-lg font-bold uppercase text-center drop-shadow-lg px-4">
