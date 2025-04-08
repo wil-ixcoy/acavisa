@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { sanityClient } from "../lib/sanity";
 
 interface Country {
@@ -15,6 +16,8 @@ interface Country {
 export default function Home() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter();
 
   const clearCookies = () => {
     const cookies = document.cookie.split("; ");
@@ -25,9 +28,14 @@ export default function Home() {
   };
 
   useEffect(() => {
+    setIsMounted(true);
+
     const resetData = () => {
-      clearCookies(); 
-      localStorage.clear();
+      if (typeof window !== "undefined") {
+        console.log("Resetting data: Clearing cookies and localStorage");
+        clearCookies();
+        localStorage.clear();
+      }
     };
 
     resetData();
@@ -42,6 +50,7 @@ export default function Home() {
           }
         `);
 
+        console.log("Fetched countries:", data);
         setCountries(data);
         setLoading(false);
       } catch (error) {
@@ -55,15 +64,25 @@ export default function Home() {
   }, []);
 
   const handleCountrySelect = (countryId: string) => {
-    localStorage.setItem("selectedCountryId", countryId);
-    document.cookie = `selectedCountryId=${countryId}; path=/; max-age=31536000`;
+    if (typeof window !== "undefined") {
+      console.log("Handling country selection for ID:", countryId);
+      localStorage.setItem("selectedCountryId", countryId);
+      document.cookie = `selectedCountryId=${countryId}; path=/; max-age=31536000`;
+      console.log("localStorage selectedCountryId:", localStorage.getItem("selectedCountryId"));
+      console.log("document.cookie:", document.cookie);
+
+      // Forzar la navegación con useRouter para depurar
+      console.log("Attempting to navigate to /home");
+      router.push("/home");
+    }
   };
 
   return (
     <div className="h-screen bg-gray-100">
       <div
         className="w-full h-[108px] bg-cover bg-center flex justify-center shadow-lg"
-        style={{ backgroundImage: "url('backgrounds/background-header.png')" }}>
+        style={{ backgroundImage: "url('/backgrounds/background-header.png')" }}
+      >
         <Image
           src="/logos/horizontal-acavisa-full-color.png"
           alt="ACAVISA"
@@ -85,14 +104,18 @@ export default function Home() {
           <hr className="w-full my-4 border-green-700 mx-auto border-1" />
 
           <div className="flex flex-col gap-4 mt-4 items-center justify-center">
-            {loading ? (
+            {!isMounted || loading ? (
               <p>Cargando países...</p>
             ) : countries.length > 0 ? (
               countries.map(({ id, country_name, country_flag }) => (
                 <Link key={id} href="/home">
                   <Button
                     className="bg-secondary text-white flex justify-between w-60 h-12 py-2 px-4 rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
-                    onClick={() => handleCountrySelect(id)}>
+                    onClick={() => {
+                      console.log("Button clicked for country ID:", id);
+                      handleCountrySelect(id);
+                    }}
+                  >
                     <Image
                       src={country_flag}
                       alt={country_name}
