@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { sanityClient } from "../lib/sanity";
 
 interface Country {
@@ -17,7 +16,6 @@ export default function Home() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
-  const router = useRouter();
 
   const clearCookies = () => {
     const cookies = document.cookie.split("; ");
@@ -63,6 +61,8 @@ export default function Home() {
     fetchCountries();
   }, []);
 
+
+
   const handleCountrySelect = (countryId: string) => {
     if (typeof window !== "undefined") {
       console.log("Handling country selection for ID:", countryId);
@@ -70,10 +70,6 @@ export default function Home() {
       document.cookie = `selectedCountryId=${countryId}; path=/; max-age=31536000`;
       console.log("localStorage selectedCountryId:", localStorage.getItem("selectedCountryId"));
       console.log("document.cookie:", document.cookie);
-
-      // Forzar la navegación con useRouter para depurar
-      console.log("Attempting to navigate to /home");
-      router.push("/home");
     }
   };
 
@@ -113,6 +109,7 @@ export default function Home() {
                     className="bg-secondary text-white flex justify-between w-60 h-12 py-2 px-4 rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
                     onClick={() => {
                       console.log("Button clicked for country ID:", id);
+                      console.log("Event propagation not prevented, Link should navigate");
                       handleCountrySelect(id);
                     }}
                   >
@@ -132,6 +129,8 @@ export default function Home() {
                       width={20}
                       height={20}
                       className="object-contain"
+                      unoptimized
+                      onError={() => console.error("Failed to load arrow-select-country.png")}
                     />
                   </Button>
                 </Link>
