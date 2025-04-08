@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { sanityClient } from "../lib/sanity";
 
 interface Country {
@@ -17,7 +17,6 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
-  const pathname = usePathname();
 
   const clearCookies = () => {
     const cookies = document.cookie.split("; ");
@@ -59,10 +58,6 @@ export default function Home() {
 
     fetchCountries();
   }, []);
-
-  useEffect(() => {
-    console.log("Current route:", pathname);
-  }, [pathname]);
 
   const handleCountrySelect = (countryId: string) => {
     if (typeof window !== "undefined") {

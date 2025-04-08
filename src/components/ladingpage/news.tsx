@@ -34,8 +34,7 @@ export default function News() {
         }
 
         setPosts(data);
-      } catch (err) {
-        console.error("Error fetching posts from Sanity:", err);
+      } catch {
         setError("No se pudieron cargar las publicaciones.");
         setPosts([]);
       } finally {
@@ -66,8 +65,8 @@ export default function News() {
                   <Image
                     src={post.image}
                     alt={post.title}
-                    width={300} 
-                    height={400} 
+                    width={300}
+                    height={400}
                     className="w-full h-full object-cover "
                   />
                 </div>

@@ -59,7 +59,7 @@ export default function PromotionsSection() {
               description,
               "image": image.asset->url,
               "alt": image.alt,
-              url // Nuevo campo
+              url
             }
           }
         `;
@@ -89,8 +89,7 @@ export default function PromotionsSection() {
           }));
 
         setPromotions(validPromotions);
-      } catch (error) {
-        console.error("Error fetching promotions from Sanity:", error);
+      } catch {
         setPromotions([]);
       } finally {
         setLoading(false);

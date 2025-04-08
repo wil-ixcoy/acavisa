@@ -68,10 +68,8 @@ export default function ContactUs() {
         setErrorMessage(
           errorData.error || "Error al enviar el mensaje. Inténtalo de nuevo."
         );
-        console.error("Error al enviar a la API:", errorData);
       }
     } catch (e) {
-      console.error("Error en handleSubmit:", e);
       setErrorMessage(
         e instanceof Error
           ? e.message

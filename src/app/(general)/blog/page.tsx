@@ -61,16 +61,9 @@ export default function Blog() {
           (post) => post.countryId === selectedCountryId
         );
 
-        if (filteredPosts.length === 0) {
-          throw new Error(
-            "No hay publicaciones disponibles para el país seleccionado"
-          );
-        }
-
         setLatestPost(filteredPosts[0]);
         setOtherPosts(filteredPosts.slice(1));
-      } catch (err) {
-        console.error("Error fetching posts from Sanity:", err);
+      } catch {
         setError("No se pudieron cargar las publicaciones.");
         setLatestPost(null);
         setOtherPosts([]);

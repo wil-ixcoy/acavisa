@@ -56,8 +56,7 @@ export default function Ads() {
         );
 
         setAds(validAds);
-      } catch (error) {
-        console.error("Error fetching ads from Sanity:", error);
+      } catch {
         setAds([]);
       } finally {
         setLoading(false);

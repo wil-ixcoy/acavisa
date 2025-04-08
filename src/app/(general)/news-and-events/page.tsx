@@ -35,10 +35,6 @@ export default function NewsAndEvents() {
       try {
         const selectedCountryId = getCookie("selectedCountryId");
 
-        if (!selectedCountryId) {
-          throw new Error("No se ha seleccionado un país");
-        }
-
         const query = `
           *[_type == "post" && defined(image.asset) && type->name in ["Noticias", "Eventos"]] | order(created_at desc){
             "_id": _id,
@@ -52,24 +48,17 @@ export default function NewsAndEvents() {
         `;
         const data: Post[] = await sanityClient.fetch(query);
 
-        if (!data || data.length === 0) {
-          throw new Error("No se encontraron publicaciones");
-        }
+    
 
         const filteredPosts = data.filter(
           (post) => post.countryId === selectedCountryId
         );
 
-        if (filteredPosts.length === 0) {
-          throw new Error(
-            "No hay publicaciones disponibles para el país seleccionado"
-          );
-        }
+     
 
         setLatestPost(filteredPosts[0]);
         setOtherPosts(filteredPosts.slice(1));
-      } catch (err) {
-        console.error("Error fetching posts from Sanity:", err);
+      } catch  {
         setError("No se pudieron cargar las publicaciones.");
         setLatestPost(null);
         setOtherPosts([]);

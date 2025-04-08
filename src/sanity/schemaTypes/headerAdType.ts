@@ -47,14 +47,12 @@ export const headerAdType = defineType({
         Rule.required().custom((endDate, context) => {
           const startDate = context.document?.startDate as string | undefined;
           if (!endDate || !startDate) {
-            return true; // Dejamos que otras validaciones (como required) manejen esto
+            return true;
           }
 
-          // Aseguramos que endDate y startDate sean tratados como strings
           const end = new Date(String(endDate));
           const start = new Date(String(startDate));
 
-          // Verificamos que las fechas sean válidas
           if (isNaN(end.getTime()) || isNaN(start.getTime())) {
             return "Las fechas no son válidas";
           }

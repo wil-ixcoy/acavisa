@@ -40,7 +40,6 @@ export default function Home() {
         const selectedCountryId = getCookie("selectedCountryId");
 
         if (!selectedCountryId) {
-          console.error("No se ha seleccionado un país");
           return;
         }
 
@@ -63,13 +62,8 @@ export default function Home() {
         if (data) {
           localStorage.setItem("contactInfo", JSON.stringify(data));
           setContactInfo(data);
-        } else {
-          console.error(
-            "No se encontró información de contacto para el país seleccionado"
-          );
         }
-      } catch (err) {
-        console.error("Error fetching contact info from Sanity:", err);
+      } catch  {
       }
     };
 

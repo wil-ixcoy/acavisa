@@ -36,7 +36,6 @@ export default function NavBar() {
     const fetchCategories = async () => {
       try {
         if (!selectedCountryId) {
-          console.log("Waiting for selectedCountryId to fetch categories...");
           return;
         }
 
@@ -53,10 +52,8 @@ export default function NavBar() {
 
         const params = { countryId: selectedCountryId };
         const data: Category[] = await client.fetch(query, params);
-        console.log("Fetched categories:", data);
         setCategories(data);
-      } catch (err) {
-        console.error("Error fetching categories from Sanity:", err);
+      } catch {
         setCategories([]);
       }
     };

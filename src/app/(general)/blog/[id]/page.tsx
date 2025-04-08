@@ -67,8 +67,7 @@ export default function Article({ params }: ArticleProps) {
         }
 
         setPost(data);
-      } catch (err) {
-        console.error("Error fetching post from Sanity:", err);
+      } catch {
         setError("No se pudo cargar la publicación.");
         setPost(null);
       } finally {

@@ -46,8 +46,7 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ message: 'Solicitud enviada con éxito', data: newApplicant }, { status: 200 });
-  } catch (error) {
-    console.error('Error al procesar la solicitud:', error);
+  } catch {
     return NextResponse.json({ error: 'Error al procesar la solicitud' }, { status: 500 });
   }
 }

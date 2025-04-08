@@ -50,13 +50,8 @@ export default function Product() {
         `;
         const data: Product = await sanityClient.fetch(query, { productId });
 
-        if (!data) {
-          throw new Error("No se encontró el producto");
-        }
-
         setProduct(data);
-      } catch (err) {
-        console.error("Error fetching product from Sanity:", err);
+      } catch {
         setError("No se pudo cargar el producto.");
         setProduct(null);
       } finally {
@@ -70,25 +65,29 @@ export default function Product() {
   return (
     <div
       className="w-full min-h-screen bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}
-    >
+      style={{ backgroundImage: "url('/backgrounds/background.jpg')" }}>
       <main className="max-w-5xl mx-auto py-6 sm:py-8 md:py-10 px-4 sm:px-6 lg:px-8">
         {loading ? (
-          <p className="text-center text-sm sm:text-base">Cargando producto...</p>
+          <p className="text-center text-sm sm:text-base">
+            Cargando producto...
+          </p>
         ) : error ? (
-          <p className="text-center text-red-500 text-sm sm:text-base">{error}</p>
+          <p className="text-center text-red-500 text-sm sm:text-base">
+            {error}
+          </p>
         ) : product ? (
           <>
             {/* Breadcrumbs */}
             <nav className="my-4 text-gray-600 text-sm sm:text-base">
-              <Link href={`/categories/${categoryId}/subcategories`} className="underline">
+              <Link
+                href={`/categories/${categoryId}/subcategories`}
+                className="underline">
                 {product.category}
               </Link>{" "}
               &gt;{" "}
               <Link
                 href={`/categories/${categoryId}/subcategories/${subcategoryId}/products`}
-                className="underline"
-              >
+                className="underline">
                 {product.subcategory}
               </Link>{" "}
               &gt; <span>{product.product_name}</span>
@@ -127,15 +126,16 @@ export default function Product() {
                 </p>
                 <Link
                   href={`/categories/${categoryId}/subcategories/${subcategoryId}/products`}
-                  className="mt-4 inline-block text-primary hover:text-black underline text-sm sm:text-base"
-                >
+                  className="mt-4 inline-block text-primary hover:text-black underline text-sm sm:text-base">
                   Regresar a los productos
                 </Link>
               </div>
             </div>
           </>
         ) : (
-          <p className="text-center text-sm sm:text-base">No se encontró el producto.</p>
+          <p className="text-center text-sm sm:text-base">
+            No se encontró el producto.
+          </p>
         )}
       </main>
     </div>
