@@ -51,7 +51,7 @@ export default function Home() {
 
         setCountries(data);
         setLoading(false);
-      } catch  {
+      } catch {
         setCountries([]);
         setLoading(false);
       }
@@ -79,15 +79,16 @@ export default function Home() {
     <div className="h-screen bg-gray-100">
       <div
         className="w-full h-[108px] bg-cover bg-center flex justify-center shadow-lg"
-        style={{ backgroundImage: "url('/backgrounds/background-header.png')" }}
-      >
+        style={{
+          backgroundImage:
+            "url('https://yekihqmbunxletzxogjn.supabase.co/storage/v1/object/sign/media/background-header%20-%20copia.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJtZWRpYS9iYWNrZ3JvdW5kLWhlYWRlciAtIGNvcGlhLnBuZyIsImlhdCI6MTc0NDE1MTI3OSwiZXhwIjoxOTAxODMxMjc5fQ.NkCVD47xzTtrxNs4f8_73oZM9UOByEjlr_Q6uhyaJtY')",
+        }}>
         <Image
-          src="/logos/horizontal-acavisa-full-color.png"
+          src="https://yekihqmbunxletzxogjn.supabase.co/storage/v1/object/sign/media/horizontal-acavisa-full-color%20-%20copia.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJtZWRpYS9ob3Jpem9udGFsLWFjYXZpc2EtZnVsbC1jb2xvciAtIGNvcGlhLnBuZyIsImlhdCI6MTc0NDE1MTI5OSwiZXhwIjoxOTAxODMxMjk5fQ.OpTHyXCGyqkgwqCVVmXpITKYUzpReUvUVpchAbNx5G4"
           alt="ACAVISA"
           width={200}
           height={80}
           className="object-contain"
-        
         />
       </div>
 
@@ -112,8 +113,7 @@ export default function Home() {
                   className="bg-secondary text-white flex justify-between w-60 h-12 py-2 px-4 rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
                   onClick={() => {
                     handleCountrySelect(id);
-                  }}
-                >
+                  }}>
                   <Image
                     src={country_flag}
                     alt={country_name}
@@ -125,7 +125,7 @@ export default function Home() {
                     {country_name}
                   </span>
                   <Image
-                    src="/icons/arrow-select-country.png"
+                    src="https://yekihqmbunxletzxogjn.supabase.co/storage/v1/object/sign/media/arrow-select-country%20-%20copia.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJtZWRpYS9hcnJvdy1zZWxlY3QtY291bnRyeSAtIGNvcGlhLnBuZyIsImlhdCI6MTc0NDE1MTI1NSwiZXhwIjoxOTAxODMxMjU1fQ.WQsRtDnfug881j0QR-OnqBKoOuvUCBYYoFjkzXFM040"
                     alt="arrow"
                     width={20}
                     height={20}
