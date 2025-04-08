@@ -32,7 +32,6 @@ export default function Home() {
 
     const resetData = () => {
       if (typeof window !== "undefined") {
-        console.log("Resetting data: Clearing cookies and localStorage");
         clearCookies();
         localStorage.clear();
       }
@@ -50,11 +49,9 @@ export default function Home() {
           }
         `);
 
-        console.log("Fetched countries:", data);
         setCountries(data);
         setLoading(false);
-      } catch (error) {
-        console.error("Error fetching countries from Sanity", error);
+      } catch  {
         setCountries([]);
         setLoading(false);
       }
@@ -69,13 +66,9 @@ export default function Home() {
 
   const handleCountrySelect = (countryId: string) => {
     if (typeof window !== "undefined") {
-      console.log("Handling country selection for ID:", countryId);
       localStorage.setItem("selectedCountryId", countryId);
       document.cookie = `selectedCountryId=${countryId}; path=/; max-age=31536000`;
-      console.log("localStorage selectedCountryId:", localStorage.getItem("selectedCountryId"));
-      console.log("document.cookie:", document.cookie);
 
-      console.log("Navigating to /home with router.push");
       setTimeout(() => {
         router.push("/home");
       }, 0);
@@ -89,13 +82,12 @@ export default function Home() {
         style={{ backgroundImage: "url('/backgrounds/background-header.png')" }}
       >
         <Image
-          src="https://acavisa.vercel.app/logos/horizontal-acavisa-full-color.png"
+          src="/logos/horizontal-acavisa-full-color.png"
           alt="ACAVISA"
           width={200}
           height={80}
           className="object-contain"
-          unoptimized
-          onError={() => console.error("Failed to load horizontal-acavisa-full-color.png")}
+        
         />
       </div>
 
@@ -118,9 +110,7 @@ export default function Home() {
                 <Button
                   key={id}
                   className="bg-secondary text-white flex justify-between w-60 h-12 py-2 px-4 rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
-                  onClick={(e) => {
-                    console.log(e);
-                    console.log("Button clicked for country ID:", id);
+                  onClick={() => {
                     handleCountrySelect(id);
                   }}
                 >
@@ -130,19 +120,16 @@ export default function Home() {
                     width={35}
                     height={50}
                     className="object-contain rounded-xs w-9 h-9"
-                    onError={() => console.error(`Failed to load flag for ${country_name}`)}
                   />
                   <span className="flex items-center gap-2 text-lg">
                     {country_name}
                   </span>
                   <Image
-                    src="https://acavisa.vercel.app/icons/arrow-select-country.png"
+                    src="/icons/arrow-select-country.png"
                     alt="arrow"
                     width={20}
                     height={20}
                     className="object-contain"
-                    unoptimized
-                    onError={() => console.error("Failed to load arrow-select-country.png")}
                   />
                 </Button>
               ))

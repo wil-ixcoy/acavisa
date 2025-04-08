@@ -60,7 +60,6 @@ export default function ProductsPage() {
         `;
         const data: Product[] = await sanityClient.fetch(query, { categoryId });
 
-        console.log("Productos devueltos por Sanity:", data);
 
         if (!data || data.length === 0) {
           throw new Error("No se encontraron productos para esta categoría");
